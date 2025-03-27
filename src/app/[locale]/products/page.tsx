@@ -1,6 +1,6 @@
 "use client";
 
-import { categories, products } from "@/app/page";
+import { categories, products } from "@/app/[locale]/page";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

@@ -1,5 +1,6 @@
 "use client";
 
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { RegionSwitcher } from "@/components/region-switcher";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import { Link, useRouter } from "@/i18n/navigation";
 import { useAuthStore } from "@/store/auth";
 import {
   LogOut,
@@ -20,8 +22,7 @@ import {
   User,
   X,
 } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export function Navbar() {
@@ -29,12 +30,13 @@ export function Navbar() {
   const { user, isAuthenticated, logout } = useAuthStore();
   const router = useRouter();
   const { toast } = useToast();
+  const t = useTranslations();
 
   const handleLogout = () => {
     logout();
     toast({
-      title: "已退出登录",
-      description: "您已成功退出登录",
+      title: t("auth.logoutSuccess"),
+      description: t("auth.logoutDescription"),
     });
     router.push("/");
   };
@@ -60,7 +62,7 @@ export function Navbar() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="搜索商品..."
+              placeholder={t("common.search")}
               className="w-full py-2 pl-10 pr-4 rounded-full border border-input focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
@@ -72,31 +74,32 @@ export function Navbar() {
             href="/products"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            商品库
+            {t("common.productLibrary")}
           </Link>
           <Link
             href="/suppliers"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            供应商
+            {t("common.suppliers")}
           </Link>
           <Link
             href="/my-stores"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            我的店铺
+            {t("common.myStores")}
           </Link>
           <Link
             href="/selected-products"
             className="text-sm font-medium transition-colors hover:text-primary flex items-center"
           >
             <ShoppingCart className="mr-1 h-4 w-4" />
-            选品车
+            {t("common.selectedProducts")}
           </Link>
         </nav>
 
         {/* 用户区域 */}
         <div className="flex items-center space-x-4">
+          <LanguageSwitcher />
           <RegionSwitcher />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -130,39 +133,39 @@ export function Navbar() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <Link href="/my-stores">
-                    <DropdownMenuItem>我的店铺</DropdownMenuItem>
+                    <DropdownMenuItem>{t("common.myStores")}</DropdownMenuItem>
                   </Link>
                   <Link href="/selected-products">
                     <DropdownMenuItem>
                       <ShoppingCart className="h-4 w-4 mr-2" />
-                      选品车
+                      {t("common.selectedProducts")}
                     </DropdownMenuItem>
                   </Link>
                   <Link href="/settings">
                     <DropdownMenuItem>
                       <Settings className="h-4 w-4 mr-2" />
-                      设置
+                      {t("common.settings")}
                     </DropdownMenuItem>
                   </Link>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="h-4 w-4 mr-2" />
-                    退出登录
+                    {t("common.logout")}
                   </DropdownMenuItem>
                 </>
               ) : (
                 <>
                   <Link href="/auth/login">
-                    <DropdownMenuItem>登录</DropdownMenuItem>
+                    <DropdownMenuItem>{t("common.login")}</DropdownMenuItem>
                   </Link>
                   <Link href="/auth/register">
-                    <DropdownMenuItem>注册</DropdownMenuItem>
+                    <DropdownMenuItem>{t("common.register")}</DropdownMenuItem>
                   </Link>
                   <DropdownMenuSeparator />
                   <Link href="/selected-products">
                     <DropdownMenuItem>
                       <ShoppingCart className="h-4 w-4 mr-2" />
-                      选品车
+                      {t("common.selectedProducts")}
                     </DropdownMenuItem>
                   </Link>
                 </>
@@ -172,7 +175,7 @@ export function Navbar() {
           {!isAuthenticated && (
             <Link href="/auth/login">
               <Button size="sm" className="hidden md:flex">
-                登录
+                {t("common.login")}
               </Button>
             </Link>
           )}
@@ -199,7 +202,7 @@ export function Navbar() {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="搜索商品..."
+            placeholder={t("common.search")}
             className="w-full py-2 pl-10 pr-4 rounded-full border border-input focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
@@ -238,28 +241,28 @@ export function Navbar() {
                   href="/my-stores"
                   className="px-4 py-3 border-b text-sm font-medium"
                 >
-                  我的店铺
+                  {t("common.myStores")}
                 </Link>
                 <Link
                   href="/selected-products"
                   className="px-4 py-3 border-b text-sm font-medium flex items-center"
                 >
                   <ShoppingCart className="h-4 w-4 mr-2" />
-                  选品车
+                  {t("common.selectedProducts")}
                 </Link>
                 <Link
                   href="/settings"
                   className="px-4 py-3 border-b text-sm font-medium flex items-center"
                 >
                   <Settings className="h-4 w-4 mr-2" />
-                  设置
+                  {t("common.settings")}
                 </Link>
                 <button
                   onClick={handleLogout}
                   className="px-4 py-3 text-sm font-medium flex items-center text-red-500"
                 >
                   <LogOut className="h-4 w-4 mr-2" />
-                  退出登录
+                  {t("common.logout")}
                 </button>
               </>
             ) : (
@@ -268,32 +271,32 @@ export function Navbar() {
                   href="/products"
                   className="px-4 py-3 border-b text-sm font-medium"
                 >
-                  商品库
+                  {t("common.productLibrary")}
                 </Link>
                 <Link
                   href="/suppliers"
                   className="px-4 py-3 border-b text-sm font-medium"
                 >
-                  供应商
+                  {t("common.suppliers")}
                 </Link>
                 <Link
                   href="/selected-products"
                   className="px-4 py-3 border-b text-sm font-medium flex items-center"
                 >
                   <ShoppingCart className="h-4 w-4 mr-2" />
-                  选品车
+                  {t("common.selectedProducts")}
                 </Link>
                 <Link
                   href="/auth/login"
                   className="px-4 py-3 border-b text-sm font-medium"
                 >
-                  登录
+                  {t("common.login")}
                 </Link>
                 <Link
                   href="/auth/register"
                   className="px-4 py-3 text-sm font-medium"
                 >
-                  注册
+                  {t("common.register")}
                 </Link>
               </>
             )}

@@ -1,0 +1,24 @@
+{
+  "common": {
+    "search": "搜索商品...",
+    "loading": "加载中...",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录",
+    "settings": "设置",
+    "myStores": "我的店铺",
+    "selectedProducts": "选品车",
+    "productLibrary": "商品库",
+    "suppliers": "供应商"
+  },
+  "auth": {
+    "loginSuccess": "登录成功",
+    "loginFailed": "登录失败",
+    "logoutSuccess": "已退出登录",
+    "logoutDescription": "您已成功退出登录"
+  },
+  "region": {
+    "switch": "切换区域",
+    "currentRegion": "当前区域"
+  }
+}
