@@ -1,7 +1,7 @@
 "use client";
 
 import { QueryClient } from "@tanstack/react-query";
-import { MedusaProvider } from "medusa-react";
+import { CartProvider, MedusaProvider } from "medusa-react";
 import React from "react";
 
 const queryClient = new QueryClient();
@@ -17,8 +17,9 @@ export function MedusaWrapper({ children }: MedusaProviderProps) {
       baseUrl={
         process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000"
       }
+      maxRetries={3}
     >
-      {children}
+      <CartProvider>{children}</CartProvider>
     </MedusaProvider>
   );
 }

@@ -1,4 +1,5 @@
 import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
 import { LoadingProvider } from "@/components/providers/loading-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { MedusaWrapper } from "@/lib/medusa-provider";
@@ -26,14 +27,15 @@ export default function RootLayout({
   return (
     <html lang="zh" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
-        <div className="flex min-h-screen flex-col">
-          <MedusaWrapper>
-            <main className="flex-1">{children}</main>
-          </MedusaWrapper>
-          <Footer />
-        </div>
-        <LoadingProvider />
-        <Toaster />
+        <MedusaWrapper>
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1 p-4 sm:p-6">{children}</main>
+            <Footer />
+          </div>
+          <LoadingProvider />
+          <Toaster />
+        </MedusaWrapper>
       </body>
     </html>
   );
