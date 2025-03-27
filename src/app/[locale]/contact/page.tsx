@@ -1,9 +1,12 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Clock, Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useRef } from "react";
+import { AiFillWechat } from "react-icons/ai";
+import { FaTiktok, FaWeibo } from "react-icons/fa";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -349,23 +352,67 @@ export default function ContactPage() {
           className="mt-16 text-center"
         >
           <h2 className="text-2xl font-semibold mb-8">关注我们</h2>
-          <div className="flex justify-center space-x-6">
+          <div className="flex flex-wrap justify-center gap-8 max-w-3xl mx-auto">
             {[
-              { name: "微信", icon: "WeChat" },
-              { name: "微博", icon: "Weibo" },
-              { name: "抖音", icon: "TikTok" },
+              {
+                name: "微信",
+                icon: <AiFillWechat className="h-6 w-6" />,
+                qrCode: "/images/wechat-qr.jpg",
+                account: "HiDoo_Official",
+                color: "bg-green-500/10 hover:bg-green-500/20",
+                iconColor: "text-green-500",
+              },
+              {
+                name: "微博",
+                icon: <FaWeibo className="h-6 w-6" />,
+                qrCode: "/images/weibo-qr.jpg",
+                account: "@HiDoo官方",
+                color: "bg-red-500/10 hover:bg-red-500/20",
+                iconColor: "text-red-500",
+              },
+              {
+                name: "抖音",
+                icon: <FaTiktok className="h-6 w-6" />,
+                qrCode: "/images/tiktok-qr.jpg",
+                account: "HiDoo_Official",
+                color: "bg-gray-500/10 hover:bg-gray-500/20",
+                iconColor: "text-black-500",
+              },
             ].map((item, index) => (
               <motion.div
                 key={item.name}
                 variants={fadeInUp}
-                whileHover={{ scale: 1.1 }}
-                className="p-4 rounded-full bg-card border shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                whileHover={{ scale: 1.05 }}
+                className="w-40 p-6 rounded-xl bg-card border shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group relative"
               >
-                <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <MessageSquare className="h-4 w-4 text-primary" />
+                <div
+                  className={`h-12 w-12 rounded-full ${item.color} flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-300`}
+                >
+                  <div className={item.iconColor}>{item.icon}</div>
                 </div>
-                <div className="text-sm mt-2 group-hover:text-primary transition-colors">
-                  {item.name}
+                <div className="mt-4 text-center">
+                  <div className="text-base font-medium group-hover:text-primary transition-colors">
+                    {item.name}
+                  </div>
+                  <div className="text-sm text-muted-foreground mt-1">
+                    {item.account}
+                  </div>
+                </div>
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 pointer-events-none">
+                  <div className="bg-white p-3 rounded-xl shadow-xl border">
+                    <div className="relative">
+                      <Image
+                        src={item.qrCode}
+                        alt={`${item.name}二维码`}
+                        width={140}
+                        height={140}
+                        className="rounded-lg"
+                      />
+                      <div className="absolute -top-2 -right-2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                        扫码关注
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}

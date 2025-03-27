@@ -20,5 +20,154 @@
   "region": {
     "switch": "切换区域",
     "currentRegion": "当前区域"
+  },
+  "home": {
+    "banner": {
+      "title": "全球优质商品，一站式采购",
+      "subtitle": "连接全球优质供应商，助力跨境贸易发展",
+      "cta": "立即开始"
+    },
+    "welcome": {
+      "title": "欢迎来到 HiDoo",
+      "subtitle": "您的跨境贸易好帮手",
+      "description": "我们致力于为全球买家提供优质商品和服务，让跨境贸易更简单、更高效。"
+    },
+    "dataOverview": {
+      "title": "平台数据",
+      "items": {
+        "suppliers": {
+          "label": "优质供应商",
+          "value": "1000+"
+        },
+        "products": {
+          "label": "商品数量",
+          "value": "50000+"
+        },
+        "buyers": {
+          "label": "活跃买家",
+          "value": "100000+"
+        },
+        "countries": {
+          "label": "覆盖国家",
+          "value": "50+"
+        }
+      }
+    },
+    "advantages": {
+      "title": "平台优势",
+      "items": {
+        "quality": {
+          "title": "品质保证",
+          "description": "严格筛选供应商，确保商品质量"
+        },
+        "price": {
+          "title": "价格优势",
+          "description": "工厂直供，价格更具竞争力"
+        },
+        "shipping": {
+          "title": "快速配送",
+          "description": "全球物流网络，快速送达"
+        },
+        "service": {
+          "title": "专业服务",
+          "description": "7*24小时客服支持"
+        }
+      }
+    },
+    "categories": {
+      "title": "商品分类",
+      "viewAll": "查看全部",
+      "items": {
+        "electronics": {
+          "name": "电子产品",
+          "subcategories": {
+            "mobile": "手机数码",
+            "computer": "电脑配件",
+            "smart": "智能设备"
+          }
+        },
+        "home": {
+          "name": "家居用品",
+          "subcategories": {
+            "furniture": "家具装饰",
+            "kitchen": "厨房用品",
+            "daily": "生活日用"
+          }
+        },
+        "clothing": {
+          "name": "服装鞋帽",
+          "subcategories": {
+            "men": "男装",
+            "women": "女装",
+            "kids": "童装"
+          }
+        },
+        "beauty": {
+          "name": "美妆护肤",
+          "subcategories": {
+            "skincare": "护肤品",
+            "makeup": "彩妆",
+            "perfume": "香水"
+          }
+        }
+      }
+    },
+    "products": {
+      "hot": {
+        "title": "热门商品",
+        "subtitle": "精选优质商品，助力您的业务发展"
+      },
+      "new": {
+        "title": "新品上架",
+        "subtitle": "最新上架商品，把握市场先机"
+      },
+      "viewMore": "查看更多",
+      "items": {
+        "hoodie": {
+          "name": "时尚休闲连帽卫衣",
+          "description": "采用优质面料，舒适保暖，时尚百搭",
+          "price": "89.99",
+          "profitMargin": "45%",
+          "minOrder": "50",
+          "shippingTime": "3-5天",
+          "supplier": "优品服饰",
+          "rating": "4.8",
+          "suggestedPrice": "129.99"
+        },
+        "smartwatch": {
+          "name": "智能手表健康监测",
+          "description": "多功能健康监测，高清显示屏，续航持久",
+          "price": "299.99",
+          "profitMargin": "35%",
+          "minOrder": "20",
+          "shippingTime": "2-4天",
+          "supplier": "科技先锋",
+          "rating": "4.9",
+          "suggestedPrice": "399.99"
+        },
+        "headphones": {
+          "name": "高端蓝牙耳机",
+          "description": "主动降噪，高品质音质，舒适佩戴",
+          "price": "159.99",
+          "profitMargin": "40%",
+          "minOrder": "30",
+          "shippingTime": "3-5天",
+          "supplier": "音频专家",
+          "rating": "4.7",
+          "suggestedPrice": "199.99"
+        },
+        "powerbank": {
+          "name": "便携式移动电源",
+          "description": "大容量快充，多口输出，轻薄便携",
+          "price": "79.99",
+          "profitMargin": "50%",
+          "minOrder": "100",
+          "shippingTime": "2-3天",
+          "supplier": "电子科技",
+          "rating": "4.6",
+          "suggestedPrice": "99.99"
+        }
+      }
+    }
   }
 }

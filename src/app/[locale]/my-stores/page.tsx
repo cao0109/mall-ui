@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 // 模拟店铺数据
 const stores = [
@@ -78,102 +79,120 @@ export default function MyStoresPage() {
   };
 
   return (
-    <div className="container mx-auto py-6">
-      <div className="flex justify-between items-center">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="container mx-auto py-6"
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="flex justify-between items-center"
+      >
         <div>
           <h1 className="text-3xl font-bold">我的店铺</h1>
           <p className="text-muted-foreground">管理您的电商店铺</p>
         </div>
         <Button>添加店铺</Button>
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {stores.map((store) => (
-          <Card key={store.id}>
-            <CardHeader>
-              <div className="flex items-center gap-4">
-                <div className="h-16 w-16 rounded-md overflow-hidden">
-                  <img
-                    src={store.logo}
-                    alt={store.name}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div>
-                  <CardTitle>{store.name}</CardTitle>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Badge
-                      variant={
-                        store.status === "已连接" ? "default" : "outline"
-                      }
-                    >
-                      {store.status}
-                    </Badge>
-                    <span className="text-sm text-muted-foreground">
-                      {store.platform}
-                    </span>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        {stores.map((store, index) => (
+          <motion.div
+            key={store.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            whileHover={{ scale: 1.02 }}
+            className="h-full"
+          >
+            <Card className="h-full hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-center gap-4">
+                  <div className="h-16 w-16 rounded-md overflow-hidden">
+                    <img
+                      src={store.logo}
+                      alt={store.name}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <CardTitle>{store.name}</CardTitle>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Badge
+                        variant={
+                          store.status === "已连接" ? "default" : "outline"
+                        }
+                      >
+                        {store.status}
+                      </Badge>
+                      <span className="text-sm text-muted-foreground">
+                        {store.platform}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">网址</span>
-                  <a
-                    href={store.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">网址</span>
+                    <a
+                      href={store.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    >
+                      {store.url}
+                    </a>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">地区</span>
+                    <span>{store.storeLocation}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">商品数量</span>
+                    <span>{store.products}个</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">订单数</span>
+                    <span>{store.orders}个</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">月访问量</span>
+                    <span>{store.monthlyVisits}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">同步状态</span>
+                    <span>{store.syncStatus}</span>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                {store.status === "已连接" ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleSync(store.id)}
                   >
-                    {store.url}
-                  </a>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">地区</span>
-                  <span>{store.storeLocation}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">商品数量</span>
-                  <span>{store.products}个</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">订单数</span>
-                  <span>{store.orders}个</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">月访问量</span>
-                  <span>{store.monthlyVisits}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">同步状态</span>
-                  <span>{store.syncStatus}</span>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              {store.status === "已连接" ? (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleSync(store.id)}
-                >
-                  同步商品
-                </Button>
-              ) : (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleConnect(store.id)}
-                >
-                  连接店铺
-                </Button>
-              )}
-              <Button size="sm">查看详情</Button>
-            </CardFooter>
-          </Card>
+                    同步商品
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleConnect(store.id)}
+                  >
+                    连接店铺
+                  </Button>
+                )}
+                <Button size="sm">查看详情</Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

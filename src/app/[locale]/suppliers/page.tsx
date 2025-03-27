@@ -13,7 +13,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, Search, SlidersHorizontal, Star } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Check,
+  Filter,
+  Search,
+  SlidersHorizontal,
+  Star,
+  X,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -118,6 +127,7 @@ export default function SuppliersPage() {
   const [selectedRegion, setSelectedRegion] = useState<RegionOption>("all");
   const [sortBy, setSortBy] = useState<SortOption>("rating");
   const [showVerifiedOnly, setShowVerifiedOnly] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filteredSuppliers = useMemo(() => {
     return suppliers
@@ -168,14 +178,113 @@ export default function SuppliersPage() {
     showVerifiedOnly,
   ]);
 
+  const FilterPanel = () => (
+    <div className="space-y-6">
+      <div>
+        <h3 className="font-medium mb-3">供应商类型</h3>
+        <div className="flex items-center space-x-2">
+          <Checkbox
+            id="verified"
+            checked={showVerifiedOnly}
+            onCheckedChange={(checked) => setShowVerifiedOnly(!!checked)}
+          />
+          <Label htmlFor="verified">仅显示认证供应商</Label>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="font-medium mb-3">主营类目</h3>
+        <div className="space-y-2">
+          {allCategories.map((category) => (
+            <motion.div
+              key={category}
+              className="flex items-center space-x-2"
+              whileHover={{ x: 2 }}
+            >
+              <Checkbox
+                id={category}
+                checked={selectedCategories.includes(category)}
+                onCheckedChange={(checked) => {
+                  if (checked) {
+                    setSelectedCategories([...selectedCategories, category]);
+                  } else {
+                    setSelectedCategories(
+                      selectedCategories.filter((c) => c !== category)
+                    );
+                  }
+                }}
+              />
+              <Label htmlFor={category}>{category}</Label>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="font-medium mb-3">所在地区</h3>
+        <Select
+          value={selectedRegion}
+          onValueChange={(value) => setSelectedRegion(value as RegionOption)}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="选择地区" />
+          </SelectTrigger>
+          <SelectContent>
+            {regionOptions.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {(selectedCategories.length > 0 ||
+        showVerifiedOnly ||
+        selectedRegion !== "all") && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="pt-4 border-t"
+        >
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => {
+              setSelectedCategories([]);
+              setShowVerifiedOnly(false);
+              setSelectedRegion("all");
+            }}
+          >
+            <X className="h-4 w-4 mr-2" />
+            清除筛选
+          </Button>
+        </motion.div>
+      )}
+    </div>
+  );
+
   return (
-    <div className="container mx-auto py-6">
-      <div className="flex justify-between items-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="container mx-auto py-6 px-4 md:px-6"
+    >
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <div>
           <h1 className="text-3xl font-bold">供应商目录</h1>
           <p className="text-muted-foreground">浏览和查找优质供应商</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full md:w-auto">
+          <div className="relative flex-1 md:w-[300px]">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="搜索供应商名称或描述..."
+              className="pl-10"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
           <Select
             value={sortBy}
             onValueChange={(value) => setSortBy(value as SortOption)}
@@ -196,184 +305,139 @@ export default function SuppliersPage() {
       </div>
 
       <div className="flex gap-6">
-        {/* 左侧筛选面板 - 添加 sticky 定位 */}
-        <div className="w-64 space-y-6 sticky top-6 self-start">
+        {/* 桌面端筛选面板 */}
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          className="hidden md:block w-64 space-y-6 sticky top-6 self-start"
+        >
           <Card className="p-4">
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-medium mb-3">供应商类型</h3>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="verified"
-                    checked={showVerifiedOnly}
-                    onCheckedChange={(checked) =>
-                      setShowVerifiedOnly(!!checked)
-                    }
-                  />
-                  <Label htmlFor="verified">仅显示认证供应商</Label>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-medium mb-3">主营类目</h3>
-                <div className="space-y-2">
-                  {allCategories.map((category) => (
-                    <div key={category} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={category}
-                        checked={selectedCategories.includes(category)}
-                        onCheckedChange={(checked) => {
-                          if (checked) {
-                            setSelectedCategories([
-                              ...selectedCategories,
-                              category,
-                            ]);
-                          } else {
-                            setSelectedCategories(
-                              selectedCategories.filter((c) => c !== category)
-                            );
-                          }
-                        }}
-                      />
-                      <Label htmlFor={category}>{category}</Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-medium mb-3">所在地区</h3>
-                <Select
-                  value={selectedRegion}
-                  onValueChange={(value) =>
-                    setSelectedRegion(value as RegionOption)
-                  }
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="选择地区" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {regionOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+            <FilterPanel />
           </Card>
+        </motion.div>
+
+        {/* 移动端筛选按钮和面板 */}
+        <div className="md:hidden fixed bottom-6 right-6 z-50">
+          <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+            <SheetTrigger asChild>
+              <Button size="lg" className="rounded-full shadow-lg">
+                <Filter className="h-5 w-5 mr-2" />
+                筛选
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="bottom" className="h-[80vh]">
+              <FilterPanel />
+            </SheetContent>
+          </Sheet>
         </div>
 
-        {/* 右侧内容区 - 保持不变 */}
-        <div className="flex-1 space-y-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="搜索供应商名称或描述..."
-              className="pl-10"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredSuppliers.map((supplier) => (
-              <Card
-                key={supplier.id}
-                className="p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="h-16 w-16 rounded-lg overflow-hidden">
-                    <img
-                      src={supplier.logo}
-                      alt={supplier.name}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">{supplier.name}</h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Badge variant="outline" className="text-xs">
-                        <Check className="h-3 w-3 mr-1" />
-                        {supplier.verificationStatus}
-                      </Badge>
-                      <span className="text-sm text-muted-foreground flex items-center">
-                        <Star className="h-4 w-4 mr-1 fill-yellow-400 text-yellow-400" />
-                        {supplier.rating}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                  {supplier.description}
-                </p>
-
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">产品数量</span>
-                    <span>{supplier.products}个</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">发货范围</span>
-                    <span className="text-right max-w-[60%] line-clamp-1">
-                      {supplier.shippingInfo}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t">
-                  <div className="flex flex-col gap-3">
-                    <div>
-                      <span className="text-sm text-muted-foreground">
-                        主营类目
-                      </span>
-                      <div className="flex flex-wrap gap-1 mt-1">
-                        {supplier.categories.map((category) => (
-                          <Badge
-                            key={category}
-                            variant="secondary"
-                            className="text-xs"
-                          >
-                            {category}
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              {filteredSuppliers.map((supplier, index) => (
+                <motion.div
+                  key={supplier.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ y: -5 }}
+                  className="h-full"
+                >
+                  <Card className="h-full p-6 hover:shadow-xl transition-all duration-300">
+                    <motion.div
+                      className="flex items-center gap-4 mb-4"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="h-16 w-16 rounded-lg overflow-hidden">
+                        <img
+                          src={supplier.logo}
+                          alt={supplier.name}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          {supplier.name}
+                        </h3>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Badge variant="outline" className="text-xs">
+                            <Check className="h-3 w-3 mr-1" />
+                            {supplier.verificationStatus}
                           </Badge>
-                        ))}
+                          <span className="text-sm text-muted-foreground flex items-center">
+                            <Star className="h-4 w-4 mr-1 fill-yellow-400 text-yellow-400" />
+                            {supplier.rating}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {supplier.description}
+                    </p>
+
+                    <div className="space-y-3 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">产品数量</span>
+                        <span>{supplier.products}个</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">发货范围</span>
+                        <span className="text-right max-w-[60%] line-clamp-1">
+                          {supplier.shippingInfo}
+                        </span>
                       </div>
                     </div>
-                    <Button
-                      className="w-full"
-                      onClick={() => router.push(`/suppliers/${supplier.id}`)}
-                    >
-                      查看详情
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
 
-          <div className="flex justify-center mt-6">
-            <nav className="flex items-center gap-1">
-              <Button variant="outline" size="sm">
-                &lt;
-              </Button>
-              <Button variant="outline" size="sm">
-                1
-              </Button>
-              <Button variant="outline" size="sm">
-                2
-              </Button>
-              <Button variant="outline" size="sm">
-                3
-              </Button>
-              <Button variant="outline" size="sm">
-                &gt;
-              </Button>
-            </nav>
-          </div>
+                    <div className="mt-4 pt-4 border-t">
+                      <div className="flex flex-col gap-3">
+                        <div>
+                          <span className="text-sm text-muted-foreground">
+                            主营类目
+                          </span>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {supplier.categories.map((category) => (
+                              <Badge
+                                key={category}
+                                variant="secondary"
+                                className="text-xs"
+                              >
+                                {category}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                        <Button
+                          className="w-full"
+                          onClick={() =>
+                            router.push(`/suppliers/${supplier.id}`)
+                          }
+                        >
+                          查看详情
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {filteredSuppliers.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12"
+            >
+              <p className="text-muted-foreground">暂无符合条件的供应商</p>
+            </motion.div>
+          )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

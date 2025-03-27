@@ -7,7 +7,7 @@
     "logout": "Logout",
     "settings": "Settings",
     "myStores": "My Stores",
-    "selectedProducts": "Selected Products",
+    "selectedProducts": "Selection Cart",
     "productLibrary": "Product Library",
     "suppliers": "Suppliers"
   },
@@ -18,7 +18,156 @@
     "logoutDescription": "You have successfully logged out"
   },
   "region": {
-    "switch": "Switch Region",
-    "currentRegion": "Current Region"
+    "switch": "Switch region",
+    "currentRegion": "Current region"
+  },
+  "home": {
+    "banner": {
+      "title": "Global Quality Products, One-Stop Procurement",
+      "subtitle": "Connecting global quality suppliers to boost cross-border trade",
+      "cta": "Get Started Now"
+    },
+    "welcome": {
+      "title": "Welcome to HiDoo",
+      "subtitle": "Your Cross-Border Trade Assistant",
+      "description": "We are committed to providing global buyers with quality products and services, making cross-border trade simpler and more efficient."
+    },
+    "dataOverview": {
+      "title": "Platform Data",
+      "items": {
+        "suppliers": {
+          "label": "Quality Suppliers",
+          "value": "1000+"
+        },
+        "products": {
+          "label": "Product Count",
+          "value": "50,000+"
+        },
+        "buyers": {
+          "label": "Active Buyers",
+          "value": "100,000+"
+        },
+        "countries": {
+          "label": "Countries Covered",
+          "value": "50+"
+        }
+      }
+    },
+    "advantages": {
+      "title": "Platform Advantages",
+      "items": {
+        "quality": {
+          "title": "Quality Assurance",
+          "description": "Strict supplier screening to ensure product quality"
+        },
+        "price": {
+          "title": "Price Advantage",
+          "description": "Direct from factories, more competitive pricing"
+        },
+        "shipping": {
+          "title": "Fast Shipping",
+          "description": "Global logistics network for quick delivery"
+        },
+        "service": {
+          "title": "Professional Service",
+          "description": "24/7 customer support"
+        }
+      }
+    },
+    "categories": {
+      "title": "Product Categories",
+      "viewAll": "View All",
+      "items": {
+        "electronics": {
+          "name": "Electronics",
+          "subcategories": {
+            "mobile": "Mobile & Digital",
+            "computer": "Computer Accessories",
+            "smart": "Smart Devices"
+          }
+        },
+        "home": {
+          "name": "Home Goods",
+          "subcategories": {
+            "furniture": "Furniture & Decor",
+            "kitchen": "Kitchen Supplies",
+            "daily": "Daily Essentials"
+          }
+        },
+        "clothing": {
+          "name": "Clothing & Footwear",
+          "subcategories": {
+            "men": "Men's Clothing",
+            "women": "Women's Clothing",
+            "kids": "Kids' Clothing"
+          }
+        },
+        "beauty": {
+          "name": "Beauty & Skincare",
+          "subcategories": {
+            "skincare": "Skincare Products",
+            "makeup": "Makeup",
+            "perfume": "Perfume"
+          }
+        }
+      }
+    },
+    "products": {
+      "hot": {
+        "title": "Hot Products",
+        "subtitle": "Curated quality products to boost your business"
+      },
+      "new": {
+        "title": "New Arrivals",
+        "subtitle": "Latest products to seize market opportunities"
+      },
+      "viewMore": "View More",
+      "items": {
+        "hoodie": {
+          "name": "Fashion Casual Hoodie",
+          "description": "Made with premium fabric, warm, comfortable, and versatile",
+          "price": "89.99",
+          "profitMargin": "45%",
+          "minOrder": "50",
+          "shippingTime": "3-5 days",
+          "supplier": "Prime Apparel",
+          "rating": "4.8",
+          "suggestedPrice": "129.99"
+        },
+        "smartwatch": {
+          "name": "Smartwatch with Health Monitoring",
+          "description": "Multi-functional health tracking, HD display, long battery life",
+          "price": "299.99",
+          "profitMargin": "35%",
+          "minOrder": "20",
+          "shippingTime": "2-4 days",
+          "supplier": "Tech Pioneer",
+          "rating": "4.9",
+          "suggestedPrice": "399.99"
+        },
+        "headphones": {
+          "name": "Premium Bluetooth Headphones",
+          "description": "Active noise cancellation, high-quality sound, comfortable fit",
+          "price": "159.99",
+          "profitMargin": "40%",
+          "minOrder": "30",
+          "shippingTime": "3-5 days",
+          "supplier": "Audio Expert",
+          "rating": "4.7",
+          "suggestedPrice": "199.99"
+        },
+        "powerbank": {
+          "name": "Portable Power Bank",
+          "description": "High-capacity fast charging, multi-port output, slim and portable",
+          "price": "79.99",
+          "profitMargin": "50%",
+          "minOrder": "100",
+          "shippingTime": "2-3 days",
+          "supplier": "Electronic Tech",
+          "rating": "4.6",
+          "suggestedPrice": "99.99"
+        }
+      }
+    }
   }
 }

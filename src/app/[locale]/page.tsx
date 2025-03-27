@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import Advantages from "@/components/home/advantages";
@@ -232,65 +233,246 @@ export const categories = [
 ];
 
 export default function Home() {
+  const t = useTranslations();
   const [selectedTab, setSelectedTab] = useState("hot");
 
   return (
     <div className="container mx-auto py-6 space-y-10">
       {/* 轮播图区域 */}
-      <HomeBanner />
+      <HomeBanner
+        title={t("home.banner.title")}
+        subtitle={t("home.banner.subtitle")}
+        cta={t("home.banner.cta")}
+      />
 
       {/* 欢迎区域 */}
-      <WelcomeSection />
+      <WelcomeSection
+        title={t("home.welcome.title")}
+        subtitle={t("home.welcome.subtitle")}
+        description={t("home.welcome.description")}
+      />
 
       {/* 数据概览 */}
-      <DataOverview />
+      <DataOverview
+        title={t("home.dataOverview.title")}
+        items={[
+          {
+            label: t("home.dataOverview.items.suppliers.label"),
+            value: t("home.dataOverview.items.suppliers.value"),
+          },
+          {
+            label: t("home.dataOverview.items.products.label"),
+            value: t("home.dataOverview.items.products.value"),
+          },
+          {
+            label: t("home.dataOverview.items.buyers.label"),
+            value: t("home.dataOverview.items.buyers.value"),
+          },
+          {
+            label: t("home.dataOverview.items.countries.label"),
+            value: t("home.dataOverview.items.countries.value"),
+          },
+        ]}
+      />
 
       {/* 商城优势 */}
-      <Advantages />
+      <Advantages
+        title={t("home.advantages.title")}
+        items={[
+          {
+            title: t("home.advantages.items.quality.title"),
+            description: t("home.advantages.items.quality.description"),
+          },
+          {
+            title: t("home.advantages.items.price.title"),
+            description: t("home.advantages.items.price.description"),
+          },
+          {
+            title: t("home.advantages.items.shipping.title"),
+            description: t("home.advantages.items.shipping.description"),
+          },
+          {
+            title: t("home.advantages.items.service.title"),
+            description: t("home.advantages.items.service.description"),
+          },
+        ]}
+      />
 
       {/* 商品分类 */}
       <Categories />
 
-      {/* 产品展示区域 */}
-      <section className="space-y-6">
+      {/* 商品展示 */}
+      <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">爆款优选</h2>
+          <div>
+            <h2 className="text-2xl font-semibold">
+              {selectedTab === "hot"
+                ? t("home.products.hot.title")
+                : t("home.products.new.title")}
+            </h2>
+            <p className="text-muted-foreground">
+              {selectedTab === "hot"
+                ? t("home.products.hot.subtitle")
+                : t("home.products.new.subtitle")}
+            </p>
+          </div>
+          <Button variant="ghost" className="group">
+            {t("home.products.viewMore")}
+            <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </div>
 
         <Tabs value={selectedTab} onValueChange={setSelectedTab}>
-          <div className="flex items-center justify-end mb-6">
-            <TabsList>
-              <TabsTrigger value="hot">跨境热销</TabsTrigger>
-              <TabsTrigger value="new">新品首发</TabsTrigger>
-              <TabsTrigger value="recommend">智能推荐</TabsTrigger>
-            </TabsList>
-          </div>
-
-          <TabsContent value="hot">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+          <TabsList>
+            <TabsTrigger value="hot">
+              {t("home.products.hot.title")}
+            </TabsTrigger>
+            <TabsTrigger value="new">
+              {t("home.products.new.title")}
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="hot" className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.slice(0, 4).map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={{
+                    ...product,
+                    name: t(
+                      `home.products.items.${product.shopUrl
+                        .split("/")
+                        .pop()}.name`
+                    ),
+                    description: t(
+                      `home.products.items.${product.shopUrl
+                        .split("/")
+                        .pop()}.description`
+                    ),
+                    price: parseFloat(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.price`
+                      )
+                    ),
+                    profitMargin: parseInt(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.profitMargin`
+                      )
+                    ),
+                    minOrder: parseInt(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.minOrder`
+                      )
+                    ),
+                    shippingTime: t(
+                      `home.products.items.${product.shopUrl
+                        .split("/")
+                        .pop()}.shippingTime`
+                    ),
+                    supplier: {
+                      ...product.supplier,
+                      name: t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.supplier`
+                      ),
+                      rating: parseFloat(
+                        t(
+                          `home.products.items.${product.shopUrl
+                            .split("/")
+                            .pop()}.rating`
+                        )
+                      ),
+                    },
+                    suggestedPrice: parseFloat(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.suggestedPrice`
+                      )
+                    ),
+                  }}
+                />
               ))}
             </div>
           </TabsContent>
-
-          <TabsContent value="new">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="recommend">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+          <TabsContent value="new" className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.slice(4, 8).map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={{
+                    ...product,
+                    name: t(
+                      `home.products.items.${product.shopUrl
+                        .split("/")
+                        .pop()}.name`
+                    ),
+                    description: t(
+                      `home.products.items.${product.shopUrl
+                        .split("/")
+                        .pop()}.description`
+                    ),
+                    price: parseFloat(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.price`
+                      )
+                    ),
+                    profitMargin: parseInt(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.profitMargin`
+                      )
+                    ),
+                    minOrder: parseInt(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.minOrder`
+                      )
+                    ),
+                    shippingTime: t(
+                      `home.products.items.${product.shopUrl
+                        .split("/")
+                        .pop()}.shippingTime`
+                    ),
+                    supplier: {
+                      ...product.supplier,
+                      name: t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.supplier`
+                      ),
+                      rating: parseFloat(
+                        t(
+                          `home.products.items.${product.shopUrl
+                            .split("/")
+                            .pop()}.rating`
+                        )
+                      ),
+                    },
+                    suggestedPrice: parseFloat(
+                      t(
+                        `home.products.items.${product.shopUrl
+                          .split("/")
+                          .pop()}.suggestedPrice`
+                      )
+                    ),
+                  }}
+                />
               ))}
             </div>
           </TabsContent>
         </Tabs>
-      </section>
+      </div>
 
       {/* 限时特惠 */}
       <section className="space-y-6">
@@ -526,9 +708,6 @@ export default function Home() {
           </Card>
         </div>
       </section>
-
-      {/* 平台优势 */}
-      <Advantages />
     </div>
   );
 }
