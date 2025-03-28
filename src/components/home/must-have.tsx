@@ -1,6 +1,6 @@
 // must-have
 
-import { demoImages, products } from "@/app/[locale]/page";
+import { demoImages, products } from "@/lib/data";
 import { ArrowRight, BadgePercent, Gift, Package, Truck } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";

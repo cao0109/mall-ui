@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRef } from "react";
 import { AiFillWechat } from "react-icons/ai";
@@ -31,27 +30,6 @@ const rotateAnimation = {
   },
 };
 
-const scaleAnimation = {
-  scale: [1, 1.05, 1],
-  transition: {
-    duration: 2,
-    repeat: Infinity,
-    ease: "easeInOut",
-  },
-};
-
-const glowAnimation = {
-  boxShadow: [
-    "0 0 0 0px rgba(59, 130, 246, 0.5)",
-    "0 0 0 10px rgba(59, 130, 246, 0)",
-  ],
-  transition: {
-    duration: 2,
-    repeat: Infinity,
-    ease: "easeInOut",
-  },
-};
-
 const pulseAnimation = {
   scale: [1, 1.1, 1],
   transition: {
@@ -62,15 +40,8 @@ const pulseAnimation = {
 };
 
 export default function ContactPage() {
-  const t = useTranslations();
+  // const t = useTranslations();
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 1]);
 
   return (
     <div
@@ -146,7 +117,7 @@ export default function ContactPage() {
                   content: "上海市浦东新区张江高科技园区",
                   subtext: "欢迎来访参观",
                 },
-              ].map((item, index) => (
+              ].map((item) => (
                 <motion.div
                   key={item.title}
                   variants={fadeInUp}
@@ -327,7 +298,7 @@ export default function ContactPage() {
                 question: "支持哪些支付方式？",
                 answer: "我们支持多种支付方式，包括信用卡、PayPal等。",
               },
-            ].map((item, index) => (
+            ].map((item) => (
               <motion.div
                 key={item.question}
                 variants={fadeInUp}
@@ -378,7 +349,7 @@ export default function ContactPage() {
                 color: "bg-gray-500/10 hover:bg-gray-500/20",
                 iconColor: "text-black-500",
               },
-            ].map((item, index) => (
+            ].map((item) => (
               <motion.div
                 key={item.name}
                 variants={fadeInUp}

@@ -60,7 +60,9 @@ export default function LoginPage() {
     } catch (error) {
       toast({
         title: "登录失败",
-        description: "邮箱或密码错误",
+        description: `请检查您的邮箱和密码是否正确 ${
+          error instanceof Error ? `: ${error.message}` : ""
+        }`,
         variant: "destructive",
       });
     }

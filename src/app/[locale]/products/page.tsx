@@ -1,6 +1,5 @@
 "use client";
 
-import { categories, products } from "@/app/[locale]/page";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -21,6 +20,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Slider } from "@/components/ui/slider";
+import { categories, products } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import {
   ArrowDownNarrowWide,

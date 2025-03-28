@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronRight, Globe, Users, Zap } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useRef } from "react";
 
 const fadeInUp = {
@@ -50,15 +49,8 @@ const glowAnimation = {
 };
 
 export default function AboutPage() {
-  const t = useTranslations();
+  // const t = useTranslations();
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 1]);
 
   return (
     <div
@@ -133,7 +125,7 @@ export default function AboutPage() {
               description:
                 "以用户需求为中心，提供优质服务和解决方案，建立长期信任关系。",
             },
-          ].map((item, index) => (
+          ].map((item) => (
             <motion.div
               key={item.title}
               variants={fadeInUp}
@@ -180,7 +172,7 @@ export default function AboutPage() {
                 "实现可持续发展目标",
               ],
             },
-          ].map((item, index) => (
+          ].map((item) => (
             <motion.div
               key={item.title}
               variants={fadeInUp}
@@ -319,7 +311,7 @@ export default function AboutPage() {
                 number: "100万+",
                 label: "活跃用户",
               },
-            ].map((item, index) => (
+            ].map((item) => (
               <motion.div
                 key={item.label}
                 variants={fadeInUp}
