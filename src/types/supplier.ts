@@ -6,8 +6,19 @@ export interface Supplier {
   phone: string;
   email: string;
   address: string;
-  description?: string;
-  status: 'active' | 'inactive';
+  description: string;
+  status: "active" | "inactive";
+  logo: string;
+  rating: number;
+  totalOrders: number;
+  totalProducts: number;
+  responseRate: number;
+  deliveryRate: number;
+  qualityScore: number;
+  mainCategories: string[];
+  certifications: string[];
+  establishedYear: string;
+  website: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -20,7 +31,12 @@ export interface SupplierProduct {
   productCode: string;
   price: number;
   currency: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
+  image: string;
+  category: string;
+  stock: number;
+  sales: number;
+  rating: string;
   createdAt: string;
   updatedAt: string;
 } 

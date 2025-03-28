@@ -3,19 +3,19 @@
 import { SectionHeader } from "@/components/home/section-header";
 import { ProductCard } from "@/components/product/product-card";
 import { products } from "@/lib/data";
-import { ShoppingBag } from "lucide-react";
+import { Timer } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export default function MustHaveSection() {
+export default function FlashSale() {
   const t = useTranslations();
 
   return (
     <section className="space-y-6">
       <SectionHeader
-        title="新店必备"
-        subtitle="精选爆款，助力开店"
-        icon={<ShoppingBag className="h-6 w-6 text-primary" />}
-        badge={{ text: "Must Have" }}
+        title="限时特惠"
+        subtitle="每日精选，限时抢购"
+        icon={<Timer className="h-6 w-6 text-red-500" />}
+        badge={{ text: "Flash Sale" }}
         action={{
           label: "查看更多",
           onClick: () => {},
