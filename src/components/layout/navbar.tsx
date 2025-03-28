@@ -2,6 +2,7 @@
 
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { RegionSwitcher } from "@/components/region-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -63,12 +64,22 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      role="banner"
+    >
       <div className="container flex h-16 items-center justify-between">
         {/* Logo区域 */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+          <Link
+            href="/"
+            className="flex items-center space-x-2"
+            aria-label="返回首页"
+          >
+            <div
+              className="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+              aria-hidden="true"
+            >
               <span className="text-white font-bold text-sm">HD</span>
             </div>
             <span className="font-bold text-xl hidden md:inline-block">
@@ -78,80 +89,94 @@ export function Navbar() {
         </div>
 
         {/* 导航区域 - 中等屏幕及以上显示 */}
-        <NavigationMenu className="hidden md:flex">
+        <NavigationMenu className="hidden md:flex" aria-label="主导航">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-sm font-medium text-muted-foreground">
-                <Package className="mr-1 h-4 w-4" />
+              <NavigationMenuTrigger
+                className="text-sm font-medium text-muted-foreground"
+                aria-label="产品库导航"
+              >
+                <Package className="mr-1 h-4 w-4" aria-hidden="true" />
                 {t("common.productLibrary")}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="grid gap-3 p-4 md:w-[400px] lg:w-[500px]">
+                <nav
+                  className="grid gap-3 p-4 md:w-[400px] lg:w-[500px]"
+                  aria-label="产品分类"
+                >
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <h4 className="text-sm font-medium leading-none mb-2">
+                      <h2 className="text-sm font-medium leading-none mb-2">
                         热门分类
-                      </h4>
-                      <div className="grid grid-cols-2 gap-2">
+                      </h2>
+                      <div className="grid grid-cols-2 gap-2" role="list">
                         <Link
                           href="/products/category/electronics"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           电子产品
                         </Link>
                         <Link
                           href="/products/category/clothing"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           服装服饰
                         </Link>
                         <Link
                           href="/products/category/home"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           家居用品
                         </Link>
                         <Link
                           href="/products/category/beauty"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           美妆个护
                         </Link>
                       </div>
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-sm font-medium leading-none mb-2">
+                      <h2 className="text-sm font-medium leading-none mb-2">
                         特色商品
-                      </h4>
-                      <div className="grid grid-cols-2 gap-2">
+                      </h2>
+                      <div className="grid grid-cols-2 gap-2" role="list">
                         <Link
                           href="/products/featured/new"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           新品上市
                         </Link>
                         <Link
                           href="/products/featured/hot"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           热销商品
                         </Link>
                         <Link
                           href="/products/featured/sale"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           特惠活动
                         </Link>
                         <Link
                           href="/products/featured/limited"
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          role="listitem"
                         >
                           限量商品
                         </Link>
                       </div>
                     </div>
                   </div>
-                </div>
+                </nav>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -198,59 +223,102 @@ export function Navbar() {
         </NavigationMenu>
 
         {/* 用户区域 */}
-        <div className="flex items-center space-x-2">
-          {/* 搜索按钮 */}
-          <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+        <div className="flex items-center space-x-4">
+          <ThemeToggle />
+          <LanguageSwitcher />
+          <RegionSwitcher />
+
+          {/* 搜索按钮和对话框 */}
+          <Dialog
+            open={isSearchOpen}
+            onOpenChange={setIsSearchOpen}
+            aria-label="搜索"
+          >
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" className="hidden md:flex">
-                <Search className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden md:flex"
+                aria-label="打开搜索"
+              >
+                <Search className="h-5 w-5" aria-hidden="true" />
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] p-0 gap-0 top-[20%]">
+            <DialogContent
+              className="sm:max-w-[425px] p-0 gap-0 top-[20%]"
+              role="dialog"
+              aria-modal="true"
+            >
               <div className="flex items-center px-4 py-3 border-b">
-                <Search className="h-4 w-4 text-muted-foreground mr-2" />
+                <Search
+                  className="h-4 w-4 text-muted-foreground mr-2"
+                  aria-hidden="true"
+                />
                 <DialogTitle className="text-base font-medium">
                   {t("common.search")}
                 </DialogTitle>
               </div>
               <div className="p-4">
                 <div className="relative w-full">
+                  <label htmlFor="search-input" className="sr-only">
+                    搜索内容
+                  </label>
                   <input
+                    id="search-input"
                     type="text"
                     placeholder={t("common.search")}
                     className="w-full py-2 pl-10 pr-4 rounded-md border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     autoFocus
+                    aria-label="搜索输入框"
                   />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Search
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"
+                    aria-hidden="true"
+                  />
                 </div>
               </div>
             </DialogContent>
           </Dialog>
 
-          <LanguageSwitcher />
-          <RegionSwitcher />
+          {/* 用户菜单 */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="hidden md:flex">
-                <User className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden md:flex"
+                aria-label="用户菜单"
+              >
+                <User className="h-5 w-5" aria-hidden="true" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuContent
+              align="end"
+              className="w-56"
+              role="menu"
+              aria-label="用户菜单选项"
+            >
               {isAuthenticated ? (
                 <>
-                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                  <DropdownMenuItem
+                    className="flex items-center gap-2 cursor-pointer"
+                    role="menuitem"
+                  >
                     <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
                       {user?.avatar ? (
                         <Image
                           src={user.avatar}
-                          alt={user.name}
+                          alt={`${user.name}的头像`}
                           width={24}
                           height={24}
                           layout="fixed"
                           className="h-full w-full rounded-full"
                         />
                       ) : (
-                        <span className="text-xs font-medium">
+                        <span
+                          className="text-xs font-medium"
+                          aria-label={`${user?.name}的首字母`}
+                        >
                           {user?.name?.[0]}
                         </span>
                       )}
@@ -312,13 +380,6 @@ export function Navbar() {
               )}
             </DropdownMenuContent>
           </DropdownMenu>
-          {!isAuthenticated && (
-            <Link href="/auth/login">
-              <Button size="sm" className="hidden md:flex">
-                {t("common.login")}
-              </Button>
-            </Link>
-          )}
 
           {/* 移动端菜单按钮 */}
           <Button
@@ -326,11 +387,14 @@ export function Navbar() {
             size="icon"
             className="md:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMobileMenuOpen ? "关闭菜单" : "打开菜单"}
           >
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6" aria-hidden="true" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             )}
           </Button>
         </div>
@@ -338,7 +402,12 @@ export function Navbar() {
 
       {/* 移动端菜单 */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t bg-background">
+        <div
+          id="mobile-menu"
+          className="md:hidden border-t bg-background"
+          role="navigation"
+          aria-label="移动端导航"
+        >
           <nav className="flex flex-col">
             {isAuthenticated ? (
               <>
