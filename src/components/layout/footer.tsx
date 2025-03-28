@@ -82,20 +82,22 @@ export function Footer() {
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         {/* Logo 和简介 */}
         <div className="mb-8 flex flex-col items-center gap-4 text-center sm:mb-12 sm:flex-row sm:gap-6 sm:text-left lg:mb-16">
-          <Link href="/" className="group relative flex items-center gap-3 sm:gap-4">
-            <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-primary/80 to-blue-600/80 shadow-lg transition-all duration-300 group-hover:shadow-primary/25 sm:h-10 sm:w-10">
-              <FaGlobeAsia className="h-4 w-4 text-white transition-transform duration-300 group-hover:scale-110 sm:h-5 sm:w-5" />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-600 opacity-0 transition-opacity duration-300 group-hover:opacity-20" />
-            </div>
-            <div>
-              <h2 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-lg font-bold tracking-tight text-transparent dark:from-gray-100 dark:to-gray-400 sm:text-xl">
-                HiDoo
-              </h2>
-              <p className="text-[10px] text-gray-500 dark:text-gray-400 sm:text-xs">
-                跨境分销生态平台
-              </p>
-            </div>
-          </Link>
+          <div className="group relative flex items-center gap-3 sm:gap-4">
+            <Link href="/" className="flex items-center">
+              <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-primary/80 to-blue-600/80 shadow-lg transition-all duration-300 group-hover:shadow-primary/25 sm:h-10 sm:w-10">
+                <FaGlobeAsia className="h-4 w-4 text-white transition-transform duration-300 group-hover:scale-110 sm:h-5 sm:w-5" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-600 opacity-0 transition-opacity duration-300 group-hover:opacity-20" />
+              </div>
+              <div className="ml-3 sm:ml-4">
+                <h2 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-lg font-bold tracking-tight text-transparent dark:from-gray-100 dark:to-gray-400 sm:text-xl">
+                  HiDoo
+                </h2>
+                <p className="text-[10px] text-gray-500 dark:text-gray-400 sm:text-xs">
+                  跨境分销生态平台
+                </p>
+              </div>
+            </Link>
+          </div>
           <div className="hidden h-8 w-px bg-gradient-to-b from-transparent via-gray-200 to-transparent dark:via-gray-700 sm:mx-6 sm:block lg:mx-8" />
           <p className="max-w-md text-xs leading-relaxed text-gray-500 dark:text-gray-400 sm:text-sm">
             HiDoo
@@ -161,17 +163,17 @@ export function Footer() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.1 + linkIndex * 0.05 }}
                     >
-                      <Link
-                        href={link.href}
-                        className="group/link relative inline-flex items-center text-[13px] text-gray-500 transition-all duration-300 hover:text-primary dark:text-gray-400 dark:hover:text-primary"
-                      >
-                        <span className="absolute -left-3 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-primary/40 opacity-0 transition-all duration-300 group-hover/link:opacity-100 sm:hidden" />
-                        <span className="relative">
+                      <div className="group/link relative inline-flex items-center">
+                        <Link
+                          href={link.href}
+                          className="relative inline-flex items-center text-[13px] text-gray-500 transition-all duration-300 hover:text-primary dark:text-gray-400 dark:hover:text-primary"
+                        >
+                          <span className="absolute -left-3 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-primary/40 opacity-0 transition-all duration-300 group-hover/link:opacity-100 sm:hidden" />
                           <span className="absolute -left-2 top-1/2 hidden h-1 w-1 -translate-x-full rounded-full bg-primary opacity-0 transition-all duration-300 group-hover/link:opacity-100 sm:block" />
                           {link.name}
                           <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-primary to-blue-500 transition-all duration-300 group-hover/link:w-full" />
-                        </span>
-                      </Link>
+                        </Link>
+                      </div>
                     </motion.li>
                   ))}
                 </ul>

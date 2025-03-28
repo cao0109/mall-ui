@@ -16,7 +16,6 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
@@ -166,43 +165,48 @@ export function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/suppliers" legacyBehavior passHref>
-                <NavigationMenuLink className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-                  <Store className="mr-1 h-4 w-4" />
-                  {t('common.suppliers')}
-                </NavigationMenuLink>
+              <Link
+                href="/suppliers"
+                className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Store className="mr-1 h-4 w-4" />
+                {t('common.suppliers')}
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/my-stores" legacyBehavior passHref>
-                <NavigationMenuLink className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-                  <Users className="mr-1 h-4 w-4" />
-                  {t('common.myStores')}
-                </NavigationMenuLink>
+              <Link
+                href="/my-stores"
+                className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Users className="mr-1 h-4 w-4" />
+                {t('common.myStores')}
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/selected-products" legacyBehavior passHref>
-                <NavigationMenuLink className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-                  <ShoppingCart className="mr-1 h-4 w-4" />
-                  {t('common.selectedProducts')}
-                </NavigationMenuLink>
+              <Link
+                href="/selected-products"
+                className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <ShoppingCart className="mr-1 h-4 w-4" />
+                {t('common.selectedProducts')}
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-                  <Info className="mr-1 h-4 w-4" />
-                  关于我们
-                </NavigationMenuLink>
+              <Link
+                href="/about"
+                className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Info className="mr-1 h-4 w-4" />
+                关于我们
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-                  <Phone className="mr-1 h-4 w-4" />
-                  联系我们
-                </NavigationMenuLink>
+              <Link
+                href="/contact"
+                className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Phone className="mr-1 h-4 w-4" />
+                联系我们
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
