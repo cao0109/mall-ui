@@ -208,7 +208,7 @@ export function Footer() {
 
               {/* 版权信息 */}
               <motion.div
-                className="flex flex-col items-center gap-1.5 text-xs tracking-wide text-gray-500/90 dark:text-gray-400/90 sm:flex-row sm:gap-2 sm:gap-4 sm:text-sm"
+                className="flex flex-col items-center gap-1.5 text-xs tracking-wide text-gray-500/90 dark:text-gray-400/90 sm:flex-row sm:gap-4 sm:text-sm"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
