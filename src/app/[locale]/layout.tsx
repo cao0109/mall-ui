@@ -1,3 +1,4 @@
+import { CookieBanner } from "@/components/cookie/cookie-banner";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { AccessibilityProvider } from "@/components/providers/accessibility-provider";
@@ -70,6 +71,7 @@ export default async function LocaleLayout({
                   </div>
                   <LoadingProvider />
                   <Toaster />
+                  <CookieBanner />
                 </NextIntlClientProvider>
               </MedusaWrapper>
             </LiveRegionProvider>
