@@ -16,6 +16,41 @@
 - **动画**: Framer Motion
 - **类型**: TypeScript
 
+## 代码规范
+
+本项目使用以下工具和规范来保证代码质量：
+
+- **ESLint**: 代码检查
+- **Prettier**: 代码格式化
+- **TypeScript**: 类型检查
+- **Husky**: Git 钩子
+- **lint-staged**: 暂存文件的 lint
+- **commitizen**: 规范的 Git 提交信息
+
+### 开发流程
+
+1. 安装依赖：
+```bash
+npm install
+```
+
+2. 开发时：
+- 使用 `npm run dev` 启动开发服务器
+- 使用 `npm run lint` 检查代码
+- 使用 `npm run format` 格式化代码
+- 使用 `npm run commit` 提交代码（会引导你填写规范的提交信息）
+
+注意：Git 钩子会在 `npm install` 时自动安装，无需手动运行 prepare 命令。
+
+### 代码规范要点
+
+- 使用 TypeScript 严格模式
+- 遵循 ESLint 和 Prettier 规则
+- 使用 Conventional Commits 规范提交信息
+- 组件使用函数式组件和 Hooks
+- 使用 Tailwind CSS 进行样式管理
+- 保持代码简洁，遵循 DRY 原则
+
 ## 项目结构
 
 ```
