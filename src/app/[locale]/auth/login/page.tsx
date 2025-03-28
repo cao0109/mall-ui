@@ -69,185 +69,193 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="container mx-auto min-h-[calc(100vh-4rem)] grid lg:grid-cols-2 gap-12 items-start py-8 px-4">
-      {/* 左侧品牌介绍 */}
-      <div className="hidden lg:flex flex-col justify-center space-y-10 sticky top-8">
-        <div className="space-y-5">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            账号登录
+    <div className="container relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-8 px-4 md:px-6 lg:px-8">
+      <div className="w-full grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+        {/* 左侧品牌介绍 */}
+        <div className="hidden lg:flex flex-col justify-center space-y-8">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              账号登录
+            </div>
+            <h1 className="text-3xl xl:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              欢迎回到 HiDoo，
+              <br />
+              开启您的跨境之旅
+            </h1>
+            <p className="text-base text-muted-foreground leading-relaxed max-w-lg">
+              HiDoo 为跨境电商从业者提供一站式解决方案，助力您的业务快速发展。
+            </p>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            欢迎回到 HiDoo，
-            <br />
-            开启您的跨境之旅
-          </h1>
-          <p className="text-base text-muted-foreground leading-relaxed">
-            HiDoo 为跨境电商从业者提供一站式解决方案，助力您的业务快速发展。
-          </p>
+
+          <div className="grid gap-4">
+            <div className="group flex items-center gap-5 p-4 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm transition-all hover:shadow-md hover:bg-white/90">
+              <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-transform group-hover:scale-110">
+                <ArrowRight className="w-6 h-6 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-base mb-0.5 truncate">
+                  一站式跨境解决方案
+                </h3>
+                <p className="text-xs text-muted-foreground line-clamp-2">
+                  从选品、采购到运营，提供全方位支持
+                </p>
+              </div>
+            </div>
+
+            <div className="group flex items-center gap-5 p-4 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm transition-all hover:shadow-md hover:bg-white/90">
+              <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-transform group-hover:scale-110">
+                <ArrowRight className="w-6 h-6 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-base mb-0.5 truncate">
+                  专业的运营支持
+                </h3>
+                <p className="text-xs text-muted-foreground line-clamp-2">
+                  提供专业的运营指导和培训服务
+                </p>
+              </div>
+            </div>
+
+            <div className="group flex items-center gap-5 p-4 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm transition-all hover:shadow-md hover:bg-white/90">
+              <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-transform group-hover:scale-110">
+                <ArrowRight className="w-6 h-6 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-base mb-0.5 truncate">
+                  高效的数据分析
+                </h3>
+                <p className="text-xs text-muted-foreground line-clamp-2">
+                  实时市场数据分析，助您把握商机
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid gap-4">
-          <div className="group flex items-center gap-5 p-4 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm transition-all hover:shadow-md hover:bg-white/90">
-            <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-transform group-hover:scale-110">
-              <ArrowRight className="w-6 h-6 text-primary" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-base mb-0.5">
-                一站式跨境解决方案
-              </h3>
-              <p className="text-xs text-muted-foreground">
-                从选品、采购到运营，提供全方位支持
-              </p>
-            </div>
+        {/* 右侧登录表单 */}
+        <div className="w-full max-w-md mx-auto lg:max-w-none space-y-6">
+          <div className="flex flex-col items-center lg:items-start space-y-2">
+            <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              账号登录
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              登录您的 HiDoo 账号，开启跨境电商之旅
+            </p>
           </div>
 
-          <div className="group flex items-center gap-5 p-4 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm transition-all hover:shadow-md hover:bg-white/90">
-            <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-transform group-hover:scale-110">
-              <ArrowRight className="w-6 h-6 text-primary" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-base mb-0.5">专业的运营支持</h3>
-              <p className="text-xs text-muted-foreground">
-                提供专业的运营指导和培训服务
-              </p>
-            </div>
-          </div>
-
-          <div className="group flex items-center gap-5 p-4 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm transition-all hover:shadow-md hover:bg-white/90">
-            <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center transition-transform group-hover:scale-110">
-              <ArrowRight className="w-6 h-6 text-primary" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-base mb-0.5">高效的数据分析</h3>
-              <p className="text-xs text-muted-foreground">
-                实时市场数据分析，助您把握商机
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 右侧登录表单 */}
-      <div className="lg:max-w-md w-full mx-auto space-y-6">
-        <div className="flex flex-col items-center lg:items-start space-y-1.5">
-          <h2 className="text-center lg:text-left text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            账号登录
-          </h2>
-          <p className="text-center lg:text-left text-sm text-muted-foreground">
-            登录您的 HiDoo 账号，开启跨境电商之旅
-          </p>
-        </div>
-
-        <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-md">
-          <form onSubmit={handleLogin}>
-            <CardHeader className="space-y-2 pb-4">
-              <CardTitle className="text-lg font-bold text-center bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                欢迎回来
-              </CardTitle>
-              <CardDescription className="text-center text-xs">
-                使用您的邮箱和密码登录
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">
-                  邮箱地址
-                </Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="请输入邮箱地址"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-9 rounded-lg text-sm h-9"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium">
-                  登录密码
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="请输入密码"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-9 rounded-lg text-sm h-9"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    className="rounded border-gray-300 h-3.5 w-3.5"
-                  />
-                  <span className="text-xs text-muted-foreground">记住我</span>
-                </label>
-                <Link
-                  href="/auth/forgot-password"
-                  className="text-xs text-primary hover:text-primary/80"
-                >
-                  忘记密码？
-                </Link>
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-4 pt-2 pb-4">
-              <Button
-                type="submit"
-                className="w-full rounded-lg text-sm h-9 font-medium shadow-md hover:shadow-lg"
-                disabled={adminLogin.isLoading}
-              >
-                {adminLogin.isLoading ? (
-                  <div className="flex items-center">
-                    <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-1.5" />
-                    登录中...
+          <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-md">
+            <form onSubmit={handleLogin}>
+              <CardHeader className="space-y-2 pb-4">
+                <CardTitle className="text-lg sm:text-xl font-bold text-center bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                  欢迎回来
+                </CardTitle>
+                <CardDescription className="text-center text-xs sm:text-sm">
+                  使用您的邮箱和密码登录
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm font-medium">
+                    邮箱地址
+                  </Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="请输入邮箱地址"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="pl-10 rounded-lg h-10"
+                      required
+                    />
                   </div>
-                ) : (
-                  "登录"
-                )}
-              </Button>
-              <div className="text-center text-xs text-muted-foreground">
-                还没有账号？{" "}
-                <Link
-                  href="/auth/register"
-                  className="text-primary hover:text-primary/80 font-medium inline-flex items-center"
-                >
-                  立即注册
-                  <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </CardFooter>
-          </form>
-        </Card>
+                </div>
 
-        <div className="text-center lg:text-left">
-          <p className="text-xs text-muted-foreground">
-            登录即表示您同意我们的
-            <Link
-              href="/terms"
-              className="text-primary hover:text-primary/80 ml-1"
-            >
-              服务条款
-            </Link>
-            和
-            <Link
-              href="/privacy"
-              className="text-primary hover:text-primary/80 ml-1"
-            >
-              隐私政策
-            </Link>
-          </p>
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-sm font-medium">
+                    登录密码
+                  </Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="请输入密码"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="pl-10 rounded-lg h-10"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      className="rounded border-gray-300 h-4 w-4"
+                    />
+                    <span className="text-xs sm:text-sm text-muted-foreground">
+                      记住我
+                    </span>
+                  </label>
+                  <Link
+                    href="/auth/forgot-password"
+                    className="text-xs sm:text-sm text-primary hover:text-primary/80"
+                  >
+                    忘记密码？
+                  </Link>
+                </div>
+              </CardContent>
+              <CardFooter className="flex flex-col gap-4 pt-2 pb-4">
+                <Button
+                  type="submit"
+                  className="w-full rounded-lg h-10 font-medium shadow-md hover:shadow-lg transition-all"
+                  disabled={adminLogin.isLoading}
+                >
+                  {adminLogin.isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                      登录中...
+                    </div>
+                  ) : (
+                    "登录"
+                  )}
+                </Button>
+                <div className="text-center text-xs sm:text-sm text-muted-foreground">
+                  还没有账号？{" "}
+                  <Link
+                    href="/auth/register"
+                    className="text-primary hover:text-primary/80 font-medium inline-flex items-center"
+                  >
+                    立即注册
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </div>
+              </CardFooter>
+            </form>
+          </Card>
+
+          <div className="text-center lg:text-left">
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              登录即表示您同意我们的
+              <Link
+                href="/terms"
+                className="text-primary hover:text-primary/80 ml-1"
+              >
+                服务条款
+              </Link>
+              和
+              <Link
+                href="/privacy"
+                className="text-primary hover:text-primary/80 ml-1"
+              >
+                隐私政策
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
