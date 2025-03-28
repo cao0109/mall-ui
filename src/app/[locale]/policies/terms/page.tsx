@@ -40,6 +40,17 @@ export default function TermsPage() {
             我们的服务按&quot;现状&quot;提供，不提供任何明示或暗示的保证。我们不对服务的中断或任何信息、产品、服务的及时性、准确性负责。
           </p>
         </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">6. 联系我们</h2>
+          <p className="mb-4">
+            如果您对我们的服务条款有任何疑问，请通过以下方式联系我们：
+          </p>
+          <ul className="list-disc pl-6 mb-4">
+            <li>电子邮件：legal@hidoo.com</li>
+            <li>电话：+86 XXX XXXX XXXX</li>
+          </ul>
+        </section>
       </div>
     </div>
   );
