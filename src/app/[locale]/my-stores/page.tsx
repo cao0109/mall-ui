@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 // 模拟店铺数据
 const stores = [
@@ -67,14 +68,14 @@ export default function MyStoresPage() {
   const handleConnect = (storeId: number) => {
     toast({
       title: "连接成功",
-      description: "店铺已成功连接",
+      description: `您已成功连接到店铺 #${storeId}`,
     });
   };
 
   const handleSync = (storeId: number) => {
     toast({
       title: "同步成功",
-      description: "产品已同步到店铺",
+      description: `您已成功同步店铺 #${storeId} 的商品`,
     });
   };
 
@@ -97,7 +98,7 @@ export default function MyStoresPage() {
         <Button>添加店铺</Button>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
         {stores.map((store, index) => (
           <motion.div
             key={store.id}
@@ -111,9 +112,12 @@ export default function MyStoresPage() {
               <CardHeader>
                 <div className="flex items-center gap-4">
                   <div className="h-16 w-16 rounded-md overflow-hidden">
-                    <img
+                    <Image
                       src={store.logo}
                       alt={store.name}
+                      layout="responsive"
+                      width={100}
+                      height={100}
                       className="h-full w-full object-cover"
                     />
                   </div>

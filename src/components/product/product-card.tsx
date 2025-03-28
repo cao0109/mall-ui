@@ -2,10 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { useSelectionStore } from "@/store/selection";
+// import { useSelectionStore } from "@/store/selection";
 import { Heart, Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export interface Product {
@@ -33,25 +34,28 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, className }: ProductCardProps) {
-  const { addProduct } = useSelectionStore();
-  const { toast } = useToast();
+  // const { addProduct } = useSelectionStore();
+  // const { toast } = useToast();
 
-  const handleAddToSelection = () => {
-    addProduct(product);
-    toast({
-      title: "已加入选品",
-      description: "商品已成功添加到选品列表",
-    });
-  };
+  // const handleAddToSelection = () => {
+  //   addProduct(product);
+  //   toast({
+  //     title: "已加入选品",
+  //     description: "商品已成功添加到选品列表",
+  //   });
+  // };
 
   return (
     <Link href={`/products/${product.id}`}>
       <Card className={cn("group overflow-hidden", className)}>
         {/* 商品图片 */}
         <div className="relative">
-          <img
+          <Image
             src={product.image}
             alt={product.name}
+            width={1}
+            height={1}
+            layout="responsive"
             className="w-full aspect-square object-cover transition-transform group-hover:scale-105"
           />
           {/* 收藏按钮 */}

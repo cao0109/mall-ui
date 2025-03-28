@@ -18,6 +18,8 @@ import {
   ShoppingCart,
   Star,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 // 模拟商品数据
@@ -120,7 +122,7 @@ const recommendedProducts: Product[] = [
   },
 ];
 
-export default function ProductDetail({ params }: { params: { id: string } }) {
+export default function ProductDetail() {
   const { toast } = useToast();
   const { addProduct } = useSelectionStore();
   const [quantity, setQuantity] = useState(product.minOrder);
@@ -149,23 +151,23 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
       <nav className="mb-8">
         <ol className="flex items-center space-x-2 text-sm">
           <li>
-            <a
+            <Link
               href="/"
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               首页
-            </a>
+            </Link>
           </li>
           <li>
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </li>
           <li>
-            <a
+            <Link
               href="/products"
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               商品库
-            </a>
+            </Link>
           </li>
           <li>
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
@@ -180,9 +182,11 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
         {/* 商品图片区 */}
         <div className="space-y-6">
           <div className="aspect-square relative rounded-xl overflow-hidden border bg-muted/10">
-            <img
+            <Image
               src={selectedImage}
               alt={product.name}
+              layout="fill"
+              priority
               className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
             />
           </div>
@@ -197,9 +201,11 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
                 )}
                 onClick={() => setSelectedImage(image)}
               >
-                <img
+                <Image
                   src={image}
                   alt={`${product.name} ${index + 1}`}
+                  layout="fill"
+                  priority
                   className="object-cover w-full h-full"
                 />
               </button>
@@ -247,9 +253,12 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
             <CardContent>
               <div className="flex items-center gap-4">
                 <div className="h-12 w-12 rounded-full overflow-hidden border bg-muted/10">
-                  <img
+                  <Image
                     src={product.supplierInfo.logo}
                     alt={product.supplierInfo.name}
+                    width={24}
+                    height={24}
+                    layout="fixed"
                     className="h-full w-full object-cover"
                   />
                 </div>
@@ -440,9 +449,12 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
               key={product.id}
               className="border rounded-lg overflow-hidden shadow-md"
             >
-              <img
+              <Image
                 src={product.image}
                 alt={product.name}
+                width={500}
+                height={500}
+                layout="responsive"
                 className="w-full h-40 object-cover"
               />
               <div className="p-4">

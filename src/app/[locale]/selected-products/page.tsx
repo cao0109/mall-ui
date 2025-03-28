@@ -30,6 +30,7 @@ import {
   Upload,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function SelectedProductsPage() {
@@ -145,9 +146,12 @@ export default function SelectedProductsPage() {
                         <TableCell>
                           <div className="flex items-center gap-4">
                             <div className="h-16 w-16 rounded-lg overflow-hidden">
-                              <img
+                              <Image
                                 src={product.image}
                                 alt={product.name}
+                                layout="responsive"
+                                width={1}
+                                height={1}
                                 className="h-full w-full object-cover"
                               />
                             </div>
@@ -167,9 +171,14 @@ export default function SelectedProductsPage() {
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <div className="h-8 w-8 rounded-full overflow-hidden">
-                              <img
-                                src={product.supplier.logo}
+                              <Image
+                                src={
+                                  product.supplier.logo || "/placeholder.png"
+                                }
                                 alt={product.supplier.name}
+                                layout="responsive"
+                                width={1}
+                                height={1}
                                 className="h-full w-full object-cover"
                               />
                             </div>

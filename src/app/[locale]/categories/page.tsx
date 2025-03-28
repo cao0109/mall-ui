@@ -5,82 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ChevronRight, Search, TrendingUp } from "lucide-react";
-
-// 模拟分类数据
-const categories = [
-  {
-    id: "electronics",
-    name: "电子产品",
-    image:
-      "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "包含各类电子产品，如手机配件、智能设备等",
-    subCategories: ["手机配件", "智能设备", "电脑周边", "音频设备"],
-    productCount: 1280,
-  },
-  {
-    id: "clothing",
-    name: "服装服饰",
-    image:
-      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "时尚服装、鞋帽、箱包等",
-    subCategories: ["男装", "女装", "童装", "运动服饰"],
-    productCount: 2150,
-  },
-  {
-    id: "home",
-    name: "家居用品",
-    image:
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "家具、家纺、厨具等居家用品",
-    subCategories: ["家具", "家纺", "厨具", "收纳"],
-    productCount: 1560,
-  },
-  {
-    id: "beauty",
-    name: "美妆个护",
-    image:
-      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "化妆品、护肤品、个人护理用品",
-    subCategories: ["护肤", "彩妆", "香水", "美容仪器"],
-    productCount: 980,
-  },
-  {
-    id: "sports",
-    name: "运动户外",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "运动器材、户外装备、健身用品",
-    subCategories: ["健身器材", "户外装备", "运动配件", "瑜伽用品"],
-    productCount: 760,
-  },
-  {
-    id: "toys",
-    name: "玩具乐器",
-    image:
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "玩具、乐器、儿童用品",
-    subCategories: ["益智玩具", "音乐器材", "儿童玩具", "创意玩具"],
-    productCount: 650,
-  },
-  {
-    id: "digital",
-    name: "数码产品",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "手机、电脑、智能设备",
-    subCategories: ["手机", "电脑", "平板", "智能设备"],
-    productCount: 890,
-  },
-  {
-    id: "food",
-    name: "食品生鲜",
-    image:
-      "https://images.unsplash.com/photo-1506617420156-8e4536971650?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    description: "零食、饮料、生鲜食品",
-    subCategories: ["零食", "饮料", "生鲜", "保健品"],
-    productCount: 1120,
-  },
-];
+import Image from "next/image";
 
 export default function CategoriesPage() {
   return (
@@ -141,9 +66,12 @@ export default function CategoriesPage() {
               <Card className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src="/placeholder.png"
                       alt="分类图片"
+                      width={48}
+                      height={48}
+                      layout="fixed"
                       className="h-full w-full object-cover"
                     />
                   </div>
@@ -156,9 +84,12 @@ export default function CategoriesPage() {
               <Card className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src="/placeholder.png"
                       alt="分类图片"
+                      width={48}
+                      height={48}
+                      layout="fixed"
                       className="h-full w-full object-cover"
                     />
                   </div>
@@ -171,9 +102,12 @@ export default function CategoriesPage() {
               <Card className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src="/placeholder.png"
                       alt="分类图片"
+                      width={48}
+                      height={48}
+                      layout="fixed"
                       className="h-full w-full object-cover"
                     />
                   </div>

@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, Truck } from "lucide-react";
+import Image from "next/image";
 
 // 添加示例图片数据
 export const demoImages = {
@@ -489,9 +490,12 @@ export default function Home() {
           {products.slice(0, 4).map((product, index) => (
             <Card key={product.id} className="group overflow-hidden">
               <div className="relative">
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
+                  layout="responsive"
+                  width={400}
+                  height={400}
                   className="w-full aspect-square object-cover transition-transform group-hover:scale-105"
                 />
                 <div className="absolute top-2 right-2 z-10">
@@ -557,9 +561,11 @@ export default function Home() {
                   {/* 供应商信息 */}
                   <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                     <div className="flex items-center gap-2">
-                      <img
+                      <Image
                         src={product.supplier.logo}
                         alt={product.supplier.name}
+                        width={24}
+                        height={24}
                         className="w-5 h-5 rounded-full ring-1 ring-slate-200"
                       />
                       <span className="text-sm font-medium text-slate-700">
@@ -580,9 +586,12 @@ export default function Home() {
                         className="flex gap-3 first:pt-0 pt-3 first:border-t-0 border-t border-slate-100"
                       >
                         <div className="relative w-[72px] h-[72px] flex-shrink-0">
-                          <img
+                          <Image
                             src={product.image}
                             alt={product.name}
+                            width={72}
+                            height={72}
+                            layout="fixed"
                             className="w-full h-full object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
                           />
                           <div className="absolute -top-1 -right-1">

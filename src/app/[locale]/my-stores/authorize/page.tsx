@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Building2, Check, ExternalLink, Plus } from "lucide-react";
+import Image from "next/image";
 
 const platforms = [
   {
@@ -47,7 +48,9 @@ export default function StoreAuthorizePage() {
     } catch (error) {
       toast({
         title: "授权失败",
-        description: "请稍后重试",
+        description: `请稍后重试: ${
+          error instanceof Error ? error.message : "未知错误"
+        }`,
         variant: "destructive",
       });
     }
@@ -70,7 +73,9 @@ export default function StoreAuthorizePage() {
     } catch (error) {
       toast({
         title: "解除连接失败",
-        description: "请稍后重试",
+        description: `请稍后重试: ${
+          error instanceof Error ? error.message : "未知错误"
+        }`,
         variant: "destructive",
       });
     }
@@ -149,9 +154,12 @@ export default function StoreAuthorizePage() {
               <Card key={platform.id} className="p-6">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="h-12 w-12 rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src={platform.logo}
                       alt={platform.name}
+                      width={48}
+                      height={48}
+                      layout="fixed"
                       className="h-full w-full object-contain"
                     />
                   </div>

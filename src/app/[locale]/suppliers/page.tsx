@@ -23,6 +23,7 @@ import {
   Star,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -353,9 +354,12 @@ export default function SuppliersPage() {
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="h-16 w-16 rounded-lg overflow-hidden">
-                        <img
+                        <Image
                           src={supplier.logo}
                           alt={supplier.name}
+                          layout="responsive"
+                          width={1}
+                          height={1}
                           className="h-full w-full object-cover"
                         />
                       </div>

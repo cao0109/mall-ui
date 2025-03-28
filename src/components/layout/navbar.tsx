@@ -42,6 +42,7 @@ import {
   X,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useState } from "react";
 
 export function Navbar() {
@@ -240,9 +241,12 @@ export function Navbar() {
                   <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                     <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
                       {user?.avatar ? (
-                        <img
+                        <Image
                           src={user.avatar}
                           alt={user.name}
+                          width={24}
+                          height={24}
+                          layout="fixed"
                           className="h-full w-full rounded-full"
                         />
                       ) : (
@@ -342,9 +346,12 @@ export function Navbar() {
                   <div className="flex items-center gap-3">
                     <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
                       {user?.avatar ? (
-                        <img
+                        <Image
                           src={user.avatar}
                           alt={user.name}
+                          width={32}
+                          height={32}
+                          layout="fixed"
                           className="h-full w-full rounded-full"
                         />
                       ) : (

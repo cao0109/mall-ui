@@ -360,9 +360,12 @@ export default function ProductsPage() {
                         <div className="flex items-center gap-2 flex-1">
                           <div className="h-5 w-5 rounded-full overflow-hidden bg-muted">
                             {supplier.logo && (
-                              <img
+                              <Image
                                 src={supplier.logo}
                                 alt={supplier.name}
+                                width={20}
+                                height={20}
+                                layout="fixed"
                                 className="h-full w-full object-cover"
                               />
                             )}
@@ -592,9 +595,12 @@ export default function ProductsPage() {
                     <div className="flex items-center gap-2">
                       <div className="h-5 w-5 rounded-full overflow-hidden bg-muted">
                         {product.supplier.logo && (
-                          <img
+                          <Image
                             src={product.supplier.logo}
                             alt={product.supplier.name}
+                            width={20}
+                            height={20}
+                            layout="fixed"
                             className="h-full w-full object-cover"
                           />
                         )}

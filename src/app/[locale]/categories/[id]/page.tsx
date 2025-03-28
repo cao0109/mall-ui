@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Filter, SlidersHorizontal } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 // 模拟分类商品数据
@@ -43,7 +44,7 @@ const categoryData = {
   // ... 其他分类数据
 };
 
-export default function CategoryPage({ params }: { params: { id: string } }) {
+export default function CategoryPage() {
   return (
     <div className="space-y-6">
       {/* 面包屑导航 */}
@@ -60,9 +61,11 @@ export default function CategoryPage({ params }: { params: { id: string } }) {
 
       {/* 分类头部 */}
       <div className="relative h-[200px] rounded-xl overflow-hidden">
-        <img
+        <Image
           src={categoryData.electronics.image}
           alt={categoryData.electronics.name}
+          layout="fill"
+          priority
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center">
