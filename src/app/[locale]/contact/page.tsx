@@ -302,7 +302,6 @@ export default function ContactPage() {
               <motion.div
                 key={item.question}
                 variants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
                 className="p-6 rounded-lg bg-card border shadow-sm hover:shadow-lg transition-all duration-300 group"
               >
                 <h3 className="font-medium mb-2 group-hover:text-primary transition-colors">

@@ -176,7 +176,6 @@ export default function AboutPage() {
             <motion.div
               key={item.title}
               variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
               className="p-8 rounded-lg bg-card border shadow-sm hover:shadow-lg transition-all duration-300"
             >
               <h2 className="text-2xl font-semibold mb-4">{item.title}</h2>
@@ -285,13 +284,7 @@ export default function AboutPage() {
         </motion.div>
 
         {/* 团队优势 */}
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="text-center"
-        >
+        <div className="text-center">
           <h2 className="text-2xl font-semibold mb-8">团队优势</h2>
           <div className="grid md:grid-cols-4 gap-6">
             {[
@@ -325,7 +318,7 @@ export default function AboutPage() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
