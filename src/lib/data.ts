@@ -9,6 +9,8 @@ export interface Product {
   minOrder: number;
   shippingTime: string;
   categoryId?: string;
+  origin: string;
+  shopUrl: string;
   supplier: {
     name: string;
     logo?: string;

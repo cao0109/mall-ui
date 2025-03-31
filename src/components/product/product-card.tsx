@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 // import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 // import { useSelectionStore } from "@/store/selection";
-import { Heart, Star } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { Heart, Star } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
@@ -47,7 +47,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
 
   return (
     <Link href={`/products/${product.id}`}>
-      <Card className={cn("group overflow-hidden", className)}>
+      <Card className={cn('group overflow-hidden', className)}>
         {/* 商品图片 */}
         <div className="relative">
           <Image
@@ -56,53 +56,49 @@ export function ProductCard({ product, className }: ProductCardProps) {
             width={1}
             height={1}
             layout="responsive"
-            className="w-full aspect-square object-cover transition-transform group-hover:scale-105"
+            className="aspect-square w-full object-cover transition-transform group-hover:scale-105"
           />
           {/* 收藏按钮 */}
-          <div className="absolute top-2 right-2">
+          <div className="absolute right-2 top-2">
             <Button
               size="icon"
               variant="secondary"
-              className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white"
+              className="h-7 w-7 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white sm:h-8 sm:w-8"
             >
               <Heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Button>
           </div>
           {/* 供应商标签 */}
-          <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
             <div className="flex items-center gap-1 text-white">
               <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-              <span className="text-[10px] sm:text-xs">
-                {product.supplier.name}
-              </span>
+              <span className="text-[10px] sm:text-xs">{product.supplier.name}</span>
             </div>
           </div>
         </div>
 
         {/* 商品信息 */}
-        <CardContent className="p-2.5 sm:p-4 space-y-2">
+        <CardContent className="space-y-2 p-2.5 sm:p-4">
           {/* 商品名称 */}
-          <h3 className="font-medium text-sm sm:text-base line-clamp-2 min-h-[32px] sm:min-h-[40px]">
+          <h3 className="line-clamp-2 min-h-[32px] text-sm font-medium sm:min-h-[40px] sm:text-base">
             {product.name}
           </h3>
 
           {/* 价格和利润率 */}
           <div className="flex items-baseline justify-between">
             <div className="flex items-baseline gap-1">
-              <span className="text-lg sm:text-xl font-bold text-primary">
+              <span className="text-lg font-bold text-primary sm:text-xl">
                 ¥{product.price.toFixed(2)}
               </span>
-              <span className="text-[10px] sm:text-xs text-muted-foreground">
-                /件
-              </span>
+              <span className="text-[10px] text-muted-foreground sm:text-xs">/件</span>
             </div>
-            <div className="text-[10px] sm:text-xs text-emerald-600 font-medium px-1.5 py-0.5 rounded bg-emerald-50">
+            <div className="rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-600 sm:text-xs">
               利润率 {product.profitMargin}%
             </div>
           </div>
 
           {/* 起订量和发货时间 */}
-          <div className="flex items-center justify-between text-[10px] sm:text-xs text-muted-foreground pt-1">
+          <div className="flex items-center justify-between pt-1 text-[10px] text-muted-foreground sm:text-xs">
             <span>≥{product.minOrder}件起订</span>
             <span>{product.shippingTime}发货</span>
           </div>

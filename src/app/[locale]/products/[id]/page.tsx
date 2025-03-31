@@ -85,7 +85,7 @@ export default function ProductDetail() {
     const suggestedPrice = Math.round(price * (1 + profitMargin / 100));
 
     addProduct({
-      id: Number(product.id),
+      id: product.id!,
       name: product.title || '未命名商品',
       price: price / 100,
       image: product.thumbnail || '/placeholder-product.png',

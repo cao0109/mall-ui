@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 interface SelectionState {
   products: Product[];
   addProduct: (product: Product) => void;
-  removeProduct: (productId: number) => void;
+  removeProduct: (productId: string) => void;
   clearProducts: () => void;
 }
 
