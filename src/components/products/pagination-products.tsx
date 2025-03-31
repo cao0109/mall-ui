@@ -20,7 +20,7 @@ interface MedusaProductsProps {
   onProductsCount?: (count: number) => void;
 }
 
-export function MedusaProducts({
+export function PaginationProducts({
   searchQuery,
   selectedCategory,
   selectedSupplier,
@@ -174,7 +174,7 @@ export function MedusaProducts({
     <div
       className={cn(
         viewMode === 'grid'
-          ? 'xs:grid-cols-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+          ? 'grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
           : 'space-y-4'
       )}
     >

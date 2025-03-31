@@ -1,8 +1,8 @@
 'use client';
 
 import { MedusaCategories } from '@/components/products/filters';
+import { PaginationProducts } from '@/components/products/pagination-products';
 import { ProductSkeleton } from '@/components/products/product-skeleton';
-import { MedusaProducts } from '@/components/products/products';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -507,7 +507,7 @@ export default function ProductsPage() {
           </div>
 
           {/* 商品列表 - 使用Medusa商品数据 */}
-          <MedusaProducts
+          <PaginationProducts
             searchQuery={searchQuery}
             selectedCategory={selectedCategory}
             selectedSupplier={selectedSupplier}
