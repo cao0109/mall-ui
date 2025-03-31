@@ -68,7 +68,8 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
 
   const thumbnail = product.thumbnail || '/placeholder.png';
   const profitMargin = Number(product.profitMargin) || 30;
-  const supplierLogo = (product.supplier?.logo as string) || '/placeholder.png';
+  const supplierLogo =
+    'https://img.alicdn.com/imgextra/i4/O1CN01GbZNxl26Vzotrjqli_!!6000000007668-2-tps-160-160.png';
   const supplierRating = Number(product.supplier?.rating) || 4.5;
   const minOrder = Number(product.minOrder) || 1;
   const shippingTime = String(product.shippingTime || '3-5天');

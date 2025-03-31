@@ -33,15 +33,11 @@ import {
   ArrowDownNarrowWide,
   ArrowUpNarrowWide,
   Filter,
-  Gift,
   LayoutGrid,
   LayoutList,
-  Package,
   Search,
-  ShoppingBag,
   SlidersHorizontal,
   Star,
-  Truck,
   X,
 } from 'lucide-react';
 import { useProducts } from 'medusa-react';
@@ -51,10 +47,30 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 // 模拟供应商数据
 const suppliers = [
-  { id: 1, name: '优品服饰', logo: '/suppliers/yupin.png', rating: 4.5 },
-  { id: 2, name: '科技先锋', logo: '/suppliers/kejixian.png', rating: 4.2 },
-  { id: 3, name: '音频专家', logo: '/suppliers/yinpin.png', rating: 4.8 },
-  { id: 4, name: '电子科技', logo: '/suppliers/dianzi.png', rating: 4.3 },
+  {
+    id: 1,
+    name: '优品服饰',
+    logo: 'https://img.alicdn.com/imgextra/i4/O1CN01GbZNxl26Vzotrjqli_!!6000000007668-2-tps-160-160.png',
+    rating: 4.5,
+  },
+  {
+    id: 2,
+    name: '科技先锋',
+    logo: 'https://img.alicdn.com/imgextra/i4/O1CN01GbZNxl26Vzotrjqli_!!6000000007668-2-tps-160-160.png',
+    rating: 4.2,
+  },
+  {
+    id: 3,
+    name: '音频专家',
+    logo: 'https://img.alicdn.com/imgextra/i4/O1CN01GbZNxl26Vzotrjqli_!!6000000007668-2-tps-160-160.png',
+    rating: 4.8,
+  },
+  {
+    id: 4,
+    name: '电子科技',
+    logo: 'https://img.alicdn.com/imgextra/i4/O1CN01GbZNxl26Vzotrjqli_!!6000000007668-2-tps-160-160.png',
+    rating: 4.3,
+  },
 ];
 
 // 帮助和资源数据
@@ -411,18 +427,11 @@ export default function ProductsPage() {
       {/* 增强版促销活动横幅 */}
       <div className="mb-6">
         <EnhancedPromotionalBanner
-          variant="accent"
           title="春季新品特惠 - 限时五折起"
           description="精选爆款商品，限时抢购，错过等一年！海外直邮，品质保证。"
           buttonText="立即抢购"
           buttonLink="/products?sort=price-asc"
-          endDate="2024-04-30"
           backgroundImage="https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=2070&auto=format&fit=crop"
-          features={[
-            { icon: <ShoppingBag className="h-3.5 w-3.5" />, text: '爆款低至5折' },
-            { icon: <Truck className="h-3.5 w-3.5" />, text: '全场包邮' },
-            { icon: <Gift className="h-3.5 w-3.5" />, text: '好礼相送' },
-          ]}
         />
       </div>
 
@@ -435,17 +444,6 @@ export default function ProductsPage() {
           </p>
         </div>
         <div className="mt-2 flex flex-wrap items-center gap-2 md:mt-0 md:gap-4">
-          {/* 桌面端筛选器切换按钮 */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowFilters(!showFilters)}
-            className="hidden md:flex"
-          >
-            <Filter className="mr-2 h-4 w-4" />
-            {showFilters ? '隐藏筛选' : '显示筛选'}
-          </Button>
-
           {/* 移动端筛选器 Sheet */}
           <Sheet open={isFilterSheetOpen} onOpenChange={setIsFilterSheetOpen}>
             <SheetTrigger asChild>
@@ -464,11 +462,6 @@ export default function ProductsPage() {
               <FiltersContent />
             </SheetContent>
           </Sheet>
-
-          <Button size="sm" className="ml-auto md:ml-0">
-            <Package className="mr-2 h-4 w-4" />
-            导入商品
-          </Button>
         </div>
       </div>
 
@@ -553,18 +546,20 @@ export default function ProductsPage() {
           </div>
 
           {/* 商品列表 - 使用Medusa商品数据 */}
-          <PaginationProducts
-            searchQuery={searchQuery}
-            selectedCategory={selectedCategory}
-            selectedSupplier={selectedSupplier}
-            priceRange={priceRange}
-            profitRange={profitRange}
-            viewMode={viewMode}
-            sortBy={sortBy}
-            currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            onProductsCount={handleProductsCount}
-          />
+          <div className="transition-all duration-300 ease-in-out">
+            <PaginationProducts
+              searchQuery={searchQuery}
+              selectedCategory={selectedCategory}
+              selectedSupplier={selectedSupplier}
+              priceRange={priceRange}
+              profitRange={profitRange}
+              viewMode={viewMode}
+              sortBy={sortBy}
+              currentPage={currentPage}
+              itemsPerPage={itemsPerPage}
+              onProductsCount={handleProductsCount}
+            />
+          </div>
 
           {/* 分页 */}
           {totalPages > 1 && (

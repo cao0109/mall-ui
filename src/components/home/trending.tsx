@@ -52,7 +52,7 @@ export default function Trending() {
                 <div className="mb-3 flex items-center justify-between border-b border-slate-100 pb-2">
                   <div className="flex items-center gap-2">
                     <Image
-                      src={product.supplier.logo || '/suppliers/default.png'}
+                      src="https://img.alicdn.com/imgextra/i4/O1CN01GbZNxl26Vzotrjqli_!!6000000007668-2-tps-160-160.png"
                       alt={product.supplier.name}
                       width={24}
                       height={24}
