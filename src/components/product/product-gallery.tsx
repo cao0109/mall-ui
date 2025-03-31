@@ -147,7 +147,7 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
 
   return (
     <div
-      className="flex flex-col gap-6"
+      className="flex flex-col gap-4 sm:gap-6"
       ref={galleryRef}
       tabIndex={0}
       onKeyDown={handleKeyDown}
@@ -178,25 +178,25 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
         {/* 缩放控制 */}
         {!isZoomed ? (
           <button
-            className="absolute bottom-3 right-3 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="absolute bottom-2 right-2 rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:bottom-3 sm:right-3 sm:p-2"
             onClick={() => setIsZoomed(true)}
             aria-label="放大查看"
           >
-            <ZoomIn size={16} />
+            <ZoomIn size={14} className="sm:h-4 sm:w-4" />
           </button>
         ) : (
           <button
-            className="absolute right-3 top-3 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="absolute right-2 top-2 rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:right-3 sm:top-3 sm:p-2"
             onClick={() => setIsZoomed(false)}
             aria-label="退出放大"
           >
-            <X size={16} />
+            <X size={14} className="sm:h-4 sm:w-4" />
           </button>
         )}
 
         {/* 图片计数器 */}
         {validImages.length > 1 && (
-          <div className="absolute bottom-3 left-3 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
+          <div className="absolute bottom-2 left-2 rounded-full bg-black/50 px-2 py-0.5 text-xs text-white sm:bottom-3 sm:left-3 sm:px-3 sm:py-1 sm:text-sm">
             {selectedIndex + 1} / {validImages.length}
           </div>
         )}
@@ -204,27 +204,27 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
 
       {/* 缩略图区域 */}
       {validImages.length > 1 && (
-        <div className="relative w-full pb-2 pt-2">
+        <div className="relative w-full pb-1 pt-1 sm:pb-2 sm:pt-2">
           <div
             ref={thumbnailsRef}
-            className="scrollbar-none mx-auto flex space-x-3 overflow-x-auto px-12 py-2"
+            className="scrollbar-none mx-auto flex space-x-2 overflow-x-auto px-8 py-1 sm:space-x-3 sm:px-12 sm:py-2"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {validImages.map((image, index) => (
               <button
                 key={index}
                 className={cn(
-                  'relative aspect-square h-28 w-28 flex-shrink-0 overflow-visible rounded-lg border bg-muted/10',
+                  'relative aspect-square h-16 w-16 flex-shrink-0 overflow-visible rounded-lg border bg-muted/10 sm:h-24 sm:w-24 md:h-28 md:w-28',
                   'transition-all duration-200 hover:border-primary/50',
                   selectedIndex === index
-                    ? 'shadow-lg ring-2 ring-primary ring-offset-2'
+                    ? 'shadow-lg ring-2 ring-primary ring-offset-1 sm:ring-offset-2'
                     : 'opacity-80 hover:opacity-100',
-                  'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
+                  'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 sm:focus:ring-offset-2'
                 )}
                 onClick={() => setSelectedIndex(index)}
                 aria-label={`查看第${index + 1}张图片`}
                 aria-current={selectedIndex === index}
-                style={{ margin: '4px' }} // 添加外边距，确保选中边框不被裁切
+                style={{ margin: '2px sm:4px' }} // 添加外边距，确保选中边框不被裁切
               >
                 <Image
                   src={image.url}
@@ -241,18 +241,18 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
           {shouldShowScrollButtons && (
             <>
               <button
-                className="absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-md transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="absolute left-0 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-md transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:h-10 sm:w-10"
                 onClick={handlePrevious}
                 aria-label="上一张图片"
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft size={16} className="sm:h-[18px] sm:w-[18px]" />
               </button>
               <button
-                className="absolute right-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-md transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="absolute right-0 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-md transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:h-10 sm:w-10"
                 onClick={handleNext}
                 aria-label="下一张图片"
               >
-                <ChevronRight size={18} />
+                <ChevronRight size={16} className="sm:h-[18px] sm:w-[18px]" />
               </button>
             </>
           )}

@@ -40,6 +40,7 @@ import {
 } from 'lucide-react';
 import { useProducts } from 'medusa-react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 
 // 模拟供应商数据
@@ -52,7 +53,10 @@ const suppliers = [
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const searchParams = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState(
+    searchParams.get('category_id') || 'all'
+  );
   const [selectedSupplier, setSelectedSupplier] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('default');
@@ -68,6 +72,14 @@ export default function ProductsPage() {
 
   // 检查数据加载状态
   const { isLoading } = useProducts();
+
+  // 监听 URL 参数变化
+  useEffect(() => {
+    const categoryId = searchParams.get('category_id');
+    if (categoryId) {
+      setSelectedCategory(categoryId);
+    }
+  }, [searchParams]);
 
   // 初始加载
   useEffect(() => {

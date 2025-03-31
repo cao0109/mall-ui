@@ -21,9 +21,13 @@ import {
 } from '@/components/ui/navigation-menu';
 import { useToast } from '@/hooks/use-toast';
 import { Link, useRouter } from '@/i18n/navigation';
+import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth';
+import { ProductCategory } from '@medusajs/medusa';
 import {
+  Flame,
   Info,
+  LogIn,
   LogOut,
   Menu,
   Package,
@@ -32,10 +36,14 @@ import {
   Settings,
   ShoppingCart,
   Store,
+  Tag,
+  Timer,
   User,
+  UserPlus,
   Users,
   X,
 } from 'lucide-react';
+import { useProductCategories } from 'medusa-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -47,6 +55,10 @@ export function Navbar() {
   const router = useRouter();
   const { toast } = useToast();
   const t = useTranslations();
+  const { product_categories } = useProductCategories({
+    limit: 4,
+    parent_category_id: 'null',
+  });
 
   const handleLogout = () => {
     logout();
@@ -97,34 +109,26 @@ export function Navbar() {
                     <div className="space-y-1">
                       <h2 className="mb-2 text-sm font-medium leading-none">热门分类</h2>
                       <div className="grid grid-cols-2 gap-2" role="list">
-                        <Link
-                          href="/products/category/electronics"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
-                          role="listitem"
-                        >
-                          电子产品
-                        </Link>
-                        <Link
-                          href="/products/category/clothing"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
-                          role="listitem"
-                        >
-                          服装服饰
-                        </Link>
-                        <Link
-                          href="/products/category/home"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
-                          role="listitem"
-                        >
-                          家居用品
-                        </Link>
-                        <Link
-                          href="/products/category/beauty"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
-                          role="listitem"
-                        >
-                          美妆个护
-                        </Link>
+                        {product_categories?.slice(0, 4).map((category: ProductCategory) => (
+                          <Link
+                            key={category.id}
+                            href={`/products?category_id=${category.id}`}
+                            className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                            role="listitem"
+                          >
+                            {category.image && (
+                              <div className="relative h-16 w-16 overflow-hidden rounded-lg">
+                                <Image
+                                  src={category.image}
+                                  alt={category.name}
+                                  fill
+                                  className="object-cover transition-transform group-hover:scale-105"
+                                />
+                              </div>
+                            )}
+                            <span className="text-center">{category.name}</span>
+                          </Link>
+                        ))}
                       </div>
                     </div>
                     <div className="space-y-1">
@@ -132,31 +136,43 @@ export function Navbar() {
                       <div className="grid grid-cols-2 gap-2" role="list">
                         <Link
                           href="/products/featured/new"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                           role="listitem"
                         >
-                          新品上市
+                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
+                            <Package className="h-8 w-8 text-primary" />
+                          </div>
+                          <span className="text-center">新品上市</span>
                         </Link>
                         <Link
                           href="/products/featured/hot"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                           role="listitem"
                         >
-                          热销商品
+                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
+                            <Flame className="h-8 w-8 text-primary" />
+                          </div>
+                          <span className="text-center">热销商品</span>
                         </Link>
                         <Link
                           href="/products/featured/sale"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                           role="listitem"
                         >
-                          特惠活动
+                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
+                            <Tag className="h-8 w-8 text-primary" />
+                          </div>
+                          <span className="text-center">特惠活动</span>
                         </Link>
                         <Link
                           href="/products/featured/limited"
-                          className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                           role="listitem"
                         >
-                          限量商品
+                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
+                            <Timer className="h-8 w-8 text-primary" />
+                          </div>
+                          <span className="text-center">限量商品</span>
                         </Link>
                       </div>
                     </div>
@@ -367,104 +383,109 @@ export function Navbar() {
       </div>
 
       {/* 移动端菜单 */}
-      {isMobileMenuOpen && (
-        <div
-          id="mobile-menu"
-          className="border-t bg-background md:hidden"
-          role="navigation"
-          aria-label="移动端导航"
-        >
-          <nav className="flex flex-col">
-            {isAuthenticated ? (
-              <>
-                <div className="border-b px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-                      {user?.avatar ? (
-                        <Image
-                          src={user.avatar}
-                          alt={user.name}
-                          width={32}
-                          height={32}
-                          layout="fixed"
-                          className="h-full w-full rounded-full"
-                        />
-                      ) : (
-                        <span className="text-sm font-medium">{user?.name?.[0]}</span>
-                      )}
-                    </div>
-                    <div>
-                      <div className="font-medium">{user?.name}</div>
-                      <div className="text-sm text-muted-foreground">{user?.email}</div>
-                    </div>
-                  </div>
+      <div
+        id="mobile-menu"
+        className={cn(
+          'fixed inset-x-0 top-16 z-50 transform border-t bg-background/95 backdrop-blur-lg transition-all duration-300 md:hidden',
+          isMobileMenuOpen
+            ? 'translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-full opacity-0'
+        )}
+        role="navigation"
+        aria-label="移动端导航"
+      >
+        <nav className="container mx-auto flex flex-col divide-y divide-border">
+          {isAuthenticated ? (
+            <>
+              <div className="flex items-center gap-3 px-4 py-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                  {user?.avatar ? (
+                    <Image
+                      src={user.avatar}
+                      alt={user.name}
+                      width={40}
+                      height={40}
+                      className="h-full w-full rounded-full"
+                    />
+                  ) : (
+                    <span className="text-sm font-medium">{user?.name?.[0]}</span>
+                  )}
                 </div>
-                <Link
-                  href="/my-stores"
-                  className="border-b px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {t('common.myStores')}
-                </Link>
-                <Link
-                  href="/selected-products"
-                  className="flex items-center border-b px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  {t('common.selectedProducts')}
-                </Link>
-                <Link
-                  href="/settings"
-                  className="flex items-center border-b px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  <Settings className="mr-2 h-4 w-4" />
-                  {t('common.settings')}
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center px-4 py-3 text-sm font-medium text-red-500 transition-colors hover:text-red-600"
-                >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  {t('common.logout')}
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/products"
-                  className="border-b px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {t('common.productLibrary')}
-                </Link>
-                <Link
-                  href="/suppliers"
-                  className="border-b px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {t('common.suppliers')}
-                </Link>
-                <Link
-                  href="/selected-products"
-                  className="flex items-center border-b px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  {t('common.selectedProducts')}
-                </Link>
-                <Link
-                  href="/auth/login"
-                  className="border-b px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {t('common.login')}
-                </Link>
-                <Link
-                  href="/auth/register"
-                  className="px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {t('common.register')}
-                </Link>
-              </>
-            )}
-          </nav>
-        </div>
-      )}
+                <div>
+                  <div className="font-medium">{user?.name}</div>
+                  <div className="text-sm text-muted-foreground">{user?.email}</div>
+                </div>
+              </div>
+              <Link
+                href="/my-stores"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Store className="h-4 w-4" />
+                {t('common.myStores')}
+              </Link>
+              <Link
+                href="/selected-products"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                {t('common.selectedProducts')}
+              </Link>
+              <Link
+                href="/settings"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Settings className="h-4 w-4" />
+                {t('common.settings')}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-red-500 transition-colors hover:text-red-600"
+              >
+                <LogOut className="h-4 w-4" />
+                {t('common.logout')}
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/products"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Package className="h-4 w-4" />
+                {t('common.productLibrary')}
+              </Link>
+              <Link
+                href="/suppliers"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Store className="h-4 w-4" />
+                {t('common.suppliers')}
+              </Link>
+              <Link
+                href="/selected-products"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                {t('common.selectedProducts')}
+              </Link>
+              <Link
+                href="/auth/login"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <LogIn className="h-4 w-4" />
+                {t('common.login')}
+              </Link>
+              <Link
+                href="/auth/register"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <UserPlus className="h-4 w-4" />
+                {t('common.register')}
+              </Link>
+            </>
+          )}
+        </nav>
+      </div>
     </header>
   );
 }

@@ -76,7 +76,7 @@ export default function LoginPage() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
               账号登录
             </div>
-            <h1 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-3xl font-bold tracking-tight text-transparent xl:text-4xl">
+            <h1 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-3xl font-bold tracking-tight text-transparent dark:from-gray-100 dark:to-gray-400 xl:text-4xl">
               欢迎回到 HiDoo，
               <br />
               开启您的跨境之旅
@@ -87,7 +87,7 @@ export default function LoginPage() {
           </div>
 
           <div className="grid gap-4">
-            <div className="group flex items-center gap-5 rounded-xl border border-gray-100 bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:bg-white/90 hover:shadow-md">
+            <div className="group flex items-center gap-5 rounded-xl border border-gray-100 bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:bg-white/90 hover:shadow-md dark:border-gray-800 dark:bg-gray-900/80 dark:hover:bg-gray-900/90">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-transform group-hover:scale-110">
                 <ArrowRight className="h-6 w-6 text-primary" />
               </div>
@@ -99,7 +99,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="group flex items-center gap-5 rounded-xl border border-gray-100 bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:bg-white/90 hover:shadow-md">
+            <div className="group flex items-center gap-5 rounded-xl border border-gray-100 bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:bg-white/90 hover:shadow-md dark:border-gray-800 dark:bg-gray-900/80 dark:hover:bg-gray-900/90">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-transform group-hover:scale-110">
                 <ArrowRight className="h-6 w-6 text-primary" />
               </div>
@@ -111,7 +111,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="group flex items-center gap-5 rounded-xl border border-gray-100 bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:bg-white/90 hover:shadow-md">
+            <div className="group flex items-center gap-5 rounded-xl border border-gray-100 bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:bg-white/90 hover:shadow-md dark:border-gray-800 dark:bg-gray-900/80 dark:hover:bg-gray-900/90">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-transform group-hover:scale-110">
                 <ArrowRight className="h-6 w-6 text-primary" />
               </div>
@@ -128,16 +128,16 @@ export default function LoginPage() {
         {/* 右侧登录表单 */}
         <div className="mx-auto w-full max-w-md space-y-6 lg:max-w-none">
           <div className="flex flex-col items-center space-y-2 lg:items-start">
-            <h2 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
+            <h2 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-2xl font-bold text-transparent dark:from-gray-100 dark:to-gray-400 sm:text-3xl">
               账号登录
             </h2>
             <p className="text-sm text-muted-foreground">登录您的 HiDoo 账号，开启跨境电商之旅</p>
           </div>
 
-          <Card className="border-0 bg-white/90 shadow-lg backdrop-blur-md">
+          <Card className="border-0 bg-white/90 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl dark:bg-gray-900/90">
             <form onSubmit={handleLogin}>
               <CardHeader className="space-y-2 pb-4">
-                <CardTitle className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-center text-lg font-bold text-transparent sm:text-xl">
+                <CardTitle className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-center text-lg font-bold text-transparent dark:from-gray-100 dark:to-gray-400 sm:text-xl">
                   欢迎回来
                 </CardTitle>
                 <CardDescription className="text-center text-xs sm:text-sm">
@@ -157,7 +157,7 @@ export default function LoginPage() {
                       placeholder="请输入邮箱地址"
                       value={email}
                       onChange={e => setEmail(e.target.value)}
-                      className="h-10 rounded-lg pl-10"
+                      className="h-10 rounded-lg pl-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       required
                     />
                   </div>
@@ -175,7 +175,7 @@ export default function LoginPage() {
                       placeholder="请输入密码"
                       value={password}
                       onChange={e => setPassword(e.target.value)}
-                      className="h-10 rounded-lg pl-10"
+                      className="h-10 rounded-lg pl-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       required
                     />
                   </div>
@@ -183,7 +183,10 @@ export default function LoginPage() {
 
                 <div className="flex items-center justify-between">
                   <label className="flex items-center gap-2">
-                    <input type="checkbox" className="h-4 w-4 rounded border-gray-300" />
+                    <input
+                      type="checkbox"
+                      className="h-4 w-4 rounded border-gray-300 dark:border-gray-700"
+                    />
                     <span className="text-xs text-muted-foreground sm:text-sm">记住我</span>
                   </label>
                   <Link
@@ -197,7 +200,7 @@ export default function LoginPage() {
               <CardFooter className="flex flex-col gap-4 pb-4 pt-2">
                 <Button
                   type="submit"
-                  className="h-10 w-full rounded-lg font-medium shadow-md transition-all hover:shadow-lg"
+                  className="h-10 w-full rounded-lg font-medium shadow-md transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]"
                   disabled={adminLogin.isLoading}
                 >
                   {adminLogin.isLoading ? (
@@ -213,10 +216,10 @@ export default function LoginPage() {
                   还没有账号？{' '}
                   <Link
                     href="/auth/register"
-                    className="inline-flex items-center font-medium text-primary hover:text-primary/80"
+                    className="inline-flex items-center font-medium text-primary transition-colors duration-200 hover:text-primary/80"
                   >
                     立即注册
-                    <ArrowRight className="ml-1 h-4 w-4" />
+                    <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </Link>
                 </div>
               </CardFooter>

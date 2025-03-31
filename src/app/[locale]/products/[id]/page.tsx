@@ -110,17 +110,17 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="container mx-auto max-w-7xl py-8">
+    <div className="container mx-auto max-w-7xl px-4 py-4 sm:py-8">
       {/* 面包屑导航 */}
-      <nav className="mb-8">
-        <ol className="flex items-center space-x-2 text-sm">
+      <nav className="mb-4 overflow-x-auto whitespace-nowrap sm:mb-8">
+        <ol className="flex items-center space-x-1 text-xs sm:space-x-2 sm:text-sm">
           <li>
             <Link href="/" className="text-muted-foreground transition-colors hover:text-primary">
               首页
             </Link>
           </li>
           <li>
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            <ChevronRight className="h-3 w-3 text-muted-foreground sm:h-4 sm:w-4" />
           </li>
           <li>
             <Link
@@ -131,54 +131,61 @@ export default function ProductDetail() {
             </Link>
           </li>
           <li>
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            <ChevronRight className="h-3 w-3 text-muted-foreground sm:h-4 sm:w-4" />
           </li>
           <li>
-            <span className="font-medium text-foreground">{product.title!.slice(0, 50)}</span>
+            <span className="font-medium text-foreground">
+              {product.title!.slice(0, 30)}
+              {product.title!.length > 30 ? '...' : ''}
+            </span>
           </li>
         </ol>
       </nav>
 
-      <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-2">
+      <div className="mb-8 grid grid-cols-1 gap-6 sm:mb-12 sm:gap-8 md:grid-cols-2 md:gap-12">
         {/* 商品图片区 */}
         <ProductGallery images={product.images || []} title={product.title} />
 
         {/* 商品信息区 */}
-        <div className="space-y-8">
-          <div className="space-y-4 border-b pb-6">
-            <h1 className="text-3xl font-bold tracking-tight">{product.title}</h1>
-            <p className="text-lg text-muted-foreground">{product.description}</p>
+        <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-2 border-b pb-4 sm:space-y-4 sm:pb-6">
+            <h1 className="text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
+              {product.title}
+            </h1>
+            <p className="text-sm text-muted-foreground sm:text-base md:text-lg">
+              {product.description}
+            </p>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-baseline gap-4">
-              <div className="text-4xl font-bold text-primary">
+          <div className="space-y-3 sm:space-y-4">
+            <div className="flex flex-wrap items-baseline gap-2 sm:gap-4">
+              <div className="text-2xl font-bold text-primary sm:text-3xl md:text-4xl">
                 ¥{(product.variants?.[0]?.prices?.[0]?.amount || 0) / 100}
               </div>
-              <div className="text-lg text-muted-foreground line-through">
+              <div className="text-base text-muted-foreground line-through sm:text-lg">
                 ¥{(((product.variants?.[0]?.prices?.[0]?.amount || 0) * 1.3) / 100).toFixed(2)}
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Badge variant="secondary" className="text-sm">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+              <Badge variant="secondary" className="text-xs sm:text-sm">
                 SKU: {product.variants?.[0]?.sku || 'N/A'}
               </Badge>
-              <Badge variant="secondary" className="text-sm">
+              <Badge variant="secondary" className="text-xs sm:text-sm">
                 库存充足
               </Badge>
             </div>
           </div>
 
-          <Card className="bg-muted/5">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-lg font-medium">
-                <Building2 className="h-5 w-5 text-primary" />
+          <Card className="bg-card">
+            <CardHeader className="px-4 pb-2 sm:px-6 sm:pb-3">
+              <CardTitle className="flex items-center gap-1 text-base font-medium sm:gap-2 sm:text-lg">
+                <Building2 className="h-4 w-4 text-primary sm:h-5 sm:w-5" />
                 供应商信息
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-4">
-                <div className="h-12 w-12 overflow-hidden rounded-full border bg-muted/10">
+            <CardContent className="px-4 sm:px-6">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="h-10 w-10 overflow-hidden rounded-full border bg-muted/10 sm:h-12 sm:w-12">
                   <Image
                     src="/suppliers/default.png"
                     alt={product.collection?.title || '默认供应商'}
@@ -189,22 +196,24 @@ export default function ProductDetail() {
                   />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-medium">{product.collection?.title || '默认供应商'}</h3>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                    <h3 className="text-sm font-medium sm:text-base">
+                      {product.collection?.title || '默认供应商'}
+                    </h3>
                     <Badge
                       variant="secondary"
-                      className="bg-emerald-50 text-emerald-600 hover:bg-emerald-50"
+                      className="bg-emerald-50 text-xs text-emerald-600 hover:bg-emerald-50 dark:bg-emerald-950 dark:text-emerald-400 dark:hover:bg-emerald-950 sm:text-sm"
                     >
                       已认证
                     </Badge>
                   </div>
-                  <div className="mt-1 flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground sm:gap-4 sm:text-sm">
                     <div className="flex items-center gap-1">
-                      <Package className="h-4 w-4" />
+                      <Package className="h-3 w-3 sm:h-4 sm:w-4" />
                       <span>商品数量: {product.collection?.products?.length || 0}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                      <Star className="h-3 w-3 fill-amber-400 text-amber-400 sm:h-4 sm:w-4" />
                       <span>4.5</span>
                     </div>
                   </div>
@@ -213,70 +222,70 @@ export default function ProductDetail() {
             </CardContent>
           </Card>
 
-          <div className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="bg-muted/5">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <Card className="bg-card">
+                <CardHeader className="px-3 pb-1 sm:px-6 sm:pb-2">
+                  <CardTitle className="text-xs font-medium text-muted-foreground sm:text-sm">
                     利润率
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-primary">
+                <CardContent className="px-3 sm:px-6">
+                  <div className="text-xl font-bold text-primary sm:text-2xl">
                     {String(product.metadata?.profit_margin || 30)}%
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-muted/5">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
+              <Card className="bg-card">
+                <CardHeader className="px-3 pb-1 sm:px-6 sm:pb-2">
+                  <CardTitle className="text-xs font-medium text-muted-foreground sm:text-sm">
                     发货时间
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">
+                <CardContent className="px-3 sm:px-6">
+                  <div className="text-xl font-bold sm:text-2xl">
                     {String(product.metadata?.shipping_time || '3-5天')}
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="font-medium">选择数量</h3>
-              <div className="flex items-center gap-4">
+            <div className="space-y-2 sm:space-y-4">
+              <h3 className="text-sm font-medium sm:text-base">选择数量</h3>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 <div className="flex items-center">
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-10 w-10 rounded-l-md rounded-r-none"
+                    className="h-9 w-9 rounded-l-md rounded-r-none sm:h-10 sm:w-10"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     disabled={quantity <= 1}
                   >
-                    <Minus className="h-4 w-4" />
+                    <Minus className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                   <input
                     type="number"
                     min={1}
                     value={quantity}
                     onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="h-10 w-20 border-y text-center"
+                    className="h-9 w-14 border-y bg-background text-center text-sm sm:h-10 sm:w-20 sm:text-base"
                   />
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-10 w-10 rounded-l-none rounded-r-md"
+                    className="h-9 w-9 rounded-l-none rounded-r-md sm:h-10 sm:w-10"
                     onClick={() => setQuantity(quantity + 1)}
                   >
-                    <Plus className="h-4 w-4" />
+                    <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
-                <div className="text-sm text-muted-foreground">最小起订量：1</div>
+                <div className="text-xs text-muted-foreground sm:text-sm">最小起订量：1</div>
               </div>
             </div>
 
-            <div className="border-t pt-6">
-              <Button size="lg" className="h-12 w-full" onClick={handleAddToSelection}>
-                <ShoppingCart className="mr-2 h-5 w-5" />
+            <div className="border-t pt-4 sm:pt-6">
+              <Button size="lg" className="h-10 w-full sm:h-12" onClick={handleAddToSelection}>
+                <ShoppingCart className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 加入选品
               </Button>
             </div>
@@ -285,43 +294,53 @@ export default function ProductDetail() {
       </div>
 
       {/* 商品详细信息标签页 */}
-      <Tabs defaultValue="details" className="mt-8">
-        <TabsList>
-          <TabsTrigger value="details">商品详情</TabsTrigger>
-          <TabsTrigger value="specs">规格参数</TabsTrigger>
-          <TabsTrigger value="shipping">物流信息</TabsTrigger>
+      <Tabs defaultValue="details" className="mt-6 sm:mt-8">
+        <TabsList className="w-full sm:w-auto">
+          <TabsTrigger value="details" className="flex-1 text-xs sm:flex-initial sm:text-sm">
+            商品详情
+          </TabsTrigger>
+          <TabsTrigger value="specs" className="flex-1 text-xs sm:flex-initial sm:text-sm">
+            规格参数
+          </TabsTrigger>
+          <TabsTrigger value="shipping" className="flex-1 text-xs sm:flex-initial sm:text-sm">
+            物流信息
+          </TabsTrigger>
         </TabsList>
-        <TabsContent value="details" className="mt-4">
-          <Card className="p-6">
-            <div className="prose max-w-none">
-              <h2>商品描述</h2>
+        <TabsContent value="details" className="mt-3 sm:mt-4">
+          <Card className="p-4 sm:p-6">
+            <div className="prose dark:prose-invert max-w-none text-sm sm:text-base">
+              <h2 className="text-lg sm:text-xl">商品描述</h2>
               <p>{product.description}</p>
             </div>
           </Card>
         </TabsContent>
-        <TabsContent value="specs" className="mt-4">
-          <Card className="p-6">
-            <div className="grid grid-cols-2 gap-4">
+        <TabsContent value="specs" className="mt-3 sm:mt-4">
+          <Card className="p-4 sm:p-6">
+            <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 sm:gap-4 sm:text-base">
               {product.metadata &&
                 Object.entries(product.metadata).map(([key, value]) => (
-                  <div key={key} className="space-y-2">
-                    <p className="text-gray-500">{key}</p>
+                  <div key={key} className="space-y-1 sm:space-y-2">
+                    <p className="text-muted-foreground">{key}</p>
                     <p>{String(value || '')}</p>
                   </div>
                 ))}
             </div>
           </Card>
         </TabsContent>
-        <TabsContent value="shipping" className="mt-4">
-          <Card className="p-6">
-            <div className="space-y-4">
+        <TabsContent value="shipping" className="mt-3 sm:mt-4">
+          <Card className="p-4 sm:p-6">
+            <div className="space-y-3 text-sm sm:space-y-4 sm:text-base">
               <div>
                 <h3 className="font-semibold">发货地</h3>
-                <p>{String(product.metadata?.origin || '中国')}</p>
+                <p className="text-muted-foreground">
+                  {String(product.metadata?.origin || '中国')}
+                </p>
               </div>
               <div>
                 <h3 className="font-semibold">物流方式</h3>
-                <p>{String(product.metadata?.shipping_methods || '标准物流')}</p>
+                <p className="text-muted-foreground">
+                  {String(product.metadata?.shipping_methods || '标准物流')}
+                </p>
               </div>
             </div>
           </Card>
