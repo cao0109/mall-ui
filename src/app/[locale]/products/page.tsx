@@ -1,8 +1,11 @@
 'use client';
 
+import { EnhancedPromotionalBanner } from '@/components/marketing/enhanced-promotional-banner';
 import { MedusaCategories } from '@/components/products/filters';
+import { HelpResources, Resource } from '@/components/products/help-resources';
 import { PaginationProducts } from '@/components/products/pagination-products';
 import { ProductSkeleton } from '@/components/products/product-skeleton';
+import { RecommendedSuppliers } from '@/components/products/recommended-suppliers';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -30,12 +33,15 @@ import {
   ArrowDownNarrowWide,
   ArrowUpNarrowWide,
   Filter,
+  Gift,
   LayoutGrid,
   LayoutList,
   Package,
   Search,
+  ShoppingBag,
   SlidersHorizontal,
   Star,
+  Truck,
   X,
 } from 'lucide-react';
 import { useProducts } from 'medusa-react';
@@ -49,6 +55,28 @@ const suppliers = [
   { id: 2, name: '科技先锋', logo: '/suppliers/kejixian.png', rating: 4.2 },
   { id: 3, name: '音频专家', logo: '/suppliers/yinpin.png', rating: 4.8 },
   { id: 4, name: '电子科技', logo: '/suppliers/dianzi.png', rating: 4.3 },
+];
+
+// 帮助和资源数据
+const helpResources: Resource[] = [
+  {
+    title: '如何选择合适的产品',
+    description: '我们的专业指南可以帮助您找到最适合您商店的产品，提高您的销售转化率。',
+    linkText: '查看详情',
+    linkHref: '/guides/product-selection',
+  },
+  {
+    title: '供应商合作流程',
+    description: '了解如何与我们的优质供应商建立长期合作关系，获取更多优惠和支持。',
+    linkText: '了解更多',
+    linkHref: '/guides/supplier-cooperation',
+  },
+  {
+    title: '产品导入教程',
+    description: '快速将选定产品导入到您的网店，自动同步库存和价格信息，轻松管理。',
+    linkText: '观看教程',
+    linkHref: '/guides/product-import',
+  },
 ];
 
 export default function ProductsPage() {
@@ -380,6 +408,24 @@ export default function ProductsPage() {
 
   return (
     <div className="container mx-auto px-4 py-4 md:px-6 md:py-6">
+      {/* 增强版促销活动横幅 */}
+      <div className="mb-6">
+        <EnhancedPromotionalBanner
+          variant="accent"
+          title="春季新品特惠 - 限时五折起"
+          description="精选爆款商品，限时抢购，错过等一年！海外直邮，品质保证。"
+          buttonText="立即抢购"
+          buttonLink="/products?sort=price-asc"
+          endDate="2024-04-30"
+          backgroundImage="https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=2070&auto=format&fit=crop"
+          features={[
+            { icon: <ShoppingBag className="h-3.5 w-3.5" />, text: '爆款低至5折' },
+            { icon: <Truck className="h-3.5 w-3.5" />, text: '全场包邮' },
+            { icon: <Gift className="h-3.5 w-3.5" />, text: '好礼相送' },
+          ]}
+        />
+      </div>
+
       {/* 页面标题和工具栏 */}
       <div className="mb-4 flex flex-col gap-2 md:mb-6 md:flex-row md:items-center md:justify-between">
         <div>
@@ -572,6 +618,16 @@ export default function ProductsPage() {
               </Pagination>
             </div>
           )}
+
+          {/* 底部推荐供应商 - 使用组件 */}
+          <div className="mt-8">
+            <RecommendedSuppliers suppliers={suppliers} />
+          </div>
+
+          {/* 帮助和资源 - 使用组件 */}
+          <div className="mt-6">
+            <HelpResources resources={helpResources} />
+          </div>
         </div>
       </div>
     </div>
