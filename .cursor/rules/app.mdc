@@ -1,0 +1,164 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+// Cursor Rules for Cross-Border E-Commerce Distributor Mall Project
+
+// Project Overview:
+// - This is a cross-border e-commerce distributor mall for end-users (not a backend admin system).
+// - User roles: "vendor" (uploads products) and "seller" (browses vendor products and syncs them to their own independent stores).
+// - Independent stores: (1) company-developed store, (2) third-party stores like Shopify.
+// - Backend: MedusaJS v1 framework.
+// - Frontend: Next.js App Router, medusa-react for API calls.
+// - UI Components: shadcn/ui (e.g., Button, Card).
+// - Styling: TailwindCSS utility classes.
+// - Language: TSX (TypeScript with JSX).
+// - File Naming: Use kebab-case (e.g., data-overview.tsx).
+// - Component Rule: If a piece of UI or logic can be reused, make it a separate component.
+
+// General Guidelines:
+// 1. Write all code in TSX with explicit TypeScript types.
+// 2. Use Next.js App Router conventions (e.g., page.tsx, Server Components by default).
+// 3. Break down UI into reusable components with kebab-case file names (e.g., product-list.tsx, sync-button.tsx).
+// 4. Use shadcn/ui components with TailwindCSS for styling.
+// 5. Use medusa-react hooks with proper TypeScript types.
+// 6. Prefer Server Components; use "use client" for Client Components when interactivity is needed.
+
+// TypeScript Rules:
+// 1. Define interfaces for key data structures.
+interface Product {
+  id: string;
+  title: string;
+  description?: string;
+  price?: number;
+  // Add other MedusaJS product fields as needed
+}
+
+// Component Examples:
+// 1. Main overview component (file: data-overview.tsx):
+import { useAdminProducts } from "medusa-react";
+import ProductList from "@/components/product-list";
+import ErrorDisplay from "@/components/error-display";
+
+export default function DataOverview(): JSX.Element {
+  const { products, isLoading, error } = useAdminProducts();
+
+  if (error) return <ErrorDisplay error={error} />;
+  return <ProductList products={products} isLoading={isLoading} />;
+}
+
+// 2. Product list component (file: product-list.tsx):
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ProductItem from "@/components/product-item";
+
+interface ProductListProps {
+  products: Product[] | undefined;
+  isLoading: boolean;
+}
+
+export default function ProductList({ products, isLoading }: ProductListProps): JSX.Element {
+  return (
+    <Card className="w-full max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">Vendor Products</CardTitle>
+      </CardHeader>
+      <CardContent>
+        {isLoading && <p className="text-muted-foreground">Loading products...</p>}
+        {!isLoading && (!products || products.length === 0) && (
+          <p className="text-muted-foreground">No products available</p>
+        )}
+        {products && products.length > 0 && (
+          <ul className="space-y-2">
+            {products.map((product) => (
+              <ProductItem key={product.id} product={product} />
+            ))}
+          </ul>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+// 3. Individual product item component (file: product-item.tsx):
+import SyncButton from "@/components/sync-button";
+
+interface ProductItemProps {
+  product: Product;
+}
+
+export default function ProductItem({ product }: ProductItemProps): JSX.Element {
+  return (
+    <li className="p-2 border rounded-md flex justify-between items-center">
+      <span>{product.title}</span>
+      <SyncButton productId={product.id} />
+    </li>
+  );
+}
+
+// 4. Sync button component (file: sync-button.tsx):
+"use client";
+import { Button } from "@/components/ui/button";
+
+interface SyncButtonProps {
+  productId: string;
+}
+
+export default function SyncButton({ productId }: SyncButtonProps): JSX.Element {
+  const handleSync = (): void => {
+    // Placeholder for sync logic
+    console.log(`Syncing product ${productId} to independent store`);
+  };
+
+  return (
+    <Button onClick={handleSync} className="bg-blue-600 hover:bg-blue-700">
+      Sync to My Store
+    </Button>
+  );
+}
+
+// 5. Error display component (file: error-display.tsx):
+interface ErrorDisplayProps {
+  error: unknown;
+}
+
+export default function ErrorDisplay({ error }: ErrorDisplayProps): JSX.Element {
+  return (
+    <div className="text-red-500 p-4 border border-red-300 rounded-md">
+      Error: {(error as Error).message}
+    </div>
+  );
+}
+
+// Third-Party Store Integration:
+// 1. Mock third-party sync logic as a utility or component.
+// Example (could be in sync-button.tsx or a separate file like shopify-sync.ts):
+const syncToShopify = (productId: string): void => {
+  // TODO: Implement Shopify API call to sync product
+  console.log(`Syncing ${productId} to Shopify`);
+};
+
+// File Structure (Next.js App Router):
+// 1. Components in /app/components/ (e.g., /app/components/product-list.tsx).
+// 2. Pages in /app/ (e.g., /app/products/page.tsx).
+// Example page (file: products/page.tsx):
+import DataOverview from "@/components/data-overview";
+
+export default function ProductsPage(): JSX.Element {
+  return (
+    <main className="container mx-auto py-8">
+      <DataOverview />
+    </main>
+  );
+}
+
+// Styling Rules:
+// 1. Use TailwindCSS classes (e.g., "flex", "space-y-2", "text-muted-foreground").
+// 2. Ensure shadcn/ui components are typed and styled correctly.
+
+// Additional Notes:
+// - Date: March 31, 2025 (for time-sensitive logic, if applicable).
+// - File names must follow kebab-case (e.g., data-overview.tsx, product-list.tsx).
+// - Maximize reusability by creating components for repeated UI/logic patterns.
+// - Assume shadcn/ui is installed and configured with TypeScript support.
+// - Use strict TypeScript mode (e.g., no implicit any).
