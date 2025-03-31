@@ -6,23 +6,24 @@ alwaysApply: true
 // Cursor Rules for Cross-Border E-Commerce Distributor Mall Project
 
 // Project Overview:
-// - This is a cross-border e-commerce distributor mall for end-users (not a backend admin system).
+// - This is a cross-border e-commerce distributor mall frontend for end-users (sellers), not a backend admin system.
 // - User roles: "vendor" (uploads products) and "seller" (browses vendor products and syncs them to their own independent stores).
 // - Independent stores: (1) company-developed store, (2) third-party stores like Shopify.
-// - Backend: MedusaJS v1 framework.
-// - Frontend: Next.js App Router, medusa-react for API calls.
+// - Backend: MedusaJS v1 framework (seller-specific APIs assumed, e.g., fetching vendor products).
+// - Frontend: Next.js App Router.
 // - UI Components: shadcn/ui (e.g., Button, Card).
 // - Styling: TailwindCSS utility classes.
 // - Language: TSX (TypeScript with JSX).
 // - File Naming: Use kebab-case (e.g., data-overview.tsx).
 // - Component Rule: If a piece of UI or logic can be reused, make it a separate component.
+// - Restriction: No admin-related functionality (e.g., useAdminProducts); focus on seller-facing features.
 
 // General Guidelines:
 // 1. Write all code in TSX with explicit TypeScript types.
 // 2. Use Next.js App Router conventions (e.g., page.tsx, Server Components by default).
-// 3. Break down UI into reusable components with kebab-case file names (e.g., product-list.tsx, sync-button.tsx).
+// 3. Break down UI into reusable components with kebab-case file names (e.g., product-list.tsx).
 // 4. Use shadcn/ui components with TailwindCSS for styling.
-// 5. Use medusa-react hooks with proper TypeScript types.
+// 5. Assume seller-specific data fetching (e.g., via a custom hook or API call, not admin hooks).
 // 6. Prefer Server Components; use "use client" for Client Components when interactivity is needed.
 
 // TypeScript Rules:
@@ -32,17 +33,21 @@ interface Product {
   title: string;
   description?: string;
   price?: number;
-  // Add other MedusaJS product fields as needed
+  // Add other seller-visible product fields as needed
 }
+
+// Placeholder for Seller Data Fetching:
+// - Since this is a seller frontend, assume a custom hook or API call (e.g., useSellerProducts) exists.
+// - Replace with actual MedusaJS seller API hooks when available.
 
 // Component Examples:
 // 1. Main overview component (file: data-overview.tsx):
-import { useAdminProducts } from "medusa-react";
 import ProductList from "@/components/product-list";
-import ErrorDisplay from "@/components/error-display";
+// Placeholder for seller-specific data fetching
+import { useSellerProducts } from "@/lib/hooks/use-seller-products"; // Hypothetical hook
 
 export default function DataOverview(): JSX.Element {
-  const { products, isLoading, error } = useAdminProducts();
+  const { products, isLoading, error } = useSellerProducts(); // Seller-specific hook
 
   if (error) return <ErrorDisplay error={error} />;
   return <ProductList products={products} isLoading={isLoading} />;
@@ -61,7 +66,7 @@ export default function ProductList({ products, isLoading }: ProductListProps): 
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">Vendor Products</CardTitle>
+        <CardTitle className="text-2xl font-bold">Available Vendor Products</CardTitle>
       </CardHeader>
       <CardContent>
         {isLoading && <p className="text-muted-foreground">Loading products...</p>}
@@ -106,8 +111,8 @@ interface SyncButtonProps {
 
 export default function SyncButton({ productId }: SyncButtonProps): JSX.Element {
   const handleSync = (): void => {
-    // Placeholder for sync logic
-    console.log(`Syncing product ${productId} to independent store`);
+    // Placeholder for seller sync logic (e.g., API call to sync to independent store)
+    console.log(`Syncing product ${productId} to seller's independent store`);
   };
 
   return (
@@ -134,7 +139,7 @@ export default function ErrorDisplay({ error }: ErrorDisplayProps): JSX.Element 
 // 1. Mock third-party sync logic as a utility or component.
 // Example (could be in sync-button.tsx or a separate file like shopify-sync.ts):
 const syncToShopify = (productId: string): void => {
-  // TODO: Implement Shopify API call to sync product
+  // TODO: Implement Shopify API call to sync product for seller
   console.log(`Syncing ${productId} to Shopify`);
 };
 
@@ -160,5 +165,5 @@ export default function ProductsPage(): JSX.Element {
 // - Date: March 31, 2025 (for time-sensitive logic, if applicable).
 // - File names must follow kebab-case (e.g., data-overview.tsx, product-list.tsx).
 // - Maximize reusability by creating components for repeated UI/logic patterns.
-// - Assume shadcn/ui is installed and configured with TypeScript support.
-// - Use strict TypeScript mode (e.g., no implicit any).
+// - No admin functionality (e.g., import/export); focus on seller browsing and syncing.
+// - Assume seller-specific hooks/APIs exist (e.g., useSellerProducts); adjust when actual APIs are provided.
