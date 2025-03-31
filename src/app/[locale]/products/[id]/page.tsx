@@ -1,160 +1,121 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
-import { useSelectionStore } from "@/store/selection";
-import { Product } from "@/types/product"; // 假设有一个Product类型定义
-import {
-  Building2,
-  Calendar,
-  ChevronRight,
-  Minus,
-  Package,
-  Plus,
-  ShoppingCart,
-  Star,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-
-// 模拟商品数据
-const product = {
-  id: 1,
-  name: "无线蓝牙耳机",
-  price: 15.99,
-  image:
-    "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-  description: "高品质无线蓝牙耳机，支持主动降噪，续航时间长达24小时。",
-  supplier: "Shenzhen Electronics Co.",
-  origin: "中国",
-  minOrder: 100,
-  shippingTime: "3-5天",
-  profitMargin: 35,
-  specifications: {
-    brand: "SoundPro",
-    model: "SP-100",
-    color: "黑色/白色",
-    battery: "24小时续航",
-    features: ["主动降噪", "蓝牙5.0", "触控操作", "语音助手"],
-    weight: "250g",
-    dimensions: "180 x 60 x 30mm",
-  },
-  images: [
-    "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    "https://images.unsplash.com/photo-1606741965326-cb990ae01bb2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    "https://images.unsplash.com/photo-1578319439584-104c94d37305?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-  ],
-  marketAnalysis: {
-    averagePrice: 29.99,
-    competitorCount: 12,
-    marketTrend: "上升",
-    salesVolume: "月销5000+",
-    profitSpace: "40-60%",
-  },
-  shipping: [
-    { method: "普通", price: 2.5, time: "15-25天" },
-    { method: "快速", price: 5.99, time: "7-12天" },
-    { method: "特快", price: 12.99, time: "3-5天" },
-  ],
-  supplierInfo: {
-    name: "Shenzhen Electronics Co.",
-    logo: "https://images.unsplash.com/photo-1706722118380-c38a1b37c079?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    rating: 4.8,
-    responseTime: "≤5小时",
-    verified: true,
-    established: "2005年",
-    products: 320,
-  },
-};
-
-// 模拟推荐产品数据
-const recommendedProducts: Product[] = [
-  {
-    id: 2,
-    name: "有线耳机",
-    price: 9.99,
-    image:
-      "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    profitMargin: 20,
-    minOrder: 50,
-    shippingTime: "3-5天",
-    supplier: {
-      name: "Supplier A",
-      rating: 4.5,
-      logo: "https://example.com/logo-a.png",
-    },
-  },
-  {
-    id: 3,
-    name: "蓝牙音响",
-    price: 29.99,
-    image:
-      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    profitMargin: 25,
-    minOrder: 30,
-    shippingTime: "2-4天",
-    supplier: {
-      name: "Supplier B",
-      rating: 4.0,
-      logo: "https://example.com/logo-b.png",
-    },
-  },
-  {
-    id: 4,
-    name: "运动耳机",
-    price: 19.99,
-    image:
-      "https://images.unsplash.com/photo-1606741965326-cb990ae01bb2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    profitMargin: 15,
-    minOrder: 20,
-    shippingTime: "5-7天",
-    supplier: {
-      name: "Supplier C",
-      rating: 4.2,
-      logo: "https://example.com/logo-c.png",
-    },
-  },
-];
+import { ProductGallery } from '@/components/product/product-gallery';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useToast } from '@/hooks/use-toast';
+import { useSelectionStore } from '@/store/selection';
+import { Building2, ChevronRight, Minus, Package, Plus, ShoppingCart, Star } from 'lucide-react';
+import { useProduct } from 'medusa-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useState } from 'react';
 
 export default function ProductDetail() {
   const { toast } = useToast();
   const { addProduct } = useSelectionStore();
-  const [quantity, setQuantity] = useState(product.minOrder);
-  const [selectedImage, setSelectedImage] = useState(product.image);
+  const params = useParams();
+  const productId = params.id as string;
+
+  // 使用 Medusa API 获取商品数据
+  const { product, isLoading, error } = useProduct(productId);
+
+  const [quantity, setQuantity] = useState(1);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto max-w-7xl py-8">
+        <div className="animate-pulse space-y-8">
+          {/* 面包屑导航骨架屏 */}
+          <div className="flex items-center space-x-2">
+            <div className="h-4 w-16 rounded bg-muted"></div>
+            <div className="h-4 w-4 rounded bg-muted"></div>
+            <div className="h-4 w-16 rounded bg-muted"></div>
+            <div className="h-4 w-4 rounded bg-muted"></div>
+            <div className="h-4 w-24 rounded bg-muted"></div>
+          </div>
+
+          {/* 商品内容骨架屏 */}
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+            <div className="space-y-6">
+              <div className="aspect-square rounded-xl bg-muted"></div>
+              <div className="grid grid-cols-4 gap-4">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="aspect-square rounded-lg bg-muted"></div>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <div className="h-8 w-3/4 rounded bg-muted"></div>
+                <div className="h-4 w-full rounded bg-muted"></div>
+              </div>
+              <div className="space-y-4">
+                <div className="h-10 w-1/3 rounded bg-muted"></div>
+                <div className="flex gap-4">
+                  <div className="h-6 w-16 rounded bg-muted"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className="container mx-auto max-w-7xl py-8">
+        <div className="rounded-lg border border-dashed bg-muted/30 py-12 text-center">
+          <Package className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+          <p className="text-muted-foreground">加载商品失败: {error?.message || '商品不存在'}</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleAddToSelection = () => {
+    if (!product) return;
+
+    const price = product.variants?.[0]?.prices?.[0]?.amount || 0;
+    const profitMargin = Number(product.metadata?.profit_margin || 30);
+    const suggestedPrice = Math.round(price * (1 + profitMargin / 100));
+
     addProduct({
-      ...product,
+      id: Number(product.id),
+      name: product.title || '未命名商品',
+      price: price / 100,
+      image: product.thumbnail || '/placeholder-product.png',
+      description: product.description || '',
+      profitMargin: profitMargin,
+      minOrder: Number(product.metadata?.min_order || 1),
+      shippingTime: String(product.metadata?.shipping_time || '3-5天'),
       supplier: {
-        name: product.supplierInfo.name,
-        logo: product.supplierInfo.logo,
-        rating: product.supplierInfo.rating,
+        name: product.collection?.title || '默认供应商',
+        logo: '/suppliers/default.png',
+        rating: 4.5,
       },
-      suggestedPrice: product.price * (1 + product.profitMargin / 100),
+      suggestedPrice: suggestedPrice / 100,
       shopUrl: `/products/${product.id}`,
+      origin: String(product.metadata?.origin || '中国'),
     });
+
     toast({
-      title: "已加入选品",
-      description: "商品已成功添加到选品列表",
+      title: '已加入选品',
+      description: '商品已成功添加到选品列表',
     });
   };
 
   return (
-    <div className="container max-w-7xl mx-auto py-8">
+    <div className="container mx-auto max-w-7xl py-8">
       {/* 面包屑导航 */}
       <nav className="mb-8">
         <ol className="flex items-center space-x-2 text-sm">
           <li>
-            <Link
-              href="/"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
+            <Link href="/" className="text-muted-foreground transition-colors hover:text-primary">
               首页
             </Link>
           </li>
@@ -164,7 +125,7 @@ export default function ProductDetail() {
           <li>
             <Link
               href="/products"
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground transition-colors hover:text-primary"
             >
               商品库
             </Link>
@@ -173,69 +134,34 @@ export default function ProductDetail() {
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </li>
           <li>
-            <span className="text-foreground font-medium">{product.name}</span>
+            <span className="font-medium text-foreground">{product.title!.slice(0, 50)}</span>
           </li>
         </ol>
       </nav>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+      <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-2">
         {/* 商品图片区 */}
-        <div className="space-y-6">
-          <div className="aspect-square relative rounded-xl overflow-hidden border bg-muted/10">
-            <Image
-              src={selectedImage}
-              alt={product.name}
-              layout="fill"
-              priority
-              className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div className="grid grid-cols-4 gap-4">
-            {product.images.map((image, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "aspect-square relative rounded-lg overflow-hidden border bg-muted/10",
-                  "hover:border-primary/50 transition-colors duration-200",
-                  selectedImage === image && "ring-2 ring-primary ring-offset-2"
-                )}
-                onClick={() => setSelectedImage(image)}
-              >
-                <Image
-                  src={image}
-                  alt={`${product.name} ${index + 1}`}
-                  layout="fill"
-                  priority
-                  className="object-cover w-full h-full"
-                />
-              </button>
-            ))}
-          </div>
-        </div>
+        <ProductGallery images={product.images || []} title={product.title} />
 
         {/* 商品信息区 */}
         <div className="space-y-8">
-          <div className="space-y-4 pb-6 border-b">
-            <h1 className="text-3xl font-bold tracking-tight">
-              {product.name}
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              {product.description}
-            </p>
+          <div className="space-y-4 border-b pb-6">
+            <h1 className="text-3xl font-bold tracking-tight">{product.title}</h1>
+            <p className="text-lg text-muted-foreground">{product.description}</p>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-baseline gap-4">
               <div className="text-4xl font-bold text-primary">
-                ¥{product.price.toFixed(2)}
+                ¥{(product.variants?.[0]?.prices?.[0]?.amount || 0) / 100}
               </div>
               <div className="text-lg text-muted-foreground line-through">
-                ¥{product.marketAnalysis.averagePrice}
+                ¥{(((product.variants?.[0]?.prices?.[0]?.amount || 0) * 1.3) / 100).toFixed(2)}
               </div>
             </div>
             <div className="flex items-center gap-4">
               <Badge variant="secondary" className="text-sm">
-                SKU: SP12345
+                SKU: {product.variants?.[0]?.sku || 'N/A'}
               </Badge>
               <Badge variant="secondary" className="text-sm">
                 库存充足
@@ -245,17 +171,17 @@ export default function ProductDetail() {
 
           <Card className="bg-muted/5">
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg font-medium flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-lg font-medium">
                 <Building2 className="h-5 w-5 text-primary" />
                 供应商信息
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full overflow-hidden border bg-muted/10">
+                <div className="h-12 w-12 overflow-hidden rounded-full border bg-muted/10">
                   <Image
-                    src={product.supplierInfo.logo}
-                    alt={product.supplierInfo.name}
+                    src="/suppliers/default.png"
+                    alt={product.collection?.title || '默认供应商'}
                     width={24}
                     height={24}
                     layout="fixed"
@@ -264,28 +190,22 @@ export default function ProductDetail() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-medium">{product.supplierInfo.name}</h3>
-                    {product.supplierInfo.verified && (
-                      <Badge
-                        variant="secondary"
-                        className="bg-emerald-50 text-emerald-600 hover:bg-emerald-50"
-                      >
-                        已认证
-                      </Badge>
-                    )}
+                    <h3 className="font-medium">{product.collection?.title || '默认供应商'}</h3>
+                    <Badge
+                      variant="secondary"
+                      className="bg-emerald-50 text-emerald-600 hover:bg-emerald-50"
+                    >
+                      已认证
+                    </Badge>
                   </div>
-                  <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>成立{product.supplierInfo.established}</span>
-                    </div>
+                  <div className="mt-1 flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Package className="h-4 w-4" />
-                      <span>{product.supplierInfo.products}+ 商品</span>
+                      <span>商品数量: {product.collection?.products?.length || 0}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                      <span>{product.supplierInfo.rating}</span>
+                      <span>4.5</span>
                     </div>
                   </div>
                 </div>
@@ -298,24 +218,24 @@ export default function ProductDetail() {
               <Card className="bg-muted/5">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
-                    月销量
+                    利润率
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
-                    {product.marketAnalysis.salesVolume}
+                  <div className="text-2xl font-bold text-primary">
+                    {String(product.metadata?.profit_margin || 30)}%
                   </div>
                 </CardContent>
               </Card>
               <Card className="bg-muted/5">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
-                    利润空间
+                    发货时间
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-primary">
-                    {product.marketAnalysis.profitSpace}
+                  <div className="text-2xl font-bold">
+                    {String(product.metadata?.shipping_time || '3-5天')}
                   </div>
                 </CardContent>
               </Card>
@@ -329,49 +249,34 @@ export default function ProductDetail() {
                     variant="outline"
                     size="icon"
                     className="h-10 w-10 rounded-l-md rounded-r-none"
-                    onClick={() =>
-                      setQuantity(Math.max(product.minOrder, quantity - 10))
-                    }
-                    disabled={quantity <= product.minOrder}
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    disabled={quantity <= 1}
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
                   <input
                     type="number"
-                    min={product.minOrder}
+                    min={1}
                     value={quantity}
-                    onChange={(e) =>
-                      setQuantity(
-                        Math.max(
-                          product.minOrder,
-                          parseInt(e.target.value) || product.minOrder
-                        )
-                      )
-                    }
+                    onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                     className="h-10 w-20 border-y text-center"
                   />
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-10 w-10 rounded-r-md rounded-l-none"
-                    onClick={() => setQuantity(quantity + 10)}
+                    className="h-10 w-10 rounded-l-none rounded-r-md"
+                    onClick={() => setQuantity(quantity + 1)}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  最小起订量：{product.minOrder}
-                </div>
+                <div className="text-sm text-muted-foreground">最小起订量：1</div>
               </div>
             </div>
 
-            <div className="pt-6 border-t">
-              <Button
-                size="lg"
-                className="w-full h-12"
-                onClick={handleAddToSelection}
-              >
-                <ShoppingCart className="h-5 w-5 mr-2" />
+            <div className="border-t pt-6">
+              <Button size="lg" className="h-12 w-full" onClick={handleAddToSelection}>
+                <ShoppingCart className="mr-2 h-5 w-5" />
                 加入选品
               </Button>
             </div>
@@ -397,30 +302,13 @@ export default function ProductDetail() {
         <TabsContent value="specs" className="mt-4">
           <Card className="p-6">
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <p className="text-gray-500">品牌</p>
-                <p>{product.specifications.brand}</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-gray-500">型号</p>
-                <p>{product.specifications.model}</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-gray-500">颜色</p>
-                <p>{product.specifications.color}</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-gray-500">电池续航</p>
-                <p>{product.specifications.battery}</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-gray-500">重量</p>
-                <p>{product.specifications.weight}</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-gray-500">尺寸</p>
-                <p>{product.specifications.dimensions}</p>
-              </div>
+              {product.metadata &&
+                Object.entries(product.metadata).map(([key, value]) => (
+                  <div key={key} className="space-y-2">
+                    <p className="text-gray-500">{key}</p>
+                    <p>{String(value || '')}</p>
+                  </div>
+                ))}
             </div>
           </Card>
         </TabsContent>
@@ -429,50 +317,16 @@ export default function ProductDetail() {
             <div className="space-y-4">
               <div>
                 <h3 className="font-semibold">发货地</h3>
-                <p>{product.origin}</p>
+                <p>{String(product.metadata?.origin || '中国')}</p>
               </div>
               <div>
                 <h3 className="font-semibold">物流方式</h3>
-                <p>{product.shipping.map((s) => s.method).join(", ")}</p>
+                <p>{String(product.metadata?.shipping_methods || '标准物流')}</p>
               </div>
             </div>
           </Card>
         </TabsContent>
       </Tabs>
-
-      {/* 相关推荐产品模块 */}
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold">相关推荐产品</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
-          {recommendedProducts.map((product) => (
-            <div
-              key={product.id}
-              className="border rounded-lg overflow-hidden shadow-md"
-            >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={500}
-                height={500}
-                layout="responsive"
-                className="w-full h-40 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{product.name}</h3>
-                <p className="text-xl text-primary">
-                  ¥{product.price.toFixed(2)}
-                </p>
-                <a
-                  href={`/products/${product.id}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  查看详情
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
