@@ -21,9 +21,9 @@ export function RecommendedSuppliers({
   title = '推荐优质供应商',
 }: RecommendedSuppliersProps) {
   return (
-    <div className="rounded-lg border bg-gradient-to-br from-card to-muted/5 p-6 shadow-sm">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-lg font-semibold">{title}</h2>
+    <div className="rounded-lg border bg-gradient-to-br from-card to-muted/5 p-4 shadow-sm sm:p-6">
+      <div className="mb-4 flex items-center justify-between sm:mb-6">
+        <h2 className="text-base font-semibold sm:text-lg">{title}</h2>
         <Button
           variant="ghost"
           size="sm"
@@ -33,13 +33,13 @@ export function RecommendedSuppliers({
           <ExternalLink className="ml-1 h-3 w-3" />
         </Button>
       </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {suppliers.map(supplier => (
           <div
             key={supplier.id}
-            className="group relative flex flex-col items-center rounded-lg border bg-background p-4 transition-all hover:border-primary/50 hover:shadow-md"
+            className="group relative flex flex-col items-center rounded-lg border bg-background p-3 transition-all hover:border-primary/50 hover:shadow-md sm:p-4"
           >
-            <div className="relative mb-3 h-16 w-16 overflow-hidden rounded-full border-2 border-muted-foreground/10 transition-colors group-hover:border-primary/30">
+            <div className="relative mb-2 h-12 w-12 overflow-hidden rounded-full border-2 border-muted-foreground/10 transition-colors group-hover:border-primary/30 sm:mb-3 sm:h-16 sm:w-16">
               {supplier.logo ? (
                 <Image
                   src={supplier.logo}
@@ -50,14 +50,14 @@ export function RecommendedSuppliers({
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center bg-muted">
-                  <span className="text-lg font-bold text-muted-foreground">
+                  <span className="text-base font-bold text-muted-foreground sm:text-lg">
                     {supplier.name.charAt(0)}
                   </span>
                 </div>
               )}
               <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
-            <h3 className="text-center text-sm font-medium">{supplier.name}</h3>
+            <h3 className="text-center text-xs font-medium sm:text-sm">{supplier.name}</h3>
             <div className="mt-1 flex items-center gap-1">
               <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
               <span className="text-xs font-medium">{supplier.rating}</span>
@@ -65,7 +65,7 @@ export function RecommendedSuppliers({
             <Button
               variant="outline"
               size="sm"
-              className="mt-3 w-full text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="mt-2 w-full text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:mt-3"
             >
               查看产品
             </Button>

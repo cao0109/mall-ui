@@ -24,20 +24,20 @@ export function HelpResources({ resources }: HelpResourcesProps) {
   ];
 
   return (
-    <div className="rounded-lg border bg-gradient-to-br from-muted/30 to-muted/10 p-6 shadow-sm">
-      <div className="grid gap-6 md:grid-cols-3">
+    <div className="rounded-lg border bg-gradient-to-br from-muted/30 to-muted/10 p-4 shadow-sm sm:p-6">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {resources.map((resource, index) => (
           <div
             key={index}
-            className="group relative space-y-3 rounded-lg border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-md"
+            className="group relative space-y-2 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md sm:space-y-3 sm:p-4"
           >
-            <div className="flex items-start gap-3">
-              <div className="rounded-lg bg-primary/10 p-2 text-primary">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <div className="rounded-lg bg-primary/10 p-1.5 text-primary sm:p-2">
                 {resource.icon || defaultIcons[index % defaultIcons.length]}
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5 sm:space-y-2">
                 <h3 className="text-sm font-semibold leading-none">{resource.title}</h3>
-                <p className="text-xs text-muted-foreground">{resource.description}</p>
+                <p className="line-clamp-2 text-xs text-muted-foreground">{resource.description}</p>
                 <Button
                   variant="ghost"
                   size="sm"
