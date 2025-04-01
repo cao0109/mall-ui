@@ -6,10 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useSelectionStore } from '@/store/selection';
 import { PricedProduct } from '@/types/product';
-import { Building2, Minus, Package, Plus, ShoppingCart, Star } from 'lucide-react';
+import { Building2, Package, ShoppingCart, Star, Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useState } from 'react';
+import { SyncProductData, SyncProductSheet } from '../products/sync-product-sheet';
 
 interface ProductInfoProps {
   product: PricedProduct;
@@ -18,8 +19,9 @@ interface ProductInfoProps {
 export function ProductInfo({ product }: ProductInfoProps) {
   const { toast } = useToast();
   const { addProduct } = useSelectionStore();
-  const [quantity, setQuantity] = useState(1);
   const t = useTranslations('product.info');
+  const [showSyncModal, setShowSyncModal] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   const handleAddToSelection = () => {
     const price = product.variants?.[0]?.prices?.[0]?.amount || 0;
@@ -49,6 +51,37 @@ export function ProductInfo({ product }: ProductInfoProps) {
       title: t('addedToSelection'),
       description: t('addedToSelectionDesc'),
     });
+  };
+
+  const handleSync = async (data: SyncProductData) => {
+    try {
+      setIsSyncing(true);
+      // TODO: 实现同步逻辑
+      console.log('同步数据:', {
+        product,
+        ...data,
+      });
+      toast({
+        title: t('syncing'),
+        description: t('syncingDesc', { name: product.title || t('defaultSupplier') }),
+      });
+
+      // 模拟同步过程
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      toast({
+        title: t('syncSuccess'),
+        description: t('syncSuccessDesc', { name: product.title || t('defaultSupplier') }),
+      });
+    } catch (error) {
+      toast({
+        title: t('syncFailed'),
+        description: t('syncFailedDesc'),
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSyncing(false);
+    }
   };
 
   return (
@@ -92,7 +125,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="h-10 w-10 overflow-hidden rounded-full border bg-muted/10 sm:h-12 sm:w-12">
               <Image
-                src="/suppliers/default.png"
+                src="https://img.alicdn.com/imgextra/i4/O1CN01GbZNxl26Vzotrjqli_!!6000000007668-2-tps-160-160.png"
                 alt={product.collection?.title || t('defaultSupplier')}
                 width={24}
                 height={24}
@@ -157,46 +190,29 @@ export function ProductInfo({ product }: ProductInfoProps) {
           </Card>
         </div>
 
-        <div className="space-y-2 sm:space-y-4">
-          <h3 className="text-sm font-medium sm:text-base">{t('selectQuantity')}</h3>
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-            <div className="flex items-center">
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-9 w-9 rounded-l-md rounded-r-none sm:h-10 sm:w-10"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                disabled={quantity <= 1}
-              >
-                <Minus className="h-3 w-3 sm:h-4 sm:w-4" />
-              </Button>
-              <input
-                type="number"
-                min={1}
-                value={quantity}
-                onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                className="h-9 w-14 border-y bg-background text-center text-sm sm:h-10 sm:w-20 sm:text-base"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-9 w-9 rounded-l-none rounded-r-md sm:h-10 sm:w-10"
-                onClick={() => setQuantity(quantity + 1)}
-              >
-                <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
-              </Button>
-            </div>
-            <div className="text-xs text-muted-foreground sm:text-sm">{t('minOrder')}：1</div>
-          </div>
-        </div>
-
-        <div className="border-t pt-4 sm:pt-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
           <Button size="lg" className="h-10 w-full sm:h-12" onClick={handleAddToSelection}>
             <ShoppingCart className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
             {t('addToSelection')}
           </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-10 w-full sm:h-12"
+            onClick={() => setShowSyncModal(true)}
+            disabled={isSyncing}
+          >
+            <Upload className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+            {isSyncing ? t('syncing') : t('syncProduct')}
+          </Button>
         </div>
       </div>
+
+      <SyncProductSheet
+        open={showSyncModal}
+        onOpenChange={setShowSyncModal}
+        onConfirm={handleSync}
+      />
     </div>
   );
 }
