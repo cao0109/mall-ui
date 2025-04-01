@@ -472,5 +472,19 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Explore the latest insights and trends in cross-border e-commerce",
+    "readMore": "Read More",
+    "readTime": "{time} min read",
+    "share": "Share Article",
+    "tags": {
+      "all": "All",
+      "industry": "Industry News",
+      "trends": "Trend Analysis",
+      "tips": "Operation Tips",
+      "news": "Latest News"
+    }
   }
 }

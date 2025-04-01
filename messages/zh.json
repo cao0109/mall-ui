@@ -18,7 +18,8 @@
     "userMenuOptions": "用户菜单选项",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
-    "mobileNavigation": "移动端导航"
+    "mobileNavigation": "移动端导航",
+    "error": "错误"
   },
   "auth": {
     "loginSuccess": "登录成功",
@@ -472,5 +473,23 @@
     "relatedProducts": "{query} 相关商品",
     "specialOffersFor": "{query} 特惠",
     "newArrivalsFor": "{query} 新品"
+  },
+  "blog": {
+    "title": "博客",
+    "description": "探索跨境电商行业的最新动态和见解",
+    "readMore": "阅读更多",
+    "readTime": "{time} 分钟阅读",
+    "share": "分享文章",
+    "shareTitle": "分享文章",
+    "shareDescription": "选择您想要分享的平台",
+    "relatedPosts": "相关文章",
+    "filterByTags": "按标签筛选",
+    "tags": {
+      "all": "全部",
+      "industry": "行业动态",
+      "trends": "趋势分析",
+      "tips": "运营技巧",
+      "news": "新闻资讯"
+    }
   }
 }
