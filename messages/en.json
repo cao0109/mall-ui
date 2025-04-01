@@ -106,36 +106,44 @@
         "registrationDescription": "An error occurred during registration. Please try again."
       },
       "brand": {
-        "vendorTitle": "Vendor Registration",
-        "sellerTitle": "Seller Registration",
-        "joinHiDoo": "Join HiDoo",
-        "vendorSubtitle": "Expand Your Business Globally",
-        "sellerSubtitle": "Start Your E-commerce Journey",
-        "vendorDescription": "Join our global marketplace as a vendor and reach customers worldwide. We provide comprehensive support for your business growth.",
-        "sellerDescription": "Start your cross-border e-commerce journey with HiDoo. Access quality products and build your own online store.",
-        "vendorFeature1": {
-          "title": "Global Reach",
-          "description": "Connect with buyers worldwide and expand your market presence"
+        "title": "Join HiDoo",
+        "vendor": {
+          "status": "Vendor Registration",
+          "subtitle": "Expand Your Business Globally",
+          "description": "Join our global marketplace as a vendor and reach customers worldwide. We provide comprehensive support for your business growth.",
+          "features": {
+            "0": {
+              "title": "Global Reach",
+              "description": "Connect with buyers worldwide and expand your market presence"
+            },
+            "1": {
+              "title": "Business Support",
+              "description": "Get professional support and tools to grow your business"
+            },
+            "2": {
+              "title": "Easy Management",
+              "description": "Efficient order and inventory management system"
+            }
+          }
         },
-        "vendorFeature2": {
-          "title": "Business Support",
-          "description": "Get professional support and tools to grow your business"
-        },
-        "vendorFeature3": {
-          "title": "Easy Management",
-          "description": "Efficient order and inventory management system"
-        },
-        "sellerFeature1": {
-          "title": "Quality Products",
-          "description": "Access a wide range of quality products from verified vendors"
-        },
-        "sellerFeature2": {
-          "title": "Store Builder",
-          "description": "Create your own online store with our easy-to-use tools"
-        },
-        "sellerFeature3": {
-          "title": "Training & Support",
-          "description": "Get professional training and guidance for your business"
+        "seller": {
+          "status": "Seller Registration",
+          "subtitle": "Start Your E-commerce Journey",
+          "description": "Start your cross-border e-commerce journey with HiDoo. Access quality products and build your own online store.",
+          "features": {
+            "0": {
+              "title": "Quality Products",
+              "description": "Access a wide range of quality products from verified vendors"
+            },
+            "1": {
+              "title": "Store Builder",
+              "description": "Create your own online store with our easy-to-use tools"
+            },
+            "2": {
+              "title": "Training & Support",
+              "description": "Get professional training and guidance for your business"
+            }
+          }
         }
       },
       "role": {
@@ -202,20 +210,22 @@
         "description": "Please check your email and password {error}"
       },
       "brand": {
-        "loginStatus": "Account Login",
-        "welcome": "Welcome back to HiDoo, start your cross-border journey",
+        "status": "Account Login",
+        "title": "Welcome back to HiDoo, start your cross-border journey",
         "description": "HiDoo provides one-stop solutions for cross-border e-commerce practitioners, helping your business grow rapidly.",
-        "feature1": {
-          "title": "One-Stop Cross-Border Solution",
-          "description": "Comprehensive support from product selection to operations"
-        },
-        "feature2": {
-          "title": "Professional Operation Support",
-          "description": "Professional operation guidance and training services"
-        },
-        "feature3": {
-          "title": "Efficient Data Analysis",
-          "description": "Real-time market data analysis to help you seize opportunities"
+        "features": {
+          "0": {
+            "title": "One-Stop Cross-Border Solution",
+            "description": "Comprehensive support from product selection to operations"
+          },
+          "1": {
+            "title": "Professional Operation Support",
+            "description": "Professional operation guidance and training services"
+          },
+          "2": {
+            "title": "Efficient Data Analysis",
+            "description": "Real-time market data analysis to help you seize opportunities"
+          }
         }
       }
     }

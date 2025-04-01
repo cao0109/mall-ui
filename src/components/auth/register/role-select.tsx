@@ -28,11 +28,11 @@ export function RoleSelect({ form }: RoleSelectProps) {
                   defaultValue={field.value}
                   className="grid grid-cols-1 gap-4 sm:grid-cols-2"
                 >
-                  <div>
+                  <div className="h-full">
                     <RadioGroupItem value="vendor" id="vendor" className="peer hidden" />
                     <Label
                       htmlFor="vendor"
-                      className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border-2 border-muted bg-white/50 p-4 transition-all duration-300 hover:border-primary/50 hover:bg-white hover:shadow-md peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 dark:bg-gray-900/50 dark:hover:bg-gray-900 dark:peer-data-[state=checked]:bg-primary/10 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 dark:[&:has([data-state=checked])]:bg-primary/10"
+                      className="flex h-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border-2 border-muted bg-white/50 p-4 transition-all duration-300 hover:border-primary/50 hover:bg-white hover:shadow-md peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 dark:bg-gray-900/50 dark:hover:bg-gray-900 dark:peer-data-[state=checked]:bg-primary/10 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 dark:[&:has([data-state=checked])]:bg-primary/10"
                     >
                       <Truck className="h-8 w-8 text-primary" />
                       <div className="text-center">
@@ -57,11 +57,11 @@ export function RoleSelect({ form }: RoleSelectProps) {
                       </div>
                     </Label>
                   </div>
-                  <div>
+                  <div className="h-full">
                     <RadioGroupItem value="seller" id="seller" className="peer hidden" />
                     <Label
                       htmlFor="seller"
-                      className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border-2 border-muted bg-white/50 p-4 transition-all duration-300 hover:border-primary/50 hover:bg-white hover:shadow-md peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 dark:bg-gray-900/50 dark:hover:bg-gray-900 dark:peer-data-[state=checked]:bg-primary/10 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 dark:[&:has([data-state=checked])]:bg-primary/10"
+                      className="flex h-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border-2 border-muted bg-white/50 p-4 transition-all duration-300 hover:border-primary/50 hover:bg-white hover:shadow-md peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 dark:bg-gray-900/50 dark:hover:bg-gray-900 dark:peer-data-[state=checked]:bg-primary/10 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 dark:[&:has([data-state=checked])]:bg-primary/10"
                     >
                       <Store className="h-8 w-8 text-primary" />
                       <div className="text-center">

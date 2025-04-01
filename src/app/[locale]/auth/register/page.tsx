@@ -1,7 +1,6 @@
 'use client';
 
 import { BasicInfoForm } from '@/components/auth/register/basic-info-form';
-import { BrandIntro } from '@/components/auth/register/brand-intro';
 import { PasswordForm } from '@/components/auth/register/password-form';
 import { RoleSelect } from '@/components/auth/register/role-select';
 import { Button } from '@/components/ui/button';
@@ -110,6 +109,14 @@ export default function RegisterPage() {
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // 监听角色变化，更新 URL 参数
+  useEffect(() => {
+    const role = form.getValues('role');
+    const url = new URL(window.location.href);
+    url.searchParams.set('role', role);
+    window.history.replaceState({}, '', url.toString());
+  }, [form.watch('role')]);
 
   // 倒计时逻辑
   useEffect(() => {
@@ -248,122 +255,110 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="container relative flex min-h-[calc(100vh-4rem)] items-start justify-center px-4 py-8 md:px-6 lg:px-8">
-      <div className="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-2 lg:gap-12">
-        {/* 左侧品牌介绍 */}
-        <div className="hidden lg:block">
-          <BrandIntro role={form.getValues('role')} />
-        </div>
+    <div className="space-y-6">
+      <div className="flex flex-col items-center space-y-2">
+        <h2 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
+          {t(`title.${form.getValues('role')}`)}
+        </h2>
+        <p className="text-sm text-muted-foreground">{t(`subtitle.${form.getValues('role')}`)}</p>
+      </div>
 
-        {/* 右侧注册表单 */}
-        <div className="mx-auto w-full max-w-md space-y-6 lg:max-w-none">
-          <div className="flex flex-col items-center space-y-2 lg:items-start">
-            <h2 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
-              {t(`title.${form.getValues('role')}`)}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {t(`subtitle.${form.getValues('role')}`)}
-            </p>
-          </div>
-
-          <Card className="border-0 bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-900">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)}>
-                <CardHeader className="space-y-2 pb-4">
-                  <CardTitle className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-center text-lg font-bold text-transparent dark:from-gray-100 dark:to-gray-400 sm:text-xl">
-                    {t(`steps.${step}.title`)}
-                  </CardTitle>
-                  <CardDescription className="text-center text-xs sm:text-sm">
-                    {t(`steps.${step}.description`)}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="pb-6">
-                  {step === 'role' && <RoleSelect form={form} />}
-                  {step === 'info' && (
-                    <BasicInfoForm
-                      form={form}
-                      attemptedSubmit={attemptedSubmit}
-                      sendingCode={sendingCode}
-                      countdown={countdown}
-                      onSendVerificationCode={handleSendVerificationCode}
-                      role={form.getValues('role')}
-                    />
+      <Card className="border-0 bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-900">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <CardHeader className="space-y-2 pb-4">
+              <CardTitle className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-center text-lg font-bold text-transparent dark:from-gray-100 dark:to-gray-400 sm:text-xl">
+                {t(`steps.${step}.title`)}
+              </CardTitle>
+              <CardDescription className="text-center text-xs sm:text-sm">
+                {t(`steps.${step}.description`)}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="pb-6">
+              {step === 'role' && <RoleSelect form={form} />}
+              {step === 'info' && (
+                <BasicInfoForm
+                  form={form}
+                  attemptedSubmit={attemptedSubmit}
+                  sendingCode={sendingCode}
+                  countdown={countdown}
+                  onSendVerificationCode={handleSendVerificationCode}
+                  role={form.getValues('role')}
+                />
+              )}
+              {step === 'password' && (
+                <PasswordForm
+                  form={form}
+                  attemptedSubmit={attemptedSubmit}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  showConfirmPassword={showConfirmPassword}
+                  setShowConfirmPassword={setShowConfirmPassword}
+                />
+              )}
+            </CardContent>
+            <CardFooter className="flex flex-col gap-4 pb-4 pt-2">
+              <div className="flex w-full gap-3">
+                {step !== 'role' && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="h-10 flex-1 rounded-lg font-medium transition-all duration-300 hover:scale-[1.02] hover:bg-gray-100 active:scale-[0.98] dark:hover:bg-gray-800"
+                    onClick={prevStep}
+                  >
+                    <ArrowLeft className="mr-1.5 h-4 w-4" />
+                    {t('form.prevStep')}
+                  </Button>
+                )}
+                <Button
+                  type={step === 'role' ? 'button' : 'submit'}
+                  className="h-10 flex-1 rounded-lg font-medium shadow-md transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]"
+                  disabled={loading}
+                  onClick={step === 'role' || step === 'info' ? () => nextStep() : undefined}
+                >
+                  {step === 'password' ? (
+                    loading ? (
+                      <div className="flex items-center justify-center">
+                        <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        {t('form.submitting')}
+                      </div>
+                    ) : (
+                      t('form.submit')
+                    )
+                  ) : (
+                    <>
+                      {t('form.nextStep')}
+                      <ArrowRight className="ml-1.5 h-4 w-4" />
+                    </>
                   )}
-                  {step === 'password' && (
-                    <PasswordForm
-                      form={form}
-                      attemptedSubmit={attemptedSubmit}
-                      showPassword={showPassword}
-                      setShowPassword={setShowPassword}
-                      showConfirmPassword={showConfirmPassword}
-                      setShowConfirmPassword={setShowConfirmPassword}
-                    />
-                  )}
-                </CardContent>
-                <CardFooter className="flex flex-col gap-4 pb-4 pt-2">
-                  <div className="flex w-full gap-3">
-                    {step !== 'role' && (
-                      <Button
-                        type="button"
-                        variant="outline"
-                        className="h-10 flex-1 rounded-lg font-medium transition-all duration-300 hover:scale-[1.02] hover:bg-gray-100 active:scale-[0.98] dark:hover:bg-gray-800"
-                        onClick={prevStep}
-                      >
-                        <ArrowLeft className="mr-1.5 h-4 w-4" />
-                        {t('form.prevStep')}
-                      </Button>
-                    )}
-                    <Button
-                      type={step === 'role' ? 'button' : 'submit'}
-                      className="h-10 flex-1 rounded-lg font-medium shadow-md transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]"
-                      disabled={loading}
-                      onClick={step === 'role' || step === 'info' ? () => nextStep() : undefined}
-                    >
-                      {step === 'password' ? (
-                        loading ? (
-                          <div className="flex items-center justify-center">
-                            <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                            {t('form.submitting')}
-                          </div>
-                        ) : (
-                          t('form.submit')
-                        )
-                      ) : (
-                        <>
-                          {t('form.nextStep')}
-                          <ArrowRight className="ml-1.5 h-4 w-4" />
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-center text-center text-xs text-muted-foreground sm:text-sm">
-                    {t('form.hasAccount')}{' '}
-                    <Link
-                      href="/auth/login"
-                      className="inline-flex items-center font-medium text-primary hover:text-primary/80"
-                    >
-                      <ArrowLeft className="mr-1 h-4 w-4" />
-                      {t('form.backToLogin')}
-                    </Link>
-                  </div>
-                </CardFooter>
-              </form>
-            </Form>
-          </Card>
+                </Button>
+              </div>
+              <div className="flex items-center justify-center text-center text-xs text-muted-foreground sm:text-sm">
+                {t('form.hasAccount')}{' '}
+                <Link
+                  href="/auth/login"
+                  className="inline-flex items-center font-medium text-primary hover:text-primary/80"
+                >
+                  <ArrowLeft className="mr-1 h-4 w-4" />
+                  {t('form.backToLogin')}
+                </Link>
+              </div>
+            </CardFooter>
+          </form>
+        </Form>
+      </Card>
 
-          <div className="text-center lg:text-left">
-            <p className="text-xs text-muted-foreground sm:text-sm">
-              {t('form.agreement')}{' '}
-              <Link href="/terms" className="ml-1 text-primary hover:text-primary/80">
-                {t('form.terms')}
-              </Link>{' '}
-              {t('form.and')}{' '}
-              <Link href="/privacy" className="ml-1 text-primary hover:text-primary/80">
-                {t('form.privacy')}
-              </Link>
-            </p>
-          </div>
-        </div>
+      <div className="text-center lg:text-left">
+        <p className="text-xs text-muted-foreground sm:text-sm">
+          {t('form.agreement')}{' '}
+          <Link href="/terms" className="ml-1 text-primary hover:text-primary/80">
+            {t('form.terms')}
+          </Link>{' '}
+          {t('form.and')}{' '}
+          <Link href="/privacy" className="ml-1 text-primary hover:text-primary/80">
+            {t('form.privacy')}
+          </Link>
+        </p>
       </div>
     </div>
   );

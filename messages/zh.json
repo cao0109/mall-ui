@@ -106,36 +106,44 @@
         "registrationDescription": "注册过程中发生错误，请重试"
       },
       "brand": {
-        "vendorTitle": "供应商注册",
-        "sellerTitle": "采购商注册",
-        "joinHiDoo": "加入HiDoo",
-        "vendorSubtitle": "拓展全球业务",
-        "sellerSubtitle": "开启电商之旅",
-        "vendorDescription": "加入我们的全球市场，触达全球客户。我们为您的业务增长提供全面支持。",
-        "sellerDescription": "通过HiDoo开启您的跨境电商之旅。获取优质产品，打造您的在线商店。",
-        "vendorFeature1": {
-          "title": "全球触达",
-          "description": "连接全球买家，拓展市场版图"
+        "title": "加入HiDoo",
+        "vendor": {
+          "status": "供应商注册",
+          "subtitle": "拓展全球业务",
+          "description": "加入我们的全球市场，触达全球客户。我们为您的业务增长提供全面支持。",
+          "features": {
+            "0": {
+              "title": "全球触达",
+              "description": "连接全球买家，拓展市场版图"
+            },
+            "1": {
+              "title": "业务支持",
+              "description": "获取专业支持和工具，助力业务增长"
+            },
+            "2": {
+              "title": "便捷管理",
+              "description": "高效的订单和库存管理系统"
+            }
+          }
         },
-        "vendorFeature2": {
-          "title": "业务支持",
-          "description": "获取专业支持和工具，助力业务增长"
-        },
-        "vendorFeature3": {
-          "title": "便捷管理",
-          "description": "高效的订单和库存管理系统"
-        },
-        "sellerFeature1": {
-          "title": "优质产品",
-          "description": "获取来自认证供应商的优质产品"
-        },
-        "sellerFeature2": {
-          "title": "店铺搭建",
-          "description": "使用我们的便捷工具创建您的在线商店"
-        },
-        "sellerFeature3": {
-          "title": "培训支持",
-          "description": "获取专业的培训和业务指导"
+        "seller": {
+          "status": "采购商注册",
+          "subtitle": "开启电商之旅",
+          "description": "通过HiDoo开启您的跨境电商之旅。获取优质产品，打造您的在线商店。",
+          "features": {
+            "0": {
+              "title": "优质产品",
+              "description": "获取来自认证供应商的优质产品"
+            },
+            "1": {
+              "title": "店铺搭建",
+              "description": "使用我们的便捷工具创建您的在线商店"
+            },
+            "2": {
+              "title": "培训支持",
+              "description": "获取专业的培训和业务指导"
+            }
+          }
         }
       },
       "role": {
@@ -202,20 +210,22 @@
         "description": "请检查您的邮箱和密码是否正确 {error}"
       },
       "brand": {
-        "loginStatus": "账号登录",
-        "welcome": "欢迎回到 HiDoo，开启您的跨境之旅",
+        "status": "账号登录",
+        "title": "欢迎回到 HiDoo，开启您的跨境之旅",
         "description": "HiDoo 为跨境电商从业者提供一站式解决方案，助力您的业务快速发展。",
-        "feature1": {
-          "title": "一站式跨境解决方案",
-          "description": "从选品、采购到运营，提供全方位支持"
-        },
-        "feature2": {
-          "title": "专业的运营支持",
-          "description": "提供专业的运营指导和培训服务"
-        },
-        "feature3": {
-          "title": "高效的数据分析",
-          "description": "实时市场数据分析，助您把握商机"
+        "features": {
+          "0": {
+            "title": "一站式跨境解决方案",
+            "description": "从选品、采购到运营，提供全方位支持"
+          },
+          "1": {
+            "title": "专业的运营支持",
+            "description": "提供专业的运营指导和培训服务"
+          },
+          "2": {
+            "title": "高效的数据分析",
+            "description": "实时市场数据分析，助您把握商机"
+          }
         }
       }
     }
