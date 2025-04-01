@@ -9,7 +9,16 @@
     "myStores": "我的店铺",
     "selectedProducts": "选品车",
     "productLibrary": "商品库",
-    "suppliers": "供应商"
+    "suppliers": "供应商",
+    "backToHome": "返回首页",
+    "mainNavigation": "主导航",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "userMenu": "用户菜单",
+    "userMenuOptions": "用户菜单选项",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "mobileNavigation": "移动端导航"
   },
   "auth": {
     "loginSuccess": "登录成功",
@@ -230,9 +239,17 @@
       }
     }
   },
+  "theme": {
+    "currentTheme": "当前主题：{theme}",
+    "selectTheme": "选择主题",
+    "light": "浅色",
+    "dark": "深色",
+    "system": "系统"
+  },
   "region": {
     "switch": "切换区域",
-    "currentRegion": "当前区域"
+    "currentRegion": "当前区域",
+    "selectRegion": "选择区域"
   },
   "home": {
     "banner": {
@@ -437,5 +454,23 @@
       "loadingFailed": "加载商品失败",
       "productNotFound": "商品不存在"
     }
+  },
+  "search": {
+    "searchContent": "搜索内容",
+    "searchPlaceholder": "搜索商品、供应商...",
+    "searchInput": "搜索输入框",
+    "search": "搜索",
+    "close": "关闭",
+    "searchHistory": "搜索历史",
+    "clearHistory": "清除历史",
+    "hotSearches": "热门搜索",
+    "newArrivals": "新品上市",
+    "hotProducts": "热销商品",
+    "specialOffers": "特惠活动",
+    "limitedEdition": "限量商品",
+    "suggestions": "搜索建议",
+    "relatedProducts": "{query} 相关商品",
+    "specialOffersFor": "{query} 特惠",
+    "newArrivalsFor": "{query} 新品"
   }
 }

@@ -1,18 +1,34 @@
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { Monitor, Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.2,
+    },
+  }),
+};
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const t = useTranslations();
 
   useEffect(() => {
     setMounted(true);
@@ -23,10 +39,21 @@ export function ThemeToggle() {
       <Button
         variant="outline"
         size="icon"
-        className="relative h-8 w-8 rounded-full"
-        aria-label="加载中"
+        className="group relative h-8 w-8 rounded-full transition-all duration-300 hover:scale-110 hover:bg-accent/50"
+        aria-label={t('common.loading')}
       >
-        <Sun className="h-4 w-4" aria-hidden="true" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+        >
+          <Sun className="h-4 w-4" aria-hidden="true" />
+        </motion.div>
+        <motion.div
+          className="absolute inset-0 rounded-full bg-accent/20"
+          initial={{ scale: 0 }}
+          whileHover={{ scale: 1 }}
+          transition={{ duration: 0.2 }}
+        />
       </Button>
     );
   }
@@ -37,45 +64,162 @@ export function ThemeToggle() {
         <Button
           variant="outline"
           size="icon"
-          className="relative h-8 w-8 rounded-full"
-          aria-label={`当前主题：${
-            theme === "dark" ? "深色" : theme === "light" ? "浅色" : "系统"
-          }`}
+          className="group relative h-8 w-8 rounded-full transition-all duration-300 hover:scale-110 hover:bg-accent/50"
+          aria-label={t('theme.currentTheme', {
+            theme:
+              theme === 'dark'
+                ? t('theme.dark')
+                : theme === 'light'
+                  ? t('theme.light')
+                  : t('theme.system'),
+          })}
         >
-          <Sun
-            className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-            aria-hidden="true"
-          />
-          <Moon
-            className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-            aria-hidden="true"
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={theme}
+              initial={{ rotate: 0, scale: 0 }}
+              animate={{ rotate: 0, scale: 1 }}
+              exit={{ rotate: -180, scale: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {theme === 'dark' ? (
+                <Moon className="h-4 w-4" aria-hidden="true" />
+              ) : theme === 'light' ? (
+                <Sun className="h-4 w-4" aria-hidden="true" />
+              ) : (
+                <Monitor className="h-4 w-4" aria-hidden="true" />
+              )}
+            </motion.div>
+          </AnimatePresence>
+          <motion.div
+            className="absolute inset-0 rounded-full bg-accent/20"
+            initial={{ scale: 0 }}
+            whileHover={{ scale: 1 }}
+            transition={{ duration: 0.2 }}
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" role="menu" aria-label="主题选择">
-        <DropdownMenuItem
-          onClick={() => setTheme("light")}
-          role="menuitem"
-          className="focus:bg-accent focus:text-accent-foreground"
-        >
-          <Sun className="mr-2 h-4 w-4" aria-hidden="true" />
-          <span>浅色</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme("dark")}
-          role="menuitem"
-          className="focus:bg-accent focus:text-accent-foreground"
-        >
-          <Moon className="mr-2 h-4 w-4" aria-hidden="true" />
-          <span>深色</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme("system")}
-          role="menuitem"
-          className="focus:bg-accent focus:text-accent-foreground"
-        >
-          <span>系统</span>
-        </DropdownMenuItem>
+      <DropdownMenuContent
+        align="end"
+        className="w-[200px] overflow-hidden rounded-lg border bg-background/95 p-2 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-background/60"
+        role="menu"
+        aria-label={t('theme.selectTheme')}
+      >
+        <div className="mb-2 px-2 py-1.5 text-sm font-medium text-muted-foreground">
+          {t('theme.selectTheme')}
+        </div>
+        <div className="space-y-1">
+          <AnimatePresence>
+            <motion.div
+              key="light"
+              custom={0}
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: -10 }}
+            >
+              <DropdownMenuItem
+                onClick={() => setTheme('light')}
+                role="menuitem"
+                className={cn(
+                  'group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50',
+                  theme === 'light' && 'bg-accent text-accent-foreground'
+                )}
+              >
+                <motion.div
+                  className="absolute inset-0 rounded-md bg-accent/20"
+                  initial={{ scale: 0 }}
+                  whileHover={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <Sun className="relative h-4 w-4" aria-hidden="true" />
+                <span className="relative font-medium">{t('theme.light')}</span>
+                {theme === 'light' && (
+                  <motion.div
+                    className="absolute right-2"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  >
+                    ✓
+                  </motion.div>
+                )}
+              </DropdownMenuItem>
+            </motion.div>
+            <motion.div
+              key="dark"
+              custom={1}
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: -10 }}
+            >
+              <DropdownMenuItem
+                onClick={() => setTheme('dark')}
+                role="menuitem"
+                className={cn(
+                  'group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50',
+                  theme === 'dark' && 'bg-accent text-accent-foreground'
+                )}
+              >
+                <motion.div
+                  className="absolute inset-0 rounded-md bg-accent/20"
+                  initial={{ scale: 0 }}
+                  whileHover={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <Moon className="relative h-4 w-4" aria-hidden="true" />
+                <span className="relative font-medium">{t('theme.dark')}</span>
+                {theme === 'dark' && (
+                  <motion.div
+                    className="absolute right-2"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  >
+                    ✓
+                  </motion.div>
+                )}
+              </DropdownMenuItem>
+            </motion.div>
+            <motion.div
+              key="system"
+              custom={2}
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: -10 }}
+            >
+              <DropdownMenuItem
+                onClick={() => setTheme('system')}
+                role="menuitem"
+                className={cn(
+                  'group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50',
+                  theme === 'system' && 'bg-accent text-accent-foreground'
+                )}
+              >
+                <motion.div
+                  className="absolute inset-0 rounded-md bg-accent/20"
+                  initial={{ scale: 0 }}
+                  whileHover={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <Monitor className="relative h-4 w-4" aria-hidden="true" />
+                <span className="relative font-medium">{t('theme.system')}</span>
+                {theme === 'system' && (
+                  <motion.div
+                    className="absolute right-2"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  >
+                    ✓
+                  </motion.div>
+                )}
+              </DropdownMenuItem>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );

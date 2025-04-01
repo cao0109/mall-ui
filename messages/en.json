@@ -9,7 +9,16 @@
     "myStores": "My Stores",
     "selectedProducts": "Selection Cart",
     "productLibrary": "Product Library",
-    "suppliers": "Suppliers"
+    "suppliers": "Suppliers",
+    "backToHome": "Back to Home",
+    "mainNavigation": "Main Navigation",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "userMenu": "User Menu",
+    "userMenuOptions": "User Menu Options",
+    "openMenu": "Open Menu",
+    "closeMenu": "Close Menu",
+    "mobileNavigation": "Mobile Navigation"
   },
   "auth": {
     "loginSuccess": "Login successful",
@@ -231,8 +240,9 @@
     }
   },
   "region": {
-    "switch": "Switch region",
-    "currentRegion": "Current region"
+    "switch": "Switch Region",
+    "currentRegion": "Current Region",
+    "selectRegion": "Select Region"
   },
   "home": {
     "banner": {
@@ -437,5 +447,30 @@
       "loadingFailed": "Failed to load product",
       "productNotFound": "Product not found"
     }
+  },
+  "search": {
+    "searchContent": "Search content",
+    "searchPlaceholder": "Search products, suppliers...",
+    "searchInput": "Search input",
+    "search": "Search",
+    "close": "Close",
+    "searchHistory": "Search History",
+    "clearHistory": "Clear History",
+    "hotSearches": "Hot Searches",
+    "newArrivals": "New Arrivals",
+    "hotProducts": "Hot Products",
+    "specialOffers": "Special Offers",
+    "limitedEdition": "Limited Edition",
+    "suggestions": "Suggestions",
+    "relatedProducts": "{query} Related Products",
+    "specialOffersFor": "{query} Special Offers",
+    "newArrivalsFor": "{query} New Arrivals"
+  },
+  "theme": {
+    "currentTheme": "Current Theme: {theme}",
+    "selectTheme": "Select Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }
