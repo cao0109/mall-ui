@@ -15,7 +15,210 @@
     "loginSuccess": "Login successful",
     "loginFailed": "Login failed",
     "logoutSuccess": "Logged out",
-    "logoutDescription": "You have successfully logged out"
+    "logoutDescription": "You have successfully logged out",
+    "register": {
+      "title": {
+        "vendor": "Join as a Vendor",
+        "seller": "Join as a Seller"
+      },
+      "subtitle": {
+        "vendor": "Expand your business globally with HiDoo",
+        "seller": "Start your cross-border e-commerce journey"
+      },
+      "steps": {
+        "role": {
+          "title": "Choose Your Role",
+          "description": "Select the role that best fits your business needs"
+        },
+        "info": {
+          "title": "Basic Information",
+          "description": "Please provide your basic information to get started"
+        },
+        "password": {
+          "title": "Set Password",
+          "description": "Create a strong password to protect your account"
+        }
+      },
+      "form": {
+        "firstName": "First Name",
+        "firstNamePlaceholder": "Enter your first name",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "Enter your last name",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email address",
+        "emailDescription": "We'll send a verification code to this email",
+        "verificationCode": "Verification Code",
+        "verificationCodePlaceholder": "Enter verification code",
+        "sendCode": "Send Code",
+        "sendingCode": "Sending...",
+        "resendCode": "Resend ({seconds}s)",
+        "companyName": "Company Name",
+        "companyNamePlaceholder": "Enter your company name",
+        "storeName": "Store Name",
+        "storeNamePlaceholder": "Enter your store name",
+        "storeNameDescription": "Only letters, numbers, and hyphens are allowed",
+        "password": "Password",
+        "passwordPlaceholder": "Set your password",
+        "passwordDescription": "Password must be at least 8 characters long and include letters, numbers, and special characters",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm your password",
+        "nextStep": "Next Step",
+        "prevStep": "Previous Step",
+        "submit": "Register",
+        "submitting": "Registering...",
+        "hasAccount": "Already have an account?",
+        "backToLogin": "Back to Login",
+        "agreement": "By registering, you agree to our",
+        "terms": "Terms of Service",
+        "and": "and",
+        "privacy": "Privacy Policy"
+      },
+      "validation": {
+        "firstName": "First name is required",
+        "lastName": "Last name is required",
+        "email": "Please enter a valid email address",
+        "verificationCode": "Verification code is required",
+        "password": "Password must be at least 8 characters long",
+        "passwordStrength": "Password strength is too weak",
+        "confirmPassword": "Please confirm your password",
+        "passwordMismatch": "Passwords do not match",
+        "storeName": {
+          "vendor": "Company name is required",
+          "seller": "Store name is required"
+        },
+        "storeNameFormat": "Store name can only contain letters, numbers, and hyphens",
+        "formValidation": "Please check the form for errors",
+        "verificationFailed": "Please verify your email first",
+        "codeError": "Invalid verification code"
+      },
+      "success": {
+        "codeSent": "Code Sent",
+        "codeSentDescription": "We've sent a verification code to your email",
+        "registration": {
+          "vendor": "Vendor registration successful!",
+          "seller": "Seller registration successful!"
+        }
+      },
+      "error": {
+        "sendFailed": "Failed to Send Code",
+        "sendFailedDescription": "Please try again later",
+        "registration": "Registration Failed",
+        "registrationDescription": "An error occurred during registration. Please try again."
+      },
+      "brand": {
+        "vendorTitle": "Vendor Registration",
+        "sellerTitle": "Seller Registration",
+        "joinHiDoo": "Join HiDoo",
+        "vendorSubtitle": "Expand Your Business Globally",
+        "sellerSubtitle": "Start Your E-commerce Journey",
+        "vendorDescription": "Join our global marketplace as a vendor and reach customers worldwide. We provide comprehensive support for your business growth.",
+        "sellerDescription": "Start your cross-border e-commerce journey with HiDoo. Access quality products and build your own online store.",
+        "vendorFeature1": {
+          "title": "Global Reach",
+          "description": "Connect with buyers worldwide and expand your market presence"
+        },
+        "vendorFeature2": {
+          "title": "Business Support",
+          "description": "Get professional support and tools to grow your business"
+        },
+        "vendorFeature3": {
+          "title": "Easy Management",
+          "description": "Efficient order and inventory management system"
+        },
+        "sellerFeature1": {
+          "title": "Quality Products",
+          "description": "Access a wide range of quality products from verified vendors"
+        },
+        "sellerFeature2": {
+          "title": "Store Builder",
+          "description": "Create your own online store with our easy-to-use tools"
+        },
+        "sellerFeature3": {
+          "title": "Training & Support",
+          "description": "Get professional training and guidance for your business"
+        }
+      },
+      "role": {
+        "title": "Choose Your Role",
+        "vendor": {
+          "title": "Vendor",
+          "subtitle": "I am a quality supplier",
+          "feature1": "Direct access to global buyers",
+          "feature2": "Professional operation support",
+          "feature3": "Efficient order management"
+        },
+        "seller": {
+          "title": "Seller",
+          "subtitle": "I want to start cross-border e-commerce",
+          "feature1": "Access to quality products",
+          "feature2": "One-click store creation",
+          "feature3": "Professional training"
+        }
+      },
+      "passwordStrength": {
+        "strength": "Password Strength",
+        "veryWeak": "Very Weak",
+        "weak": "Weak",
+        "fair": "Fair",
+        "medium": "Medium",
+        "strong": "Strong",
+        "veryStrong": "Very Strong",
+        "validPassword": "Valid Password",
+        "minLength": "At least 8 characters",
+        "excellentLength": "Excellent length ({length} characters)",
+        "hasLetter": "Contains letters",
+        "excellentCase": "Excellent case mix",
+        "hasNumber": "Contains numbers",
+        "hasSpecial": "Contains special characters (@$!%*?&#)"
+      }
+    },
+    "login": {
+      "title": "Account Login",
+      "subtitle": "Login to your HiDoo account and start your cross-border journey",
+      "welcome": "Welcome Back",
+      "formDescription": "Login with your email and password",
+      "form": {
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email address",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot password?",
+        "login": "Login",
+        "loggingIn": "Logging in...",
+        "noAccount": "Don't have an account?",
+        "registerNow": "Register now",
+        "agreement": "By logging in, you agree to our",
+        "terms": "Terms of Service",
+        "and": "and",
+        "privacy": "Privacy Policy"
+      },
+      "success": {
+        "title": "Login Successful",
+        "description": "Welcome back!"
+      },
+      "error": {
+        "title": "Login Failed",
+        "description": "Please check your email and password {error}"
+      },
+      "brand": {
+        "loginStatus": "Account Login",
+        "welcome": "Welcome back to HiDoo, start your cross-border journey",
+        "description": "HiDoo provides one-stop solutions for cross-border e-commerce practitioners, helping your business grow rapidly.",
+        "feature1": {
+          "title": "One-Stop Cross-Border Solution",
+          "description": "Comprehensive support from product selection to operations"
+        },
+        "feature2": {
+          "title": "Professional Operation Support",
+          "description": "Professional operation guidance and training services"
+        },
+        "feature3": {
+          "title": "Efficient Data Analysis",
+          "description": "Real-time market data analysis to help you seize opportunities"
+        }
+      }
+    }
   },
   "region": {
     "switch": "Switch region",

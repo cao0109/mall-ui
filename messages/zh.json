@@ -15,7 +15,210 @@
     "loginSuccess": "登录成功",
     "loginFailed": "登录失败",
     "logoutSuccess": "已退出登录",
-    "logoutDescription": "您已成功退出登录"
+    "logoutDescription": "您已成功退出登录",
+    "register": {
+      "title": {
+        "vendor": "成为供应商",
+        "seller": "成为采购商"
+      },
+      "subtitle": {
+        "vendor": "通过HiDoo拓展全球业务",
+        "seller": "开启您的跨境电商之旅"
+      },
+      "steps": {
+        "role": {
+          "title": "选择身份",
+          "description": "选择最适合您业务需求的角色"
+        },
+        "info": {
+          "title": "基本信息",
+          "description": "请填写您的基本信息以开始"
+        },
+        "password": {
+          "title": "设置密码",
+          "description": "创建强密码以保护您的账户"
+        }
+      },
+      "form": {
+        "firstName": "名字",
+        "firstNamePlaceholder": "请输入您的名字",
+        "lastName": "姓氏",
+        "lastNamePlaceholder": "请输入您的姓氏",
+        "email": "邮箱",
+        "emailPlaceholder": "请输入您的邮箱地址",
+        "emailDescription": "我们将向此邮箱发送验证码",
+        "verificationCode": "验证码",
+        "verificationCodePlaceholder": "请输入验证码",
+        "sendCode": "发送验证码",
+        "sendingCode": "发送中...",
+        "resendCode": "重新发送({seconds}秒)",
+        "companyName": "公司名称",
+        "companyNamePlaceholder": "请输入您的公司名称",
+        "storeName": "店铺名称",
+        "storeNamePlaceholder": "请输入您的店铺名称",
+        "storeNameDescription": "仅允许使用字母、数字和连字符",
+        "password": "密码",
+        "passwordPlaceholder": "请设置您的密码",
+        "passwordDescription": "密码必须至少包含8个字符，并包含字母、数字和特殊字符",
+        "confirmPassword": "确认密码",
+        "confirmPasswordPlaceholder": "请再次输入密码",
+        "nextStep": "下一步",
+        "prevStep": "上一步",
+        "submit": "注册",
+        "submitting": "注册中...",
+        "hasAccount": "已有账号？",
+        "backToLogin": "返回登录",
+        "agreement": "注册即表示您同意我们的",
+        "terms": "服务条款",
+        "and": "和",
+        "privacy": "隐私政策"
+      },
+      "validation": {
+        "firstName": "请输入名字",
+        "lastName": "请输入姓氏",
+        "email": "请输入有效的邮箱地址",
+        "verificationCode": "请输入验证码",
+        "password": "密码必须至少包含8个字符",
+        "passwordStrength": "密码强度不足",
+        "confirmPassword": "请确认密码",
+        "passwordMismatch": "两次输入的密码不一致",
+        "storeName": {
+          "vendor": "请输入公司名称",
+          "seller": "请输入店铺名称"
+        },
+        "storeNameFormat": "店铺名称只能包含字母、数字和连字符",
+        "formValidation": "请检查表单错误",
+        "verificationFailed": "请先完成邮箱验证",
+        "codeError": "验证码错误"
+      },
+      "success": {
+        "codeSent": "验证码已发送",
+        "codeSentDescription": "我们已向您的邮箱发送了验证码",
+        "registration": {
+          "vendor": "供应商注册成功！",
+          "seller": "采购商注册成功！"
+        }
+      },
+      "error": {
+        "sendFailed": "发送失败",
+        "sendFailedDescription": "请稍后重试",
+        "registration": "注册失败",
+        "registrationDescription": "注册过程中发生错误，请重试"
+      },
+      "brand": {
+        "vendorTitle": "供应商注册",
+        "sellerTitle": "采购商注册",
+        "joinHiDoo": "加入HiDoo",
+        "vendorSubtitle": "拓展全球业务",
+        "sellerSubtitle": "开启电商之旅",
+        "vendorDescription": "加入我们的全球市场，触达全球客户。我们为您的业务增长提供全面支持。",
+        "sellerDescription": "通过HiDoo开启您的跨境电商之旅。获取优质产品，打造您的在线商店。",
+        "vendorFeature1": {
+          "title": "全球触达",
+          "description": "连接全球买家，拓展市场版图"
+        },
+        "vendorFeature2": {
+          "title": "业务支持",
+          "description": "获取专业支持和工具，助力业务增长"
+        },
+        "vendorFeature3": {
+          "title": "便捷管理",
+          "description": "高效的订单和库存管理系统"
+        },
+        "sellerFeature1": {
+          "title": "优质产品",
+          "description": "获取来自认证供应商的优质产品"
+        },
+        "sellerFeature2": {
+          "title": "店铺搭建",
+          "description": "使用我们的便捷工具创建您的在线商店"
+        },
+        "sellerFeature3": {
+          "title": "培训支持",
+          "description": "获取专业的培训和业务指导"
+        }
+      },
+      "role": {
+        "title": "选择身份",
+        "vendor": {
+          "title": "供应商",
+          "subtitle": "我是优质货源供应商",
+          "feature1": "产品直接面向全球买家",
+          "feature2": "专业的运营支持服务",
+          "feature3": "高效的订单管理系统"
+        },
+        "seller": {
+          "title": "采购商",
+          "subtitle": "我要开启跨境电商",
+          "feature1": "海量优质货源直供",
+          "feature2": "一键生成独立站",
+          "feature3": "专业的培训指导"
+        }
+      },
+      "passwordStrength": {
+        "strength": "密码强度",
+        "veryWeak": "非常弱",
+        "weak": "弱",
+        "fair": "一般",
+        "medium": "中等",
+        "strong": "强",
+        "veryStrong": "非常强",
+        "validPassword": "有效密码",
+        "minLength": "至少8个字符",
+        "excellentLength": "优秀长度({length}个字符)",
+        "hasLetter": "包含字母",
+        "excellentCase": "优秀的大小写组合",
+        "hasNumber": "包含数字",
+        "hasSpecial": "包含特殊字符(@$!%*?&#)"
+      }
+    },
+    "login": {
+      "title": "账号登录",
+      "subtitle": "登录您的 HiDoo 账号，开启跨境电商之旅",
+      "welcome": "欢迎回来",
+      "formDescription": "使用您的邮箱和密码登录",
+      "form": {
+        "email": "邮箱地址",
+        "emailPlaceholder": "请输入邮箱地址",
+        "password": "登录密码",
+        "passwordPlaceholder": "请输入密码",
+        "rememberMe": "记住我",
+        "forgotPassword": "忘记密码？",
+        "login": "登录",
+        "loggingIn": "登录中...",
+        "noAccount": "还没有账号？",
+        "registerNow": "立即注册",
+        "agreement": "登录即表示您同意我们的",
+        "terms": "服务条款",
+        "and": "和",
+        "privacy": "隐私政策"
+      },
+      "success": {
+        "title": "登录成功",
+        "description": "欢迎回来！"
+      },
+      "error": {
+        "title": "登录失败",
+        "description": "请检查您的邮箱和密码是否正确 {error}"
+      },
+      "brand": {
+        "loginStatus": "账号登录",
+        "welcome": "欢迎回到 HiDoo，开启您的跨境之旅",
+        "description": "HiDoo 为跨境电商从业者提供一站式解决方案，助力您的业务快速发展。",
+        "feature1": {
+          "title": "一站式跨境解决方案",
+          "description": "从选品、采购到运营，提供全方位支持"
+        },
+        "feature2": {
+          "title": "专业的运营支持",
+          "description": "提供专业的运营指导和培训服务"
+        },
+        "feature3": {
+          "title": "高效的数据分析",
+          "description": "实时市场数据分析，助您把握商机"
+        }
+      }
+    }
   },
   "region": {
     "switch": "切换区域",
