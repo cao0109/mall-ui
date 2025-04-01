@@ -382,5 +382,54 @@
         }
       }
     }
+  },
+  "product": {
+    "tabs": {
+      "details": "商品详情",
+      "specs": "规格参数",
+      "shipping": "物流信息",
+      "description": "商品描述",
+      "basicInfo": "基本信息",
+      "productName": "商品名称",
+      "productCode": "商品编号",
+      "specifications": "规格信息",
+      "spec": "规格",
+      "barcode": "条形码",
+      "otherParams": "其他参数",
+      "shippingOrigin": "发货地",
+      "shippingMethod": "物流方式",
+      "china": "中国",
+      "standardShipping": "标准物流"
+    },
+    "info": {
+      "addToSelection": "加入选品",
+      "addedToSelection": "已加入选品",
+      "addedToSelectionDesc": "商品已成功添加到选品列表",
+      "supplierInfo": "供应商信息",
+      "verified": "已认证",
+      "productCount": "商品数量",
+      "profitMargin": "利润率",
+      "shippingTime": "发货时间",
+      "selectQuantity": "选择数量",
+      "minOrder": "最小起订量",
+      "stock": "库存充足",
+      "perUnit": "/件",
+      "sku": "SKU",
+      "na": "N/A",
+      "defaultSupplier": "默认供应商"
+    },
+    "gallery": {
+      "imageBrowser": "商品图片浏览器",
+      "zoomIn": "放大查看",
+      "zoomOut": "退出放大",
+      "viewImage": "查看第{index}张图片",
+      "previousImage": "上一张图片",
+      "nextImage": "下一张图片",
+      "imageCounter": "{current} / {total}"
+    },
+    "detail": {
+      "loadingFailed": "加载商品失败",
+      "productNotFound": "商品不存在"
+    }
   }
 }

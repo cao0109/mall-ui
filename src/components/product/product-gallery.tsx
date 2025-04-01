@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -10,6 +11,8 @@ interface ProductGalleryProps {
 }
 
 export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalleryProps) {
+  const t = useTranslations('product.gallery');
+
   // 状态管理
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -131,9 +134,9 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
   }, []);
 
   // 效果处理
-  useEffect(() => {
-    galleryRef.current?.focus();
-  }, []);
+  // useEffect(() => {
+  //   galleryRef.current?.focus();
+  // }, []);
 
   useEffect(() => {
     scrollThumbnailIntoView();
@@ -152,7 +155,7 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
       tabIndex={0}
       onKeyDown={handleKeyDown}
       role="region"
-      aria-label={`${title || '商品'}图片浏览器`}
+      aria-label={t('imageBrowser')}
     >
       {/* 主图展示区域 */}
       <div
@@ -180,7 +183,7 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
           <button
             className="absolute bottom-2 right-2 rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:bottom-3 sm:right-3 sm:p-2"
             onClick={() => setIsZoomed(true)}
-            aria-label="放大查看"
+            aria-label={t('zoomIn')}
           >
             <ZoomIn size={14} className="sm:h-4 sm:w-4" />
           </button>
@@ -188,7 +191,7 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
           <button
             className="absolute right-2 top-2 rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:right-3 sm:top-3 sm:p-2"
             onClick={() => setIsZoomed(false)}
-            aria-label="退出放大"
+            aria-label={t('zoomOut')}
           >
             <X size={14} className="sm:h-4 sm:w-4" />
           </button>
@@ -197,7 +200,7 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
         {/* 图片计数器 */}
         {validImages.length > 1 && (
           <div className="absolute bottom-2 left-2 rounded-full bg-black/50 px-2 py-0.5 text-xs text-white sm:bottom-3 sm:left-3 sm:px-3 sm:py-1 sm:text-sm">
-            {selectedIndex + 1} / {validImages.length}
+            {t('imageCounter', { current: selectedIndex + 1, total: validImages.length })}
           </div>
         )}
       </div>
@@ -222,7 +225,7 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
                   'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 sm:focus:ring-offset-2'
                 )}
                 onClick={() => setSelectedIndex(index)}
-                aria-label={`查看第${index + 1}张图片`}
+                aria-label={t('viewImage', { index: index + 1 })}
                 aria-current={selectedIndex === index}
                 style={{ margin: '2px sm:4px' }} // 添加外边距，确保选中边框不被裁切
               >
@@ -243,14 +246,14 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
               <button
                 className="absolute left-0 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-md transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:h-10 sm:w-10"
                 onClick={handlePrevious}
-                aria-label="上一张图片"
+                aria-label={t('previousImage')}
               >
                 <ChevronLeft size={16} className="sm:h-[18px] sm:w-[18px]" />
               </button>
               <button
                 className="absolute right-0 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-md transition-colors hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-primary sm:h-10 sm:w-10"
                 onClick={handleNext}
-                aria-label="下一张图片"
+                aria-label={t('nextImage')}
               >
                 <ChevronRight size={16} className="sm:h-[18px] sm:w-[18px]" />
               </button>

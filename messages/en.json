@@ -382,5 +382,54 @@
         }
       }
     }
+  },
+  "product": {
+    "tabs": {
+      "details": "Product Details",
+      "specs": "Specifications",
+      "shipping": "Shipping Info",
+      "description": "Description",
+      "basicInfo": "Basic Information",
+      "productName": "Product Name",
+      "productCode": "Product Code",
+      "specifications": "Specifications",
+      "spec": "Spec",
+      "barcode": "Barcode",
+      "otherParams": "Other Parameters",
+      "shippingOrigin": "Shipping Origin",
+      "shippingMethod": "Shipping Method",
+      "china": "China",
+      "standardShipping": "Standard Shipping"
+    },
+    "info": {
+      "addToSelection": "Add to Selection",
+      "addedToSelection": "Added to Selection",
+      "addedToSelectionDesc": "Product has been added to your selection list",
+      "supplierInfo": "Supplier Information",
+      "verified": "Verified",
+      "productCount": "Product Count",
+      "profitMargin": "Profit Margin",
+      "shippingTime": "Shipping Time",
+      "selectQuantity": "Select Quantity",
+      "minOrder": "Minimum Order",
+      "stock": "In Stock",
+      "perUnit": "/unit",
+      "sku": "SKU",
+      "na": "N/A",
+      "defaultSupplier": "Default Supplier"
+    },
+    "gallery": {
+      "imageBrowser": "Product Image Browser",
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out",
+      "viewImage": "View Image {index}",
+      "previousImage": "Previous Image",
+      "nextImage": "Next Image",
+      "imageCounter": "{current} / {total}"
+    },
+    "detail": {
+      "loadingFailed": "Failed to load product",
+      "productNotFound": "Product not found"
+    }
   }
 }
