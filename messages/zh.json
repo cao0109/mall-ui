@@ -484,6 +484,11 @@
     "shareDescription": "选择您想要分享的平台",
     "relatedPosts": "相关文章",
     "filterByTags": "按标签筛选",
+    "search": "搜索文章",
+    "searchPlaceholder": "输入关键词搜索文章...",
+    "searchResults": "搜索结果",
+    "noResults": "未找到相关文章",
+    "clearSearch": "清除搜索",
     "tags": {
       "all": "全部",
       "industry": "行业动态",

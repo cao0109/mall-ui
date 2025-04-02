@@ -1,18 +1,24 @@
 'use client';
 
+import { BlogSearch } from '@/components/posts/blog-search';
+import { HighlightText } from '@/components/posts/highlight-text';
+import { SearchHistory } from '@/components/posts/search-history';
 import { TagFilter } from '@/components/posts/tag-filter';
 import { useBlogPosts } from '@/hooks/use-blog';
+import { addBlogSearchHistory } from '@/lib/search-history';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function BlogPage() {
   const t = useTranslations();
-  const { posts, isLoading, error } = useBlogPosts();
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [hasSearched, setHasSearched] = useState(false);
+  const { posts, isLoading, error } = useBlogPosts({ searchQuery });
 
   // 获取所有标签
   const allTags = posts?.flatMap(post => post.tags) || [];
@@ -22,6 +28,31 @@ export default function BlogPage() {
     selectedTags.length > 0
       ? posts?.filter(post => selectedTags.some(tag => post.tags.includes(tag)))
       : posts;
+
+  // 记录搜索历史
+  useEffect(() => {
+    if (hasSearched && searchQuery.trim()) {
+      addBlogSearchHistory(searchQuery);
+    }
+  }, [hasSearched, searchQuery]);
+
+  // 搜索处理
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setHasSearched(true);
+  };
+
+  // 清除搜索
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setHasSearched(false);
+  };
+
+  // 从历史中选择
+  const handleSelectHistory = (term: string) => {
+    setSearchQuery(term);
+    setHasSearched(true);
+  };
 
   if (error) {
     return (
@@ -39,26 +70,60 @@ export default function BlogPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-12 text-center"
+        className="mb-8 text-center"
       >
         <h1 className="mb-4 text-4xl font-bold">{t('blog.title')}</h1>
         <p className="text-lg text-muted-foreground">{t('blog.description')}</p>
       </motion.div>
 
-      {/* 标签筛选 */}
-      <TagFilter
-        tags={allTags}
-        selectedTags={selectedTags}
-        onTagSelect={tag => {
-          if (tag === '') {
-            setSelectedTags([]);
-          } else {
-            setSelectedTags(prev =>
-              prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
-            );
-          }
-        }}
-      />
+      {/* 搜索框 */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="mb-8"
+      >
+        <div className="mx-auto max-w-xl">
+          <BlogSearch
+            searchQuery={searchQuery}
+            onSearchChange={handleSearch}
+            onClearSearch={handleClearSearch}
+            posts={posts || []}
+          />
+
+          {/* 搜索历史 */}
+          {!searchQuery && !hasSearched && <SearchHistory onSelectHistory={handleSelectHistory} />}
+        </div>
+      </motion.div>
+
+      {/* 搜索结果提示 */}
+      {searchQuery && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6 text-center">
+          <h2 className="text-xl font-semibold">
+            {t('blog.searchResults')}: &quot;{searchQuery}&quot;
+          </h2>
+          <p className="mt-2 text-muted-foreground">
+            {filteredPosts?.length === 0 ? t('blog.noResults') : `${filteredPosts?.length} 篇文章`}
+          </p>
+        </motion.div>
+      )}
+
+      {/* 标签筛选 - 只在无搜索时显示 */}
+      {!searchQuery && (
+        <TagFilter
+          tags={allTags}
+          selectedTags={selectedTags}
+          onTagSelect={tag => {
+            if (tag === '') {
+              setSelectedTags([]);
+            } else {
+              setSelectedTags(prev =>
+                prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+              );
+            }
+          }}
+        />
+      )}
 
       {/* 文章列表 */}
       {isLoading ? (
@@ -74,6 +139,10 @@ export default function BlogPage() {
             </div>
           ))}
         </div>
+      ) : filteredPosts?.length === 0 ? (
+        <div className="my-16 text-center">
+          <p className="text-lg text-muted-foreground">{t('blog.noResults')}</p>
+        </div>
       ) : (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredPosts?.map((post, index) => (
@@ -84,7 +153,7 @@ export default function BlogPage() {
               transition={{ delay: index * 0.1 }}
               className="group overflow-hidden rounded-lg border bg-card"
             >
-              <Link href={`/blog/${post.slug}`}>
+              <Link href={`/blogs/${post.slug}`}>
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={post.coverImage}
@@ -100,19 +169,35 @@ export default function BlogPage() {
                         key={tag}
                         className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
                       >
-                        {tag}
+                        {searchQuery ? <HighlightText text={tag} highlight={searchQuery} /> : tag}
                       </span>
                     ))}
                   </div>
                   <h2 className="mb-2 text-xl font-semibold group-hover:text-primary">
-                    {post.title}
+                    {searchQuery ? (
+                      <HighlightText text={post.title} highlight={searchQuery} />
+                    ) : (
+                      post.title
+                    )}
                   </h2>
-                  <p className="mb-4 text-sm text-muted-foreground">{post.excerpt}</p>
+                  <p className="mb-4 text-sm text-muted-foreground">
+                    {searchQuery ? (
+                      <HighlightText text={post.excerpt} highlight={searchQuery} />
+                    ) : (
+                      post.excerpt
+                    )}
+                  </p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
                         <User className="h-4 w-4" />
-                        <span>{post.author.name}</span>
+                        <span>
+                          {searchQuery ? (
+                            <HighlightText text={post.author.name} highlight={searchQuery} />
+                          ) : (
+                            post.author.name
+                          )}
+                        </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4" />

@@ -1,3 +1,4 @@
+import { ChartType } from '@/components/posts/blog-chart';
 import { useEffect, useState } from 'react';
 
 export interface BlogPost {
@@ -15,6 +16,41 @@ export interface BlogPost {
   date: string;
   readTime: number;
   tags: string[];
+  // 富媒体内容
+  richContent?: {
+    charts?: BlogChart[];
+    videos?: BlogVideo[];
+    codeBlocks?: BlogCodeBlock[];
+  };
+}
+
+// 博客图表类型
+export interface BlogChart {
+  title: string;
+  description?: string;
+  type: ChartType;
+  data: Record<string, unknown>[];
+  xAxisKey: string;
+  dataKeys: string[];
+  colors?: string[];
+  labels?: Record<string, string>;
+  height?: number;
+}
+
+// 博客视频类型
+export interface BlogVideo {
+  src: string;
+  title?: string;
+  platform: 'youtube' | 'bilibili' | 'vimeo' | 'generic';
+  aspectRatio?: '16:9' | '4:3' | '1:1';
+}
+
+// 博客代码块类型
+export interface BlogCodeBlock {
+  code: string;
+  language: string;
+  fileName?: string;
+  lineNumbers?: boolean;
 }
 
 // 模拟数据
@@ -331,10 +367,11 @@ const mockPosts: BlogPost[] = [
   }
 ];
 
-export function useBlogPosts() {
+export function useBlogPosts(options?: { searchQuery?: string }) {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const searchQuery = options?.searchQuery || '';
 
   useEffect(() => {
     // 模拟API调用
@@ -342,7 +379,22 @@ export function useBlogPosts() {
       try {
         // 模拟网络延迟
         await new Promise(resolve => setTimeout(resolve, 1000));
-        setPosts(mockPosts);
+        
+        // 如果有搜索查询，就筛选数据
+        if (searchQuery) {
+          const query = searchQuery.toLowerCase();
+          const filteredPosts = mockPosts.filter(
+            post => 
+              post.title.toLowerCase().includes(query) || 
+              post.excerpt.toLowerCase().includes(query) || 
+              post.content.toLowerCase().includes(query) ||
+              post.author.name.toLowerCase().includes(query) ||
+              post.tags.some(tag => tag.toLowerCase().includes(query))
+          );
+          setPosts(filteredPosts);
+        } else {
+          setPosts(mockPosts);
+        }
       } catch (err) {
         setError(err instanceof Error ? err : new Error('获取文章列表失败'));
       } finally {
@@ -351,7 +403,7 @@ export function useBlogPosts() {
     };
 
     fetchPosts();
-  }, []);
+  }, [searchQuery]);
 
   return { posts, isLoading, error };
 }
