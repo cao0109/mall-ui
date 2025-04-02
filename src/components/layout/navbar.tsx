@@ -4,6 +4,7 @@ import { LanguageSwitcher } from '@/components/language-switcher';
 import { RegionSwitcher } from '@/components/region-switcher';
 import { SearchDialog } from '@/components/search-dialog';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -34,6 +35,8 @@ import {
   Package,
   Phone,
   Settings,
+  Shield,
+  ShoppingBag,
   ShoppingCart,
   Store,
   Tag,
@@ -79,6 +82,32 @@ export function Navbar() {
     });
     router.push('/');
   };
+
+  // 根据角色获取对应的图标和标签
+  const getRoleInfo = (role: string) => {
+    switch (role) {
+      case 'seller':
+        return {
+          icon: <Store className="h-3 w-3" />,
+          label: t('accountSettings.sellerRole'),
+          color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+        };
+      case 'vendor':
+        return {
+          icon: <ShoppingBag className="h-3 w-3" />,
+          label: t('accountSettings.vendorRole'),
+          color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
+        };
+      default:
+        return {
+          icon: <User className="h-3 w-3" />,
+          label: t('accountSettings.userRole'),
+          color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+        };
+    }
+  };
+
+  const roleInfo = user ? getRoleInfo(user.role || 'user') : null;
 
   return (
     <header
@@ -316,45 +345,39 @@ export function Navbar() {
                         <div className="relative flex flex-col">
                           <span className="font-medium">{user?.name}</span>
                           <span className="text-xs text-muted-foreground">{user?.email}</span>
+                          {roleInfo && (
+                            <div className="flex items-center gap-1 pt-1">
+                              <Badge
+                                variant="outline"
+                                className={`flex items-center gap-1 px-1 py-0 text-xs ${roleInfo.color}`}
+                              >
+                                {roleInfo.icon}
+                                <span>{roleInfo.label}</span>
+                              </Badge>
+                              {user?.role === 'seller' && (
+                                <Badge
+                                  variant="outline"
+                                  className="bg-green-100 px-1 py-0 text-xs text-green-800 dark:bg-green-900 dark:text-green-300"
+                                >
+                                  <Shield className="mr-1 h-3 w-3" />
+                                  {t('accountSettings.verified')}
+                                </Badge>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </DropdownMenuItem>
                     </motion.div>
                     <DropdownMenuSeparator className="my-2" />
                     <motion.div
-                      key="menu-items"
+                      key="settings"
                       custom={1}
                       variants={itemVariants}
                       initial="hidden"
                       animate="visible"
                       exit={{ opacity: 0, y: -10 }}
                     >
-                      <Link href="/my-stores">
-                        <DropdownMenuItem className="group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50">
-                          <motion.div
-                            className="absolute inset-0 rounded-md bg-accent/20"
-                            initial={{ scale: 0 }}
-                            whileHover={{ scale: 1 }}
-                            transition={{ duration: 0.2 }}
-                          />
-                          <Store className="relative h-4 w-4" />
-                          <span className="relative font-medium">{t('common.myStores')}</span>
-                        </DropdownMenuItem>
-                      </Link>
-                      <Link href="/selected-products">
-                        <DropdownMenuItem className="group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50">
-                          <motion.div
-                            className="absolute inset-0 rounded-md bg-accent/20"
-                            initial={{ scale: 0 }}
-                            whileHover={{ scale: 1 }}
-                            transition={{ duration: 0.2 }}
-                          />
-                          <ShoppingCart className="relative h-4 w-4" />
-                          <span className="relative font-medium">
-                            {t('common.selectedProducts')}
-                          </span>
-                        </DropdownMenuItem>
-                      </Link>
-                      <Link href="/settings">
+                      <Link href="/account-settings">
                         <DropdownMenuItem className="group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50">
                           <motion.div
                             className="absolute inset-0 rounded-md bg-accent/20"
@@ -367,7 +390,6 @@ export function Navbar() {
                         </DropdownMenuItem>
                       </Link>
                     </motion.div>
-                    <DropdownMenuSeparator className="my-2" />
                     <motion.div
                       key="logout"
                       custom={2}
@@ -524,7 +546,7 @@ export function Navbar() {
                 {t('common.selectedProducts')}
               </Link>
               <Link
-                href="/settings"
+                href="/account-settings"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 <Settings className="h-4 w-4" />
