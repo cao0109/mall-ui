@@ -33,6 +33,13 @@ export const metadata: Metadata = {
   keywords: ['电商', '商城', '在线购物', '批发', '零售'],
   authors: [{ name: 'HiDoo Team' }],
   robots: 'index, follow',
+  icons: [
+    {
+      url: '/favicon.ico',
+      sizes: 'any',
+      type: 'image/x-icon',
+    },
+  ],
 };
 
 export default async function LocaleLayout({

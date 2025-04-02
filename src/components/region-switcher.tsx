@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Globe } from 'lucide-react';
+import { Check, Globe } from 'lucide-react';
 import { useCart, useRegions } from 'medusa-react';
 import { useTranslations } from 'next-intl';
 
@@ -130,7 +130,7 @@ export const RegionSwitcher = () => {
                         animate={{ scale: 1 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                       >
-                        ✓
+                        <Check className="h-4 w-4" color="green" />
                       </motion.div>
                     )}
                   </div>

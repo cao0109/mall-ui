@@ -7,7 +7,7 @@
     "logout": "Logout",
     "settings": "Settings",
     "myStores": "My Stores",
-    "selectedProducts": "Selection Cart",
+    "selectedProducts": "Selected Products",
     "productLibrary": "Product Library",
     "suppliers": "Suppliers",
     "backToHome": "Back to Home",
@@ -19,10 +19,19 @@
     "openMenu": "Open Menu",
     "closeMenu": "Close Menu",
     "mobileNavigation": "Mobile Navigation",
+    "error": "Error",
     "dashboard": "Dashboard",
     "myProducts": "My Products",
     "syncHistory": "Sync History",
-    "accountSettings": "Account Settings"
+    "accountSettings": "Account Settings",
+    "home": "Home",
+    "featuredProducts": {
+      "new": "New Arrivals",
+      "hot": "Hot Sales",
+      "sale": "Special Offers",
+      "limited": "Limited Edition"
+    },
+    "popularCategories": "Popular Categories"
   },
   "auth": {
     "loginSuccess": "Login successful",
@@ -498,7 +507,19 @@
       "trends": "Trend Analysis",
       "tips": "Operation Tips",
       "news": "Latest News"
-    }
+    },
+    "sort": "Sort",
+    "gridView": "Grid View",
+    "listView": "List View",
+    "sortByDate": "Sort by Date",
+    "sortByPopularity": "Sort by Popularity",
+    "previous": "Previous",
+    "next": "Next",
+    "like": "Like",
+    "comment": "Comment",
+    "bookmark": "Bookmark",
+    "follow": "Follow",
+    "viewProfile": "View Profile"
   },
   "dashboard": {
     "title": "Dashboard",

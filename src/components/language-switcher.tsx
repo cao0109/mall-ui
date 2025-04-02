@@ -10,13 +10,13 @@ import {
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Languages } from 'lucide-react';
+import { Check, Languages } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { useTransition } from 'react';
 
 const languages = [
-  { code: 'zh', name: '中文', flag: '🇨🇳', description: '简体中文' },
-  { code: 'en', name: 'English', flag: '🇺🇸', description: 'English' },
+  { code: 'zh', name: '简体中文', flag: '🇨🇳' },
+  { code: 'en', name: 'English', flag: '🇺🇸' },
 ];
 
 const itemVariants = {
@@ -92,10 +92,7 @@ export function LanguageSwitcher() {
                     transition={{ duration: 0.2 }}
                   />
                   <span className="relative text-xl">{lang.flag}</span>
-                  <div className="relative flex flex-col">
-                    <span className="font-medium">{lang.name}</span>
-                    <span className="text-xs text-muted-foreground">{lang.description}</span>
-                  </div>
+                  <span className="font-medium">{lang.name}</span>
                   {locale === lang.code && (
                     <motion.div
                       className="absolute right-2"
@@ -103,7 +100,7 @@ export function LanguageSwitcher() {
                       animate={{ scale: 1 }}
                       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     >
-                      ✓
+                      <Check className="h-4 w-4" color="green" />
                     </motion.div>
                   )}
                 </DropdownMenuItem>

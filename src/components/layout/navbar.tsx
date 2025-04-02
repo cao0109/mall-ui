@@ -27,7 +27,10 @@ import { useAuthStore } from '@/store/auth';
 import { ProductCategory } from '@medusajs/medusa';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
+  Book,
+  ChevronRight,
   Flame,
+  Home,
   Info,
   LogIn,
   LogOut,
@@ -38,6 +41,7 @@ import {
   Shield,
   ShoppingBag,
   ShoppingCart,
+  Star,
   Store,
   Tag,
   Timer,
@@ -135,6 +139,18 @@ export function Navbar() {
         {/* 导航区域 - 中等屏幕及以上显示 */}
         <NavigationMenu className="hidden md:flex" aria-label={t('common.mainNavigation')}>
           <NavigationMenuList>
+            {/* 首页 */}
+            <NavigationMenuItem>
+              <Link
+                href="/"
+                className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Home className="mr-1 h-4 w-4" />
+                {t('common.home')}
+              </Link>
+            </NavigationMenuItem>
+
+            {/* 产品库 */}
             <NavigationMenuItem>
               <NavigationMenuTrigger
                 className="text-sm font-medium text-muted-foreground"
@@ -220,6 +236,8 @@ export function Navbar() {
                 </nav>
               </NavigationMenuContent>
             </NavigationMenuItem>
+
+            {/* 供应商 */}
             <NavigationMenuItem>
               <Link
                 href="/suppliers"
@@ -229,24 +247,22 @@ export function Navbar() {
                 {t('common.suppliers')}
               </Link>
             </NavigationMenuItem>
+
+           
+
+
+            {/* 博客 */}
             <NavigationMenuItem>
               <Link
-                href="/my-stores"
+                href="/blog"
                 className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
-                <Users className="mr-1 h-4 w-4" />
-                {t('common.myStores')}
+                <Book className="mr-1 h-4 w-4" />
+                {t('blog.title')}
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link
-                href="/selected-products"
-                className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                <ShoppingCart className="mr-1 h-4 w-4" />
-                {t('common.selectedProducts')}
-              </Link>
-            </NavigationMenuItem>
+
+            {/* 关于 */}
             <NavigationMenuItem>
               <Link
                 href="/about"
@@ -256,6 +272,8 @@ export function Navbar() {
                 {t('common.about')}
               </Link>
             </NavigationMenuItem>
+
+            {/* 联系我们 */}
             <NavigationMenuItem>
               <Link
                 href="/contact"
@@ -387,6 +405,49 @@ export function Navbar() {
                           />
                           <Settings className="relative h-4 w-4" />
                           <span className="relative font-medium">{t('common.settings')}</span>
+                          <ChevronRight className="relative ml-auto h-4 w-4 text-muted-foreground" />
+                        </DropdownMenuItem>
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      key="my-stores"
+                      custom={2}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      <Link href="/my-stores">
+                        <DropdownMenuItem className="group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50">
+                          <motion.div
+                            className="absolute inset-0 rounded-md bg-accent/20"
+                            initial={{ scale: 0 }}
+                            whileHover={{ scale: 1 }}
+                            transition={{ duration: 0.2 }}
+                          />
+                          <Users className="relative h-4 w-4" />
+                          <span className="relative font-medium">{t('common.myStores')}</span>
+                          <ChevronRight className="relative ml-auto h-4 w-4 text-muted-foreground" />
+                        </DropdownMenuItem>
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      key="selected-products"
+                      custom={2}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      <Link href="/selected-products">
+                        <DropdownMenuItem className="group relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 transition-all duration-200 hover:bg-accent/50">
+                          <motion.div
+                            className="absolute inset-0 rounded-md bg-accent/20"
+                            initial={{ scale: 0 }}
+                            whileHover={{ scale: 1 }}
+                            transition={{ duration: 0.2 }}
+                          />
+                          <ShoppingCart className="relative h-4 w-4" />
+                          <span className="relative font-medium">{t('common.selectedProducts')}</span>
+                          <ChevronRight className="relative ml-auto h-4 w-4 text-muted-foreground" />
                         </DropdownMenuItem>
                       </Link>
                     </motion.div>
@@ -410,6 +471,7 @@ export function Navbar() {
                         />
                         <LogOut className="relative h-4 w-4" />
                         <span className="relative font-medium">{t('common.logout')}</span>
+                        <ChevronRight className="relative ml-auto h-4 w-4 text-red-500/50" />
                       </DropdownMenuItem>
                     </motion.div>
                   </>
@@ -433,6 +495,7 @@ export function Navbar() {
                           />
                           <LogIn className="relative h-4 w-4" />
                           <span className="relative font-medium">{t('common.login')}</span>
+                          <ChevronRight className="relative ml-auto h-4 w-4 text-muted-foreground" />
                         </DropdownMenuItem>
                       </Link>
                       <Link href="/auth/register">
@@ -445,6 +508,7 @@ export function Navbar() {
                           />
                           <UserPlus className="relative h-4 w-4" />
                           <span className="relative font-medium">{t('common.register')}</span>
+                          <ChevronRight className="relative ml-auto h-4 w-4 text-muted-foreground" />
                         </DropdownMenuItem>
                       </Link>
                     </motion.div>
@@ -469,6 +533,7 @@ export function Navbar() {
                           <span className="relative font-medium">
                             {t('common.selectedProducts')}
                           </span>
+                          <ChevronRight className="relative ml-auto h-4 w-4 text-muted-foreground" />
                         </DropdownMenuItem>
                       </Link>
                     </motion.div>
@@ -529,21 +594,83 @@ export function Navbar() {
                 <div>
                   <div className="font-medium">{user?.name}</div>
                   <div className="text-sm text-muted-foreground">{user?.email}</div>
+                  {roleInfo && (
+                    <div className="flex items-center gap-1 pt-1">
+                      <Badge
+                        variant="outline"
+                        className={`flex items-center gap-1 px-1 py-0 text-xs ${roleInfo.color}`}
+                      >
+                        {roleInfo.icon}
+                        <span>{roleInfo.label}</span>
+                      </Badge>
+                      {user?.role === 'seller' && (
+                        <Badge
+                          variant="outline"
+                          className="bg-green-100 px-1 py-0 text-xs text-green-800 dark:bg-green-900 dark:text-green-300"
+                        >
+                          <Shield className="mr-1 h-3 w-3" />
+                          {t('accountSettings.verified')}
+                        </Badge>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
+              <Link
+                href="/"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Home className="h-4 w-4" />
+                {t('common.home')}
+              </Link>
+              <Link
+                href="/products"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Package className="h-4 w-4" />
+                {t('common.productLibrary')}
+              </Link>
+              <Link
+                href="/suppliers"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Store className="h-4 w-4" />
+                {t('common.suppliers')}
+              </Link>
               <Link
                 href="/my-stores"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
-                <Store className="h-4 w-4" />
+                <Users className="h-4 w-4" />
                 {t('common.myStores')}
               </Link>
               <Link
                 href="/selected-products"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
-                <ShoppingCart className="h-4 w-4" />
+                <Star className="h-4 w-4" />
                 {t('common.selectedProducts')}
+              </Link>
+              <Link
+                href="/blog"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Book className="h-4 w-4" />
+                {t('blog.title')}
+              </Link>
+              <Link
+                href="/about"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Info className="h-4 w-4" />
+                {t('common.about')}
+              </Link>
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Phone className="h-4 w-4" />
+                {t('common.contact')}
               </Link>
               <Link
                 href="/account-settings"
@@ -563,6 +690,13 @@ export function Navbar() {
           ) : (
             <>
               <Link
+                href="/"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Home className="h-4 w-4" />
+                {t('common.home')}
+              </Link>
+              <Link
                 href="/products"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
@@ -580,8 +714,29 @@ export function Navbar() {
                 href="/selected-products"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
-                <ShoppingCart className="h-4 w-4" />
+                <Star className="h-4 w-4" />
                 {t('common.selectedProducts')}
+              </Link>
+              <Link
+                href="/blog"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Book className="h-4 w-4" />
+                {t('blog.title')}
+              </Link>
+              <Link
+                href="/about"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Info className="h-4 w-4" />
+                {t('common.about')}
+              </Link>
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Phone className="h-4 w-4" />
+                {t('common.contact')}
               </Link>
               <Link
                 href="/auth/login"

@@ -32,7 +32,7 @@ export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="group overflow-hidden rounded-lg border bg-card"
+            className="group overflow-hidden rounded-xl border bg-card shadow-sm transition-all duration-300 hover:shadow-lg"
           >
             <Link href={`/blog/${post.slug}`}>
               <div className="relative h-48 overflow-hidden">
@@ -40,14 +40,29 @@ export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
                   src={post.coverImage}
                   alt={post.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.slice(0, 2).map(tag => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
               <div className="p-6">
-                <h3 className="mb-2 text-lg font-semibold group-hover:text-primary">
+                <h3 className="mb-3 text-lg font-semibold leading-tight group-hover:text-primary">
                   {post.title}
                 </h3>
-                <p className="mb-4 text-sm text-muted-foreground">{post.excerpt}</p>
+                <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
+                  {post.excerpt}
+                </p>
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">

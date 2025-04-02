@@ -1,4 +1,4 @@
-import { Monitor, Moon, Sun } from 'lucide-react';
+import { Check, Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -141,7 +141,7 @@ export function ThemeToggle() {
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   >
-                    ✓
+                    <Check className="h-4 w-4" color="green" />
                   </motion.div>
                 )}
               </DropdownMenuItem>
