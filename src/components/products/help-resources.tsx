@@ -1,7 +1,8 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { ArrowRight, BookOpen, Handshake, Upload } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 
 export interface Resource {
   title: string;

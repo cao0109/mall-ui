@@ -1,11 +1,12 @@
+import { Lock, Shield, ShoppingBag, Store, User } from 'lucide-react';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Lock, Shield, ShoppingBag, Store, User } from 'lucide-react';
-import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('accountSettings');

@@ -1,5 +1,10 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
+import { Check, Languages } from 'lucide-react';
+import { useLocale } from 'next-intl';
+import { useTransition } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,10 +14,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Check, Languages } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { useTransition } from 'react';
 
 const languages = [
   { code: 'zh', name: '简体中文', flag: '🇨🇳' },

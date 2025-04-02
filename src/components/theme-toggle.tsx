@@ -1,4 +1,6 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { Check, Monitor, Moon, Sun } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -10,8 +12,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },

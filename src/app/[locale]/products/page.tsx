@@ -1,5 +1,21 @@
 'use client';
 
+import {
+  ArrowDownNarrowWide,
+  ArrowUpNarrowWide,
+  Filter,
+  LayoutGrid,
+  LayoutList,
+  Search,
+  SlidersHorizontal,
+  Star,
+  X,
+} from 'lucide-react';
+import { useProducts } from 'medusa-react';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { EnhancedPromotionalBanner } from '@/components/marketing/enhanced-promotional-banner';
 import { MedusaCategories } from '@/components/products/filters';
 import { HelpResources, Resource } from '@/components/products/help-resources';
@@ -29,21 +45,6 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/s
 import { Slider } from '@/components/ui/slider';
 import { products } from '@/lib/data';
 import { cn } from '@/lib/utils';
-import {
-  ArrowDownNarrowWide,
-  ArrowUpNarrowWide,
-  Filter,
-  LayoutGrid,
-  LayoutList,
-  Search,
-  SlidersHorizontal,
-  Star,
-  X,
-} from 'lucide-react';
-import { useProducts } from 'medusa-react';
-import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import React, { useCallback, useEffect, useState } from 'react';
 
 // 模拟供应商数据
 const suppliers = [

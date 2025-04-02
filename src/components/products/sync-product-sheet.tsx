@@ -1,3 +1,24 @@
+import { useEffect, useState } from 'react';
+import {
+  FaAmazon,
+  FaArrowLeft,
+  FaArrowRight,
+  FaBox,
+  FaCheck,
+  FaCog,
+  FaEbay,
+  FaFileAlt,
+  FaImages,
+  FaInfoCircle,
+  FaShopify,
+  FaStore,
+  FaSync,
+  FaTag,
+  FaTimes,
+  FaTruck,
+  FaWordpress,
+} from 'react-icons/fa';
+
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -21,26 +42,6 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { Switch } from '@/components/ui/switch';
-import { useEffect, useState } from 'react';
-import {
-  FaAmazon,
-  FaArrowLeft,
-  FaArrowRight,
-  FaBox,
-  FaCheck,
-  FaCog,
-  FaEbay,
-  FaFileAlt,
-  FaImages,
-  FaInfoCircle,
-  FaShopify,
-  FaStore,
-  FaSync,
-  FaTag,
-  FaTimes,
-  FaTruck,
-  FaWordpress,
-} from 'react-icons/fa';
 
 interface SyncProductSheetProps {
   open: boolean;

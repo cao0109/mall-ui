@@ -1,11 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaEnvelope, FaGift } from 'react-icons/fa';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');

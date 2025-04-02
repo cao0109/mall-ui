@@ -1,5 +1,11 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { Bookmark, Calendar, Clock, MessageSquare, ThumbsUp, User } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { use } from 'react';
+
 import { RelatedPosts } from '@/components/posts/related-posts';
 import { ShareDialog } from '@/components/share-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -7,11 +13,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useBlogPost, useBlogPosts } from '@/hooks/use-blog';
-import { motion } from 'framer-motion';
-import { Bookmark, Calendar, Clock, MessageSquare, ThumbsUp, User } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import { use } from 'react';
 
 export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
@@ -57,11 +58,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
           >
             <div className="mb-4 flex justify-center gap-2">
               {post.tags.map(tag => (
-                <Badge
-                  key={tag}
-                  variant="outline"
-                  className="bg-primary/5"
-                >
+                <Badge key={tag} variant="outline" className="bg-primary/5">
                   {tag}
                 </Badge>
               ))}

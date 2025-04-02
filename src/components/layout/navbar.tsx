@@ -1,29 +1,5 @@
 'use client';
 
-import { LanguageSwitcher } from '@/components/language-switcher';
-import { RegionSwitcher } from '@/components/region-switcher';
-import { SearchDialog } from '@/components/search-dialog';
-import { ThemeToggle } from '@/components/theme-toggle';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
-import { useToast } from '@/hooks/use-toast';
-import { Link, useRouter } from '@/i18n/navigation';
-import { cn } from '@/lib/utils';
-import { useAuthStore } from '@/store/auth';
 import { ProductCategory } from '@medusajs/medusa';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -51,9 +27,34 @@ import {
   X,
 } from 'lucide-react';
 import { useProductCategories } from 'medusa-react';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+
+import { LanguageSwitcher } from '@/components/language-switcher';
+import { RegionSwitcher } from '@/components/region-switcher';
+import { SearchDialog } from '@/components/search-dialog';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
+import { useToast } from '@/hooks/use-toast';
+import { Link, useRouter } from '@/i18n/navigation';
+import { cn } from '@/lib/utils';
+import { useAuthStore } from '@/store/auth';
 
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },
@@ -247,9 +248,6 @@ export function Navbar() {
                 {t('common.suppliers')}
               </Link>
             </NavigationMenuItem>
-
-           
-
 
             {/* 博客 */}
             <NavigationMenuItem>
@@ -446,7 +444,9 @@ export function Navbar() {
                             transition={{ duration: 0.2 }}
                           />
                           <ShoppingCart className="relative h-4 w-4" />
-                          <span className="relative font-medium">{t('common.selectedProducts')}</span>
+                          <span className="relative font-medium">
+                            {t('common.selectedProducts')}
+                          </span>
                           <ChevronRight className="relative ml-auto h-4 w-4 text-muted-foreground" />
                         </DropdownMenuItem>
                       </Link>

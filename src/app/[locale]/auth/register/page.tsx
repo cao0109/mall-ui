@@ -1,5 +1,14 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import { BasicInfoForm } from '@/components/auth/register/basic-info-form';
 import { PasswordForm } from '@/components/auth/register/password-form';
 import { RoleSelect } from '@/components/auth/register/role-select';
@@ -17,14 +26,6 @@ import { useToast } from '@/hooks/use-toast';
 import { ApiError, ApiService } from '@/lib/api';
 import { calculatePasswordStrength } from '@/lib/utils/password';
 import { useAuthStore } from '@/store/auth';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 export type RegisterFormValues = {
   role: 'vendor' | 'seller';

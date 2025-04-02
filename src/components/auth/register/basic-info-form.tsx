@@ -1,3 +1,7 @@
+import { Building2, Mail, User } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+
 import { RegisterFormValues } from '@/app/[locale]/auth/register/page';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,9 +13,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Building2, Mail, User } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { UseFormReturn } from 'react-hook-form';
 
 interface BasicInfoFormProps {
   form: UseFormReturn<RegisterFormValues>;

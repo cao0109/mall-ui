@@ -1,14 +1,15 @@
 'use client';
 
+import { Clock, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
   clearBlogSearchHistory,
   getBlogSearchHistory,
   removeBlogSearchHistoryItem,
 } from '@/lib/search-history';
-import { Clock, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
 
 interface SearchHistoryProps {
   onSelectHistory: (term: string) => void;

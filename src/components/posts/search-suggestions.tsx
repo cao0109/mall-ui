@@ -1,9 +1,10 @@
 'use client';
 
-import { BlogPost } from '@/hooks/use-blog';
-import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef } from 'react';
+
+import { BlogPost } from '@/hooks/use-blog';
+import { cn } from '@/lib/utils';
 
 interface SearchSuggestionsProps {
   query: string;

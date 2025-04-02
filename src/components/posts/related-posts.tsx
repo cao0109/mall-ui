@@ -1,11 +1,12 @@
 'use client';
 
-import { BlogPost } from '@/hooks/use-blog';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+
+import { BlogPost } from '@/hooks/use-blog';
 
 interface RelatedPostsProps {
   posts: BlogPost[];
@@ -60,9 +61,7 @@ export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
                 <h3 className="mb-3 text-lg font-semibold leading-tight group-hover:text-primary">
                   {post.title}
                 </h3>
-                <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
-                  {post.excerpt}
-                </p>
+                <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">{post.excerpt}</p>
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">

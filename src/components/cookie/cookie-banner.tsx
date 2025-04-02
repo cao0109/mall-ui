@@ -1,30 +1,28 @@
-"use client";
+'use client';
 
-import { getCookie, setCookie } from "cookies-next";
-import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { getCookie, setCookie } from 'cookies-next';
+import { AnimatePresence, motion } from 'framer-motion';
+import { X } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
-  const [confirmation, setConfirmation] = useState<
-    "accepted" | "rejected" | null
-  >(null);
+  const [confirmation, setConfirmation] = useState<'accepted' | 'rejected' | null>(null);
 
   useEffect(() => {
-    const consent = getCookie("cookie-consent");
+    const consent = getCookie('cookie-consent');
     if (!consent) {
       setIsVisible(true);
     }
   }, []);
 
   const handleCookieChoice = (accepted: boolean) => {
-    setCookie("cookie-consent", accepted ? "true" : "false", {
+    setCookie('cookie-consent', accepted ? 'true' : 'false', {
       maxAge: 365 * 24 * 60 * 60, // 1 year
     });
     setIsVisible(false);
-    setConfirmation(accepted ? "accepted" : "rejected");
+    setConfirmation(accepted ? 'accepted' : 'rejected');
   };
 
   const hideConfirmation = () => {
@@ -41,37 +39,32 @@ export function CookieBanner() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50"
+          className="fixed bottom-0 left-0 right-0 z-50 border-t bg-white shadow-lg"
           role="region"
           aria-label="Cookie 确认"
         >
-          <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="mx-auto max-w-7xl px-4 py-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div
-                  className={`w-2 h-2 rounded-full ${
-                    confirmation === "accepted" ? "bg-green-500" : "bg-red-500"
+                  className={`h-2 w-2 rounded-full ${
+                    confirmation === 'accepted' ? 'bg-green-500' : 'bg-red-500'
                   }`}
                 />
                 <p className="text-sm text-gray-600">
-                  {confirmation === "accepted"
-                    ? "您已接受 Cookie"
-                    : "您已拒绝 Cookie"}
+                  {confirmation === 'accepted' ? '您已接受 Cookie' : '您已拒绝 Cookie'}
                   <span className="mx-1">·</span>
-                  <Link
-                    href="/policies/privacy"
-                    className="text-blue-600 hover:underline"
-                  >
+                  <Link href="/policies/privacy" className="text-blue-600 hover:underline">
                     查看隐私政策
                   </Link>
                 </p>
               </div>
               <button
                 onClick={hideConfirmation}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                className="rounded-full p-1 transition-colors hover:bg-gray-100"
                 aria-label="关闭"
               >
-                <X className="w-4 h-4 text-gray-500" />
+                <X className="h-4 w-4 text-gray-500" />
               </button>
             </div>
           </div>
@@ -87,17 +80,17 @@ export function CookieBanner() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
         transition={{ duration: 0.3 }}
-        className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50"
+        className="fixed bottom-0 left-0 right-0 z-50 border-t bg-white shadow-lg"
         role="region"
         aria-label="Cookie 设置"
       >
-        <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
+        <div className="mx-auto max-w-7xl px-4 py-4 md:py-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center">
             <div className="flex-1">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
                   <svg
-                    className="w-4 h-4 text-blue-600"
+                    className="h-4 w-4 text-blue-600"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -111,26 +104,17 @@ export function CookieBanner() {
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-1">
-                    Cookie 设置
-                  </h2>
-                  <div className="text-sm text-gray-600 space-y-1">
+                  <h2 className="mb-1 text-lg font-semibold text-gray-900">Cookie 设置</h2>
+                  <div className="space-y-1 text-sm text-gray-600">
                     <p>我们使用必要的 Cookie 来使网站正常运行。</p>
                     <p>
-                      我们还想使用分析 Cookie
-                      来了解您如何使用本网站，以便我们可以改进服务。
+                      我们还想使用分析 Cookie 来了解您如何使用本网站，以便我们可以改进服务。
                       这需要您的同意。详细信息请查看我们的
-                      <Link
-                        href="/policies/privacy"
-                        className="text-blue-600 hover:underline mx-1"
-                      >
+                      <Link href="/policies/privacy" className="mx-1 text-blue-600 hover:underline">
                         隐私政策
                       </Link>
                       和
-                      <Link
-                        href="/policies/terms"
-                        className="text-blue-600 hover:underline mx-1"
-                      >
+                      <Link href="/policies/terms" className="mx-1 text-blue-600 hover:underline">
                         服务条款
                       </Link>
                       。
@@ -139,22 +123,22 @@ export function CookieBanner() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 md:ml-4">
+            <div className="flex flex-col gap-3 sm:flex-row md:ml-4">
               <button
                 onClick={() => handleCookieChoice(true)}
-                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="rounded-md bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 接受所有 Cookie
               </button>
               <button
                 onClick={() => handleCookieChoice(false)}
-                className="px-6 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="rounded-md border border-gray-300 bg-white px-6 py-2 text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
               >
                 仅使用必要的 Cookie
               </button>
               <Link
                 href="/policies/privacy#cookies"
-                className="px-6 py-2 text-blue-600 hover:underline text-center"
+                className="px-6 py-2 text-center text-blue-600 hover:underline"
               >
                 查看 Cookie 详情
               </Link>

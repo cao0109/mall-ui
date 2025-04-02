@@ -1,10 +1,11 @@
+import { Store, Truck } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+
 import { RegisterFormValues } from '@/app/[locale]/auth/register/page';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Store, Truck } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { UseFormReturn } from 'react-hook-form';
 
 interface RoleSelectProps {
   form: UseFormReturn<RegisterFormValues>;

@@ -1,11 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Clock, Command, History, Search, Sparkles } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 export function SearchDialog() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);

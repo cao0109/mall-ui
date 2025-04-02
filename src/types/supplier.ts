@@ -7,7 +7,7 @@ export interface Supplier {
   email: string;
   address: string;
   description: string;
-  status: "active" | "inactive";
+  status: 'active' | 'inactive';
   logo: string;
   rating: number;
   totalOrders: number;
@@ -31,7 +31,7 @@ export interface SupplierProduct {
   productCode: string;
   price: number;
   currency: string;
-  status: "active" | "inactive";
+  status: 'active' | 'inactive';
   image: string;
   category: string;
   stock: number;
@@ -39,4 +39,4 @@ export interface SupplierProduct {
   rating: string;
   createdAt: string;
   updatedAt: string;
-} 
+}

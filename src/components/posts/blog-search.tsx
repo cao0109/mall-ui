@@ -1,11 +1,13 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { BlogPost } from '@/hooks/use-blog';
 import { Search, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { BlogPost } from '@/hooks/use-blog';
+
 import { SearchSuggestions } from './search-suggestions';
 
 interface BlogSearchProps {

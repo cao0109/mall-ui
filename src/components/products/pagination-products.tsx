@@ -1,12 +1,13 @@
 'use client';
 
-import { ProductCard } from '@/components/products/product-card';
-import { ProductSkeleton } from '@/components/products/product-skeleton';
-import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Package } from 'lucide-react';
 import { useProducts } from 'medusa-react';
 import { useEffect } from 'react';
+
+import { ProductCard } from '@/components/products/product-card';
+import { ProductSkeleton } from '@/components/products/product-skeleton';
+import { cn } from '@/lib/utils';
 
 interface MedusaProductsProps {
   searchQuery: string;

@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "./loading-spinner";
+import { LoadingSpinner } from './loading-spinner';
 
 interface LoadingScreenProps {
   text?: string;

@@ -1,13 +1,14 @@
 'use client';
 
+import { Heart, Star } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 // import { useToast } from "@/hooks/use-toast";
 import { cn } from '@/lib/utils';
 // import { useSelectionStore } from "@/store/selection";
-import { Heart, Star } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
 
 export interface Product {
   id: string;

@@ -9,13 +9,11 @@ interface DataOverviewProps {
 export default function DataOverview({ title, items }: DataOverviewProps) {
   return (
     <div className="text-center">
-      <h2 className="text-2xl font-semibold mb-8">{title}</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <h2 className="mb-8 text-2xl font-semibold">{title}</h2>
+      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
         {items.map((item, index) => (
-          <div key={index} className="p-6 rounded-lg bg-card border shadow-sm">
-            <div className="text-3xl font-bold text-primary mb-2">
-              {item.value}
-            </div>
+          <div key={index} className="rounded-lg border bg-card p-6 shadow-sm">
+            <div className="mb-2 text-3xl font-bold text-primary">{item.value}</div>
             <div className="text-muted-foreground">{item.label}</div>
           </div>
         ))}

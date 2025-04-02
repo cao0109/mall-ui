@@ -1,10 +1,12 @@
 'use client';
 
-import { PricedProduct } from '@/types/product';
 import { Package } from 'lucide-react';
 import { useProduct } from 'medusa-react';
-import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+
+import { PricedProduct } from '@/types/product';
+
 import { ProductBreadcrumb } from './product-breadcrumb';
 import { ProductGallery } from './product-gallery';
 import { ProductInfo } from './product-info';

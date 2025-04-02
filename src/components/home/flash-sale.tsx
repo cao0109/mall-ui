@@ -1,10 +1,11 @@
 'use client';
 
+import { Timer } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
 import { SectionHeader } from '@/components/home/section-header';
 import { ProductCard } from '@/components/product/product-card';
 import { products } from '@/lib/data';
-import { Timer } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 
 export default function FlashSale() {
   const t = useTranslations();

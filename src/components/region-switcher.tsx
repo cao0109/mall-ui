@@ -1,5 +1,10 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
+import { Check, Globe } from 'lucide-react';
+import { useCart, useRegions } from 'medusa-react';
+import { useTranslations } from 'next-intl';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,10 +13,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Check, Globe } from 'lucide-react';
-import { useCart, useRegions } from 'medusa-react';
-import { useTranslations } from 'next-intl';
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },

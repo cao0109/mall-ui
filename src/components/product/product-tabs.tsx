@@ -1,10 +1,11 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PricedProduct } from '@/types/product';
-import { useTranslations } from 'next-intl';
 
 interface ProductTabsProps {
   product: PricedProduct;

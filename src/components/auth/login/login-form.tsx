@@ -1,3 +1,13 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRight, Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import { useAdminLogin } from 'medusa-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -18,15 +28,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useAuthStore } from '@/store/auth';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowRight, Eye, EyeOff, Lock, Mail } from 'lucide-react';
-import { useAdminLogin } from 'medusa-react';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 const formSchema = z.object({
   email: z.string().email('请输入有效的邮箱地址'),

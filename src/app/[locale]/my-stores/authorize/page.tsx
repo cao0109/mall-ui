@@ -1,40 +1,41 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { Building2, Check, ExternalLink, Plus } from "lucide-react";
-import Image from "next/image";
+import { Building2, Check, ExternalLink, Plus } from 'lucide-react';
+import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 
 const platforms = [
   {
-    id: "shopify",
-    name: "Shopify",
-    logo: "/platforms/shopify.png",
-    description: "全球领先的独立站电商平台",
+    id: 'shopify',
+    name: 'Shopify',
+    logo: '/platforms/shopify.png',
+    description: '全球领先的独立站电商平台',
   },
   {
-    id: "woocommerce",
-    name: "WooCommerce",
-    logo: "/platforms/woocommerce.png",
-    description: "基于WordPress的电商解决方案",
+    id: 'woocommerce',
+    name: 'WooCommerce',
+    logo: '/platforms/woocommerce.png',
+    description: '基于WordPress的电商解决方案',
   },
   {
-    id: "magento",
-    name: "Magento",
-    logo: "/platforms/magento.png",
-    description: "企业级电商平台",
+    id: 'magento',
+    name: 'Magento',
+    logo: '/platforms/magento.png',
+    description: '企业级电商平台',
   },
 ];
 
 const authorizedStores = [
   {
     id: 1,
-    name: "My Fashion Store",
-    platform: "Shopify",
-    url: "https://my-fashion-store.myshopify.com",
-    status: "已连接",
-    authorizedAt: "2024-03-26",
+    name: 'My Fashion Store',
+    platform: 'Shopify',
+    url: 'https://my-fashion-store.myshopify.com',
+    status: '已连接',
+    authorizedAt: '2024-03-26',
   },
 ];
 
@@ -47,11 +48,9 @@ export default function StoreAuthorizePage() {
       window.location.href = `/api/auth/${platformId}/authorize`;
     } catch (error) {
       toast({
-        title: "授权失败",
-        description: `请稍后重试: ${
-          error instanceof Error ? error.message : "未知错误"
-        }`,
-        variant: "destructive",
+        title: '授权失败',
+        description: `请稍后重试: ${error instanceof Error ? error.message : '未知错误'}`,
+        variant: 'destructive',
       });
     }
   };
@@ -59,24 +58,22 @@ export default function StoreAuthorizePage() {
   const handleDisconnect = async (storeId: number) => {
     try {
       const response = await fetch(`/api/stores/${storeId}/disconnect`, {
-        method: "POST",
+        method: 'POST',
       });
 
       if (response.ok) {
         toast({
-          title: "解除连接成功",
-          description: "店铺已成功解除连接",
+          title: '解除连接成功',
+          description: '店铺已成功解除连接',
         });
       } else {
-        throw new Error("Failed to disconnect");
+        throw new Error('Failed to disconnect');
       }
     } catch (error) {
       toast({
-        title: "解除连接失败",
-        description: `请稍后重试: ${
-          error instanceof Error ? error.message : "未知错误"
-        }`,
-        variant: "destructive",
+        title: '解除连接失败',
+        description: `请稍后重试: ${error instanceof Error ? error.message : '未知错误'}`,
+        variant: 'destructive',
       });
     }
   };
@@ -87,31 +84,27 @@ export default function StoreAuthorizePage() {
         {/* 页面标题 */}
         <div>
           <h1 className="text-2xl font-bold">店铺授权</h1>
-          <p className="text-muted-foreground mt-2">
-            连接您的电商平台，开始同步商品
-          </p>
+          <p className="mt-2 text-muted-foreground">连接您的电商平台，开始同步商品</p>
         </div>
 
         {/* 已授权店铺 */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold">已连接的店铺</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {authorizedStores.map((store) => (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {authorizedStores.map(store => (
               <Card key={store.id} className="p-6">
-                <div className="flex items-center gap-4 mb-4">
+                <div className="mb-4 flex items-center gap-4">
                   <Building2 className="h-8 w-8 text-primary" />
                   <div>
                     <h3 className="font-semibold">{store.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {store.platform}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{store.platform}</p>
                   </div>
                 </div>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">状态</span>
                     <span className="flex items-center text-green-600">
-                      <Check className="h-4 w-4 mr-1" />
+                      <Check className="mr-1 h-4 w-4" />
                       {store.status}
                     </span>
                   </div>
@@ -125,14 +118,14 @@ export default function StoreAuthorizePage() {
                       href={store.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-primary hover:underline flex items-center"
+                      className="flex items-center text-primary hover:underline"
                     >
                       访问
-                      <ExternalLink className="h-3 w-3 ml-1" />
+                      <ExternalLink className="ml-1 h-3 w-3" />
                     </a>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t">
+                <div className="mt-4 border-t pt-4">
                   <Button
                     variant="destructive"
                     className="w-full"
@@ -149,11 +142,11 @@ export default function StoreAuthorizePage() {
         {/* 可授权平台 */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold">添加新店铺</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {platforms.map((platform) => (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {platforms.map(platform => (
               <Card key={platform.id} className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="h-12 w-12 rounded-lg overflow-hidden">
+                <div className="mb-4 flex items-center gap-4">
+                  <div className="h-12 w-12 overflow-hidden rounded-lg">
                     <Image
                       src={platform.logo}
                       alt={platform.name}
@@ -165,16 +158,11 @@ export default function StoreAuthorizePage() {
                   </div>
                   <div>
                     <h3 className="font-semibold">{platform.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {platform.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{platform.description}</p>
                   </div>
                 </div>
-                <Button
-                  className="w-full"
-                  onClick={() => handleAuthorize(platform.id)}
-                >
-                  <Plus className="h-4 w-4 mr-2" />
+                <Button className="w-full" onClick={() => handleAuthorize(platform.id)}>
+                  <Plus className="mr-2 h-4 w-4" />
                   连接店铺
                 </Button>
               </Card>

@@ -1,3 +1,9 @@
+import { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
+import { notFound } from 'next/navigation';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { ThemeProvider } from 'next-themes';
+
 import { CookieBanner } from '@/components/cookie/cookie-banner';
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
@@ -8,11 +14,6 @@ import { SkipToContent } from '@/components/skip-to-content';
 import { Toaster } from '@/components/ui/toaster';
 import { routing } from '@/i18n/routing';
 import { MedusaWrapper } from '@/lib/medusa-provider';
-import { Metadata, Viewport } from 'next';
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { ThemeProvider } from 'next-themes';
-import { Inter } from 'next/font/google';
-import { notFound } from 'next/navigation';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });

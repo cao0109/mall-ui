@@ -1,15 +1,17 @@
 'use client';
 
+import { Building2, Package, ShoppingCart, Star, Upload } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useSelectionStore } from '@/store/selection';
 import { PricedProduct } from '@/types/product';
-import { Building2, Package, ShoppingCart, Star, Upload } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import { useState } from 'react';
+
 import { SyncProductData, SyncProductSheet } from '../products/sync-product-sheet';
 
 interface ProductInfoProps {

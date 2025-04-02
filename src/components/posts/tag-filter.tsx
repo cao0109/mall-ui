@@ -1,8 +1,9 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Tag } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+
+import { Button } from '@/components/ui/button';
 
 interface TagFilterProps {
   tags: string[];

@@ -1,12 +1,13 @@
 'use client';
 
+import { Flame, Truck } from 'lucide-react';
+import Image from 'next/image';
+import { useState } from 'react';
+
 import { SectionHeader } from '@/components/home/section-header';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { products } from '@/lib/data';
-import { Flame, Truck } from 'lucide-react';
-import Image from 'next/image';
-import { useState } from 'react';
 
 const tabs = ['全部', '3C数码', '智能家居', '户外运动', '美妆个护'] as const;
 

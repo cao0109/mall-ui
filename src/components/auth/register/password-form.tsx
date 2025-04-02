@@ -1,3 +1,7 @@
+import { Eye, EyeOff, Lock } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+
 import { RegisterFormValues } from '@/app/[locale]/auth/register/page';
 import {
   FormControl,
@@ -8,9 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Eye, EyeOff, Lock } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { UseFormReturn } from 'react-hook-form';
+
 import { PasswordStrengthIndicator } from './password-strength-indicator';
 
 interface PasswordFormProps {

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { LoadingScreen } from "@/components/ui/loading-screen";
-import { useLoadingStore } from "@/store/loading-store";
+import { LoadingScreen } from '@/components/ui/loading-screen';
+import { useLoadingStore } from '@/store/loading-store';
 
 export function LoadingProvider() {
   const { isLoading, loadingText } = useLoadingStore();

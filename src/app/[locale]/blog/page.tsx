@@ -1,21 +1,27 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { ArrowUpDown, Bookmark, Calendar, Clock, Grid, List, User } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+
 import { BlogSearch } from '@/components/posts/blog-search';
 import { HighlightText } from '@/components/posts/highlight-text';
 import { SearchHistory } from '@/components/posts/search-history';
 import { TagFilter } from '@/components/posts/tag-filter';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useBlogPosts } from '@/hooks/use-blog';
 import { addBlogSearchHistory } from '@/lib/search-history';
-import { motion } from 'framer-motion';
-import { ArrowUpDown, Bookmark, Calendar, Clock, Grid, List, User } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 // 视图类型
 type ViewType = 'grid' | 'list';
@@ -95,9 +101,7 @@ export default function BlogPage() {
           <h1 className="mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-5xl font-bold text-transparent">
             {t('blog.title')}
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            {t('blog.description')}
-          </p>
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">{t('blog.description')}</p>
         </motion.div>
 
         {/* 搜索框 */}
@@ -139,7 +143,9 @@ export default function BlogPage() {
               {t('blog.searchResults')}: &quot;{searchQuery}&quot;
             </h2>
             <p className="mt-2 text-muted-foreground">
-              {filteredPosts?.length === 0 ? t('blog.noResults') : `${filteredPosts?.length} 篇文章`}
+              {filteredPosts?.length === 0
+                ? t('blog.noResults')
+                : `${filteredPosts?.length} 篇文章`}
             </p>
           </motion.div>
         )}
@@ -175,11 +181,7 @@ export default function BlogPage() {
             {/* 排序下拉菜单 */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-2"
-                >
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
                   <ArrowUpDown className="h-4 w-4" />
                   <span className="hidden md:inline">
                     {sortBy === 'date' ? t('blog.sortByDate') : t('blog.sortByPopularity')}
@@ -187,14 +189,14 @@ export default function BlogPage() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem 
+                <DropdownMenuItem
                   onClick={() => setSortBy('date')}
                   className="flex items-center gap-2"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>{t('blog.sortByDate')}</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem 
+                <DropdownMenuItem
                   onClick={() => setSortBy('popularity')}
                   className="flex items-center gap-2"
                 >
@@ -224,7 +226,7 @@ export default function BlogPage() {
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-              
+
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -249,8 +251,12 @@ export default function BlogPage() {
 
         {/* 文章列表 */}
         {isLoading ? (
-          <div className={viewType === 'grid' ? "grid gap-8 md:grid-cols-2 lg:grid-cols-3" : "space-y-6"}>
-            {[1, 2, 3].map(i => (
+          <div
+            className={
+              viewType === 'grid' ? 'grid gap-8 md:grid-cols-2 lg:grid-cols-3' : 'space-y-6'
+            }
+          >
+            {[1, 2, 3].map(i =>
               viewType === 'grid' ? (
                 <div key={i} className="animate-pulse">
                   <div className="h-48 rounded-lg bg-muted" />
@@ -270,7 +276,7 @@ export default function BlogPage() {
                   </div>
                 </div>
               )
-            ))}
+            )}
           </div>
         ) : sortedPosts?.length === 0 ? (
           <motion.div
@@ -306,7 +312,11 @@ export default function BlogPage() {
                             key={tag}
                             className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm"
                           >
-                            {searchQuery ? <HighlightText text={tag} highlight={searchQuery} /> : tag}
+                            {searchQuery ? (
+                              <HighlightText text={tag} highlight={searchQuery} />
+                            ) : (
+                              tag
+                            )}
                           </span>
                         ))}
                       </div>
@@ -376,11 +386,7 @@ export default function BlogPage() {
                   <div className="flex flex-1 flex-col p-6">
                     <div className="mb-3 flex flex-wrap gap-2">
                       {post.tags.map(tag => (
-                        <Badge
-                          key={tag}
-                          variant="outline"
-                          className="bg-primary/5"
-                        >
+                        <Badge key={tag} variant="outline" className="bg-primary/5">
                           {searchQuery ? <HighlightText text={tag} highlight={searchQuery} /> : tag}
                         </Badge>
                       ))}

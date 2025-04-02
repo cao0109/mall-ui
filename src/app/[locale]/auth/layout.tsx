@@ -1,7 +1,8 @@
 'use client';
 
-import { BrandIntro } from '@/components/auth/brand-intro';
 import { usePathname, useSearchParams } from 'next/navigation';
+
+import { BrandIntro } from '@/components/auth/brand-intro';
 
 interface AuthLayoutProps {
   children: React.ReactNode;

@@ -1,8 +1,9 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { ExternalLink, Star } from 'lucide-react';
 import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
 
 interface Supplier {
   id: number | string;

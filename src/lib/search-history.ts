@@ -11,7 +11,7 @@ const MAX_HISTORY_ITEMS = 10;
  */
 export function getBlogSearchHistory(): string[] {
   if (typeof window === 'undefined') return [];
-  
+
   try {
     const history = localStorage.getItem(STORAGE_KEY);
     return history ? JSON.parse(history) : [];
@@ -27,21 +27,21 @@ export function getBlogSearchHistory(): string[] {
  */
 export function addBlogSearchHistory(query: string): void {
   if (typeof window === 'undefined' || !query.trim()) return;
-  
+
   try {
     const history = getBlogSearchHistory();
-    
+
     // 过滤重复项
     const newHistory = history.filter(item => item.toLowerCase() !== query.toLowerCase());
-    
+
     // 添加到最前面
     newHistory.unshift(query);
-    
+
     // 限制历史记录数量
     if (newHistory.length > MAX_HISTORY_ITEMS) {
       newHistory.pop();
     }
-    
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newHistory));
   } catch (error) {
     console.error('保存搜索历史失败:', error);
@@ -53,7 +53,7 @@ export function addBlogSearchHistory(query: string): void {
  */
 export function clearBlogSearchHistory(): void {
   if (typeof window === 'undefined') return;
-  
+
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch (error) {
@@ -67,7 +67,7 @@ export function clearBlogSearchHistory(): void {
  */
 export function removeBlogSearchHistoryItem(query: string): void {
   if (typeof window === 'undefined') return;
-  
+
   try {
     const history = getBlogSearchHistory();
     const filteredHistory = history.filter(item => item !== query);
@@ -75,4 +75,4 @@ export function removeBlogSearchHistoryItem(query: string): void {
   } catch (error) {
     console.error('删除搜索历史项失败:', error);
   }
-} 
+}

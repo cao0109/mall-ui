@@ -1,6 +1,6 @@
 import { ArrowRight, BarChart3, Building2, Globe2, Store, Truck, Users } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface BrandIntroProps {
   role?: 'vendor' | 'seller';

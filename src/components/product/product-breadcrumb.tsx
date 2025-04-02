@@ -1,8 +1,9 @@
 'use client';
 
-import { PricedProduct } from '@/types/product';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+
+import { PricedProduct } from '@/types/product';
 
 interface ProductBreadcrumbProps {
   product: PricedProduct;

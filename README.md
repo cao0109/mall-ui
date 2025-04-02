@@ -30,11 +30,13 @@
 ### 开发流程
 
 1. 安装依赖：
+
 ```bash
 npm install
 ```
 
 2. 开发时：
+
 - 使用 `npm run dev` 启动开发服务器
 - 使用 `npm run lint` 检查代码
 - 使用 `npm run format` 格式化代码

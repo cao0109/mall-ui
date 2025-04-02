@@ -1,10 +1,11 @@
 'use client';
 
+import Image from 'next/image';
+
 import { BlogChart } from '@/components/posts/blog-chart';
 import { BlogCodeBlock } from '@/components/posts/blog-code-block';
 import { BlogVideo } from '@/components/posts/blog-video';
 import { Card } from '@/components/ui/card';
-import Image from 'next/image';
 
 export default function RichContentExamplePage() {
   // 示例数据 - 销售数据

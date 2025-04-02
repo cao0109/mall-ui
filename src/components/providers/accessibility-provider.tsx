@@ -1,21 +1,15 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef } from 'react';
 
 interface AccessibilityContextType {
   trapFocus: (element: HTMLElement) => void;
   releaseFocus: () => void;
 }
 
-const AccessibilityContext = createContext<
-  AccessibilityContextType | undefined
->(undefined);
+const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
 
-export function AccessibilityProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function AccessibilityProvider({ children }: { children: React.ReactNode }) {
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const trapFocus = (element: HTMLElement) => {
@@ -29,11 +23,9 @@ export function AccessibilityProvider({
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Tab") {
+      if (e.key === 'Tab') {
         const firstFocusable = focusableElements[0] as HTMLElement;
-        const lastFocusable = focusableElements[
-          focusableElements.length - 1
-        ] as HTMLElement;
+        const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
 
         if (e.shiftKey) {
           if (document.activeElement === firstFocusable) {
@@ -48,13 +40,13 @@ export function AccessibilityProvider({
         }
       }
 
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         releaseFocus();
       }
     };
 
-    element.addEventListener("keydown", handleKeyDown);
-    return () => element.removeEventListener("keydown", handleKeyDown);
+    element.addEventListener('keydown', handleKeyDown);
+    return () => element.removeEventListener('keydown', handleKeyDown);
   };
 
   const releaseFocus = () => {
@@ -74,9 +66,7 @@ export function AccessibilityProvider({
 export const useAccessibility = () => {
   const context = useContext(AccessibilityContext);
   if (!context) {
-    throw new Error(
-      "useAccessibility must be used within an AccessibilityProvider"
-    );
+    throw new Error('useAccessibility must be used within an AccessibilityProvider');
   }
   return context;
 };

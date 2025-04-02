@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
-import { ReactNode } from "react";
+import { ArrowRight } from 'lucide-react';
+import { ReactNode } from 'react';
+
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface SectionHeaderProps {
   title: string;
@@ -15,7 +16,7 @@ interface SectionHeaderProps {
   icon?: ReactNode;
   badge?: {
     text: string;
-    variant?: "default" | "primary" | "secondary" | "outline" | "destructive";
+    variant?: 'default' | 'primary' | 'secondary' | 'outline' | 'destructive';
   };
   className?: string;
 }
@@ -29,16 +30,16 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <div className={cn("flex items-center justify-between", className)}>
+    <div className={cn('flex items-center justify-between', className)}>
       <div className="relative">
-        <h2 className="text-2xl font-semibold flex items-center gap-2">
+        <h2 className="flex items-center gap-2 text-2xl font-semibold">
           {icon}
           {title}
         </h2>
-        {subtitle && <p className="text-muted-foreground mt-1">{subtitle}</p>}
+        {subtitle && <p className="mt-1 text-muted-foreground">{subtitle}</p>}
         {badge && (
-          <div className="absolute -top-2 -right-12 rotate-12">
-            <span className="inline-block bg-red-50 text-red-500 text-xs px-2 py-1 rounded-full">
+          <div className="absolute -right-12 -top-2 rotate-12">
+            <span className="inline-block rounded-full bg-red-50 px-2 py-1 text-xs text-red-500">
               {badge.text}
             </span>
           </div>
@@ -47,7 +48,7 @@ export function SectionHeader({
       {action && (
         <Button variant="ghost" className="group" onClick={action.onClick}>
           {action.label}
-          <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Button>
       )}
     </div>

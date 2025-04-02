@@ -4,4 +4,4 @@ declare module '@medusajs/medusa' {
   interface ProductCategory extends MedusaProductCategory {
     image?: string;
   }
-} 
+}

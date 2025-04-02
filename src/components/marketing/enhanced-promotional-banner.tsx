@@ -1,9 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Building2, Globe2, Package, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
 
 interface EnhancedPromotionalBannerProps {
   title: string;

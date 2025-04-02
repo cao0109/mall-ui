@@ -1,11 +1,11 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export type User = {
   id: string;
   name: string;
   email: string;
-  role: "vendor" | "seller";
+  role: 'vendor' | 'seller';
   avatar: string;
 };
 
@@ -19,16 +19,15 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    set => ({
       user: null,
       token: null,
       isAuthenticated: false,
-      login: (user: User, token: string) =>
-        set({ user, token, isAuthenticated: true }),
+      login: (user: User, token: string) => set({ user, token, isAuthenticated: true }),
       logout: () => set({ user: null, token: null, isAuthenticated: false }),
     }),
     {
-      name: "auth-storage",
+      name: 'auth-storage',
     }
   )
-); 
+);

@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000';
 
 interface RegisterParams {
   email: string;
@@ -26,22 +26,22 @@ interface UserData {
 }
 
 export class ApiError extends Error {
-  constructor(public status: number, message: string) {
+  constructor(
+    public status: number,
+    message: string
+  ) {
     super(message);
-    this.name = "ApiError";
+    this.name = 'ApiError';
   }
 }
 
 export class ApiService {
-  private static async request<T>(
-    endpoint: string,
-    options: RequestInit
-  ): Promise<T> {
+  private static async request<T>(endpoint: string, options: RequestInit): Promise<T> {
     try {
       const response = await fetch(`${API_BASE_URL}${endpoint}`, {
         ...options,
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           ...options.headers,
         },
       });
@@ -49,7 +49,7 @@ export class ApiService {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new ApiError(response.status, data.message || "请求失败");
+        throw new ApiError(response.status, data.message || '请求失败');
       }
 
       return data;
@@ -57,38 +57,37 @@ export class ApiService {
       if (error instanceof ApiError) {
         throw error;
       }
-      throw new ApiError(500, "网络请求失败");
+      throw new ApiError(500, '网络请求失败');
     }
   }
 
   static async registerVendor(params: RegisterParams): Promise<ApiResponse<UserData>> {
-    return this.request<ApiResponse<UserData>>("/vendor/users", {
-      method: "POST",
+    return this.request<ApiResponse<UserData>>('/vendor/users', {
+      method: 'POST',
       body: JSON.stringify(params),
     });
   }
 
   static async registerSeller(params: RegisterParams): Promise<ApiResponse<UserData>> {
-    return this.request<ApiResponse<UserData>>("/seller/users", {
-      method: "POST",
+    return this.request<ApiResponse<UserData>>('/seller/users', {
+      method: 'POST',
       body: JSON.stringify(params),
     });
   }
 
   static async login(params: LoginParams): Promise<ApiResponse<UserData>> {
-    return this.request<ApiResponse<UserData>>("/auth/token", {
-      method: "POST",
+    return this.request<ApiResponse<UserData>>('/auth/token', {
+      method: 'POST',
       body: JSON.stringify(params),
     });
   }
 
   static async sendVerificationCode(email: string): Promise<void> {
-    return this.request<void>("/auth/email/code", {
-      method: "POST",
+    return this.request<void>('/auth/email/code', {
+      method: 'POST',
       body: JSON.stringify({ email }),
     });
   }
 }
 
 export type { ApiResponse, LoginParams, RegisterParams, UserData };
-

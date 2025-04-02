@@ -12,4 +12,4 @@ export function calculatePasswordStrength(password: string): number {
   if (/[0-9]/.test(password)) strength++;
   if (/[@$!%*?&#]/.test(password)) strength++;
   return Math.min(5, strength);
-} 
+}

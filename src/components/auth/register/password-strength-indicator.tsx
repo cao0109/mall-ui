@@ -1,6 +1,7 @@
-import { calculatePasswordStrength } from '@/lib/utils/password';
 import { Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+
+import { calculatePasswordStrength } from '@/lib/utils/password';
 
 interface PasswordStrengthIndicatorProps {
   password: string;
