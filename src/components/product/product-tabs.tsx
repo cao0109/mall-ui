@@ -7,6 +7,8 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PricedProduct } from '@/types/product';
 
+import { ProductReviews } from './product-reviews';
+
 interface ProductTabsProps {
   product: PricedProduct;
 }
@@ -21,6 +23,71 @@ interface Spec {
 export function ProductTabs({ product }: ProductTabsProps) {
   const t = useTranslations('product.tabs');
 
+  // 模拟评论数据
+  const mockReviews = [
+    {
+      id: '1',
+      title: '非常满意的购物体验',
+      content:
+        '商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！',
+      rating: 5,
+      customer: {
+        first_name: '张',
+        last_name: '小明',
+        email: 'xiaoming@example.com',
+      },
+      created_at: '2024-04-05T10:30:00Z',
+    },
+    {
+      id: '2',
+      title: '性价比很高',
+      content: '价格实惠，商品和描述的一样。就是发货稍微有点慢，其他都挺好的。',
+      rating: 4,
+      customer: {
+        first_name: '李',
+        last_name: '华',
+        email: 'lihua@example.com',
+      },
+      created_at: '2024-04-03T15:20:00Z',
+    },
+    {
+      id: '3',
+      title: '一般般吧',
+      content: '商品本身没什么问题，但是款式跟图片有点差异。建议卖家把产品图片拍得更真实一些。',
+      rating: 3,
+      customer: {
+        first_name: '王',
+        last_name: '芳',
+        email: 'wangfang@example.com',
+      },
+      created_at: '2024-04-01T09:15:00Z',
+    },
+    {
+      id: '4',
+      title: '非常满意的购物体验',
+      content:
+        '商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！',
+      rating: 5,
+      created_at: '2024-03-30T09:15:00Z',
+    },
+    {
+      id: '5',
+      title: '非常满意的购物体验',
+      content:
+        '商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！',
+      rating: 5,
+      created_at: '2024-03-29T09:15:00Z',
+    },
+    {
+      id: '6',
+      title: '非常满意的购物体验',
+      content:
+        '商品质量很好，物流速度快，包装也很完整。卖家服务态度很好，有问必答。下次还会继续购买！',
+      rating: 5,
+      created_at: '2024-03-28T09:15:00Z',
+    },
+  ];
+
   // 提取产品规格
   const specs = product.variants.map(variant => ({
     title: variant.title,
@@ -29,19 +96,13 @@ export function ProductTabs({ product }: ProductTabsProps) {
   })) as Spec[];
 
   return (
-    <Tabs defaultValue="details" className="mt-6 sm:mt-8">
-      <TabsList className="w-full sm:w-auto">
-        <TabsTrigger value="details" className="flex-1 text-xs sm:flex-initial sm:text-sm">
-          {t('details')}
-        </TabsTrigger>
-        <TabsTrigger value="specs" className="flex-1 text-xs sm:flex-initial sm:text-sm">
-          {t('specs')}
-        </TabsTrigger>
-        <TabsTrigger value="shipping" className="flex-1 text-xs sm:flex-initial sm:text-sm">
-          {t('shipping')}
-        </TabsTrigger>
+    <Tabs defaultValue="description" className="w-full">
+      <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger value="description">商品描述</TabsTrigger>
+        <TabsTrigger value="specs">规格参数</TabsTrigger>
+        <TabsTrigger value="reviews">用户评价</TabsTrigger>
       </TabsList>
-      <TabsContent value="details" className="mt-3 sm:mt-4">
+      <TabsContent value="description" className="mt-3 sm:mt-4">
         <Card className="p-4 sm:p-6">
           <div className="prose dark:prose-invert max-w-none text-sm sm:text-base">
             <h2 className="text-lg sm:text-xl">{t('description')}</h2>
@@ -131,23 +192,10 @@ export function ProductTabs({ product }: ProductTabsProps) {
           </div>
         </Card>
       </TabsContent>
-      <TabsContent value="shipping" className="mt-3 sm:mt-4">
-        <Card className="p-4 sm:p-6">
-          <div className="space-y-3 text-sm sm:space-y-4 sm:text-base">
-            <div>
-              <h3 className="font-semibold">{t('shippingOrigin')}</h3>
-              <p className="text-muted-foreground">
-                {String(product.metadata?.origin || t('china'))}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold">{t('shippingMethod')}</h3>
-              <p className="text-muted-foreground">
-                {String(product.metadata?.shipping_methods || t('standardShipping'))}
-              </p>
-            </div>
-          </div>
-        </Card>
+      <TabsContent value="reviews">
+        <div className="space-y-6">
+          <ProductReviews reviews={mockReviews} />
+        </div>
       </TabsContent>
     </Tabs>
   );
