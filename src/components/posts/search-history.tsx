@@ -35,6 +35,10 @@ export function SearchHistory({ onSelectHistory, className }: SearchHistoryProps
     setHistory(prev => prev.filter(item => item !== term));
   };
 
+  const handleSelectHistory = (term: string) => {
+    onSelectHistory(term);
+  };
+
   if (!history.length) return null;
 
   return (
@@ -42,7 +46,7 @@ export function SearchHistory({ onSelectHistory, className }: SearchHistoryProps
       <div className="mb-2 flex items-center justify-between">
         <h3 className="flex items-center text-sm font-medium text-muted-foreground">
           <Clock className="mr-1.5 h-3.5 w-3.5" />
-          搜索历史
+          Search History
         </h3>
         <Button
           variant="ghost"
@@ -55,10 +59,16 @@ export function SearchHistory({ onSelectHistory, className }: SearchHistoryProps
       </div>
       <div className="flex flex-wrap gap-2">
         {history.map(term => (
-          <div
+          <button
             key={term}
-            onClick={() => onSelectHistory(term)}
-            className="group flex cursor-pointer items-center gap-1 rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            onClick={() => handleSelectHistory(term)}
+            onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                handleSelectHistory(term);
+              }
+            }}
+            tabIndex={0}
+            className="group flex cursor-pointer items-center gap-1 rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <span>{term}</span>
             <button
@@ -66,9 +76,9 @@ export function SearchHistory({ onSelectHistory, className }: SearchHistoryProps
               className="rounded-full p-0.5 opacity-60 hover:bg-background hover:opacity-100"
             >
               <X className="h-3 w-3" />
-              <span className="sr-only">删除 {term}</span>
+              <span className="sr-only">Delete {term}</span>
             </button>
-          </div>
+          </button>
         ))}
       </div>
     </div>
