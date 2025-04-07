@@ -56,7 +56,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative border-t border-gray-200/30 bg-gradient-to-b from-gray-50 via-white to-gray-50/90 backdrop-blur-xl dark:border-gray-800/30 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950/90">
+    <footer className="relative z-0 border-t border-gray-200/30 bg-gradient-to-b from-gray-50 via-white to-gray-50/90 backdrop-blur-xl dark:border-gray-800/30 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950/90">
       {/* AI 风格装饰元素 */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {/* 网格背景 */}

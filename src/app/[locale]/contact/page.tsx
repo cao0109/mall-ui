@@ -391,7 +391,7 @@ export default function ContactPage() {
                 key={item.name}
                 variants={fadeInUp}
                 whileHover={{ scale: 1.05 }}
-                className="group relative w-40 cursor-pointer rounded-xl border bg-card p-6 shadow-sm transition-all duration-300 hover:shadow-lg"
+                className="group relative z-10 w-40 cursor-pointer rounded-xl border bg-card p-6 shadow-sm transition-all duration-300 hover:shadow-lg"
               >
                 <div
                   className={`h-12 w-12 rounded-full ${item.color} mx-auto flex items-center justify-center transition-all duration-300 group-hover:scale-110`}
