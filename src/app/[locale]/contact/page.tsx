@@ -1,11 +1,36 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { Clock, Mail, MapPin, Phone, Send } from 'lucide-react';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiFillWechat } from 'react-icons/ai';
 import { FaTiktok, FaWeibo } from 'react-icons/fa';
+import * as z from 'zod';
+
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
+
+const formSchema = z.object({
+  name: z.string().min(2, '姓名至少需要2个字符'),
+  email: z.string().email('请输入有效的邮箱地址'),
+  subject: z.string().min(2, '主题至少需要2个字符'),
+  message: z.string().min(10, '留言内容至少需要10个字符'),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -40,8 +65,36 @@ const pulseAnimation = {
 };
 
 export default function ContactPage() {
-  // const t = useTranslations();
   const containerRef = useRef(null);
+  const { toast } = useToast();
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+  });
+
+  const onSubmit = async (data: FormValues) => {
+    try {
+      // TODO: 实现发送留言的逻辑
+      console.log('Form data:', data);
+      toast({
+        title: '提交成功',
+        description: '我们将在24小时内回复您的留言',
+      });
+      form.reset();
+    } catch (error) {
+      toast({
+        title: '提交失败',
+        description: '请稍后重试',
+        variant: 'destructive',
+      });
+    }
+  };
 
   return (
     <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-background to-muted/20">
@@ -177,82 +230,86 @@ export default function ContactPage() {
             className="rounded-lg border bg-card p-8 shadow-sm transition-all duration-300 hover:shadow-lg"
           >
             <h2 className="mb-8 text-2xl font-semibold">在线留言</h2>
-            <form className="space-y-6">
-              <motion.div variants={fadeInUp} className="grid gap-6 md:grid-cols-2">
-                {[
-                  {
-                    label: '姓名',
-                    type: 'text',
-                    placeholder: '请输入您的姓名',
-                  },
-                  {
-                    label: '邮箱',
-                    type: 'email',
-                    placeholder: '请输入您的邮箱',
-                  },
-                ].map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <motion.div variants={fadeInUp} className="grid gap-6 md:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>姓名</FormLabel>
+                        <FormControl>
+                          <Input placeholder="请输入您的姓名" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>邮箱</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="请输入您的邮箱" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </motion.div>
+
+                <motion.div variants={fadeInUp}>
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>主题</FormLabel>
+                        <FormControl>
+                          <Input placeholder="请输入留言主题" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </motion.div>
+
+                <motion.div variants={fadeInUp}>
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>留言内容</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="请输入您的留言内容"
+                            className="h-32 resize-none"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="flex items-center space-x-2">
+                  <Button
+                    type="submit"
+                    className="flex items-center"
+                    disabled={form.formState.isSubmitting}
                   >
-                    <label className="mb-2 block text-sm font-medium">{item.label}</label>
-                    <input
-                      type={item.type}
-                      className="w-full rounded-md border bg-background px-4 py-2 text-sm ring-offset-background transition-all duration-300 placeholder:text-muted-foreground hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      placeholder={item.placeholder}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              <motion.div
-                variants={fadeInUp}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
-              >
-                <label className="mb-2 block text-sm font-medium">主题</label>
-                <input
-                  type="text"
-                  className="w-full rounded-md border bg-background px-4 py-2 text-sm ring-offset-background transition-all duration-300 placeholder:text-muted-foreground hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  placeholder="请输入留言主题"
-                />
-              </motion.div>
-
-              <motion.div
-                variants={fadeInUp}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
-              >
-                <label className="mb-2 block text-sm font-medium">留言内容</label>
-                <textarea
-                  className="h-32 w-full resize-none rounded-md border bg-background px-4 py-2 text-sm ring-offset-background transition-all duration-300 placeholder:text-muted-foreground hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  placeholder="请输入您的留言内容"
-                />
-              </motion.div>
-
-              <motion.div
-                variants={fadeInUp}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
-                className="flex items-center space-x-2"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="submit"
-                  className="flex items-center rounded-md bg-primary px-6 py-2 text-white transition-colors hover:bg-primary/90"
-                >
-                  <Send className="mr-2 h-4 w-4" />
-                  提交留言
-                </motion.button>
-                <p className="text-sm text-muted-foreground">我们将在24小时内回复您的留言</p>
-              </motion.div>
-            </form>
+                    <Send className="mr-2 h-4 w-4" />
+                    {form.formState.isSubmitting ? '提交中...' : '提交留言'}
+                  </Button>
+                  <p className="text-sm text-muted-foreground">我们将在24小时内回复您的留言</p>
+                </motion.div>
+              </form>
+            </Form>
           </motion.div>
         </div>
 

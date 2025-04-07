@@ -98,15 +98,14 @@ export function ProductTabs({ product }: ProductTabsProps) {
   return (
     <Tabs defaultValue="description" className="w-full">
       <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="description">商品描述</TabsTrigger>
-        <TabsTrigger value="specs">规格参数</TabsTrigger>
+        <TabsTrigger value="description">{t('details')}</TabsTrigger>
+        <TabsTrigger value="specs">{t('specifications')}</TabsTrigger>
         <TabsTrigger value="reviews">用户评价</TabsTrigger>
       </TabsList>
       <TabsContent value="description" className="mt-3 sm:mt-4">
         <Card className="p-4 sm:p-6">
           <div className="prose dark:prose-invert max-w-none text-sm sm:text-base">
-            <h2 className="text-lg sm:text-xl">{t('description')}</h2>
-            <p>{product.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: product?.details || '' }} />
           </div>
         </Card>
       </TabsContent>

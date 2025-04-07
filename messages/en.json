@@ -445,16 +445,18 @@
       "syncSuccess": "Sync Successful",
       "syncSuccessDesc": "Product \"{name}\" has been successfully synced to target store",
       "syncFailed": "Sync Failed",
-      "syncFailedDesc": "An error occurred during sync, please try again later"
+      "syncFailedDesc": "An error occurred during sync, please try again later",
+      "outOfStock": "Sell out"
     },
     "gallery": {
-      "imageBrowser": "Product Image Browser",
-      "zoomIn": "Zoom In",
-      "zoomOut": "Zoom Out",
-      "viewImage": "View Image {index}",
-      "previousImage": "Previous Image",
-      "nextImage": "Next Image",
-      "imageCounter": "{current} / {total}"
+      "keyboardNavigation": "Use arrow keys to navigate images",
+      "navigationAccessibility": "Showing image {current} of {total}",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "imageCounter": "{current}/{total}",
+      "viewImage": "View image {index}",
+      "previousImage": "Previous image",
+      "nextImage": "Next image"
     },
     "detail": {
       "loadingFailed": "Failed to load product",

@@ -14,6 +14,8 @@ import { PricedProduct } from '@/types/product';
 
 import { SyncProductData, SyncProductSheet } from '../products/sync-product-sheet';
 
+import { ProductVariantSelector } from './product-variant-selector';
+
 interface ProductInfoProps {
   product: PricedProduct;
 }
@@ -24,9 +26,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const t = useTranslations('product.info');
   const [showSyncModal, setShowSyncModal] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
 
   const handleAddToSelection = () => {
-    const price = product.variants?.[0]?.prices?.[0]?.amount || 0;
+    if (!selectedVariant) return;
+
+    const price = selectedVariant.prices?.[0]?.amount || 0;
     const profitMargin = Number(product.metadata?.profit_margin || 30);
     const suggestedPrice = Math.round(price * (1 + profitMargin / 100));
 
@@ -47,6 +52,11 @@ export function ProductInfo({ product }: ProductInfoProps) {
       suggestedPrice: suggestedPrice / 100,
       shopUrl: `/products/${product.id}`,
       origin: String(product.metadata?.origin || '中国'),
+      // variant: {
+      //   id: selectedVariant.id || '',
+      //   title: selectedVariant.title || '',
+      //   sku: selectedVariant.sku || '',
+      // },
     });
 
     toast({
@@ -100,18 +110,23 @@ export function ProductInfo({ product }: ProductInfoProps) {
       <div className="space-y-3 sm:space-y-4">
         <div className="flex flex-wrap items-baseline gap-2 sm:gap-4">
           <div className="text-2xl font-bold text-primary sm:text-3xl md:text-4xl">
-            ¥{(product.variants?.[0]?.prices?.[0]?.amount || 0) / 100}
+            ¥{(selectedVariant?.prices?.[0]?.amount || 0) / 100}
           </div>
           <div className="text-base text-muted-foreground line-through sm:text-lg">
-            ¥{(((product.variants?.[0]?.prices?.[0]?.amount || 0) * 1.3) / 100).toFixed(2)}
+            ¥{(((selectedVariant?.prices?.[0]?.amount || 0) * 1.3) / 100).toFixed(2)}
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           <Badge variant="secondary" className="text-xs sm:text-sm">
-            {t('sku')}: {product.variants?.[0]?.sku || t('na')}
+            {t('sku')}: {selectedVariant?.sku || t('na')}
           </Badge>
-          <Badge variant="secondary" className="text-xs sm:text-sm">
-            {t('stock')}
+          <Badge
+            variant={selectedVariant?.inventory_quantity ? 'secondary' : 'destructive'}
+            className="text-xs sm:text-sm"
+          >
+            {selectedVariant?.inventory_quantity
+              ? `${t('stock')}: ${selectedVariant.inventory_quantity}`
+              : t('outOfStock')}
           </Badge>
         </div>
       </div>
@@ -192,10 +207,24 @@ export function ProductInfo({ product }: ProductInfoProps) {
           </Card>
         </div>
 
+        <div className="space-y-2">
+          <h3 className="text-sm font-medium">规格选择</h3>
+          <ProductVariantSelector
+            product={product}
+            selectedVariant={selectedVariant}
+            onVariantChange={setSelectedVariant}
+          />
+        </div>
+
         <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-          <Button size="lg" className="h-10 w-full sm:h-12" onClick={handleAddToSelection}>
+          <Button
+            size="lg"
+            className="h-10 w-full sm:h-12"
+            onClick={handleAddToSelection}
+            disabled={!selectedVariant || selectedVariant.inventory_quantity === 0}
+          >
             <ShoppingCart className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-            {t('addToSelection')}
+            {selectedVariant?.inventory_quantity === 0 ? t('outOfStock') : t('addToSelection')}
           </Button>
           <Button
             size="lg"

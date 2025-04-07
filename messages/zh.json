@@ -452,16 +452,18 @@
       "syncSuccess": "同步成功",
       "syncSuccessDesc": "商品\"{name}\"已成功同步到目标店铺",
       "syncFailed": "同步失败",
-      "syncFailedDesc": "同步过程中出现错误，请稍后重试"
+      "syncFailedDesc": "同步过程中出现错误，请稍后重试",
+      "outOfStock": "售罄"
     },
     "gallery": {
-      "imageBrowser": "商品图片浏览器",
-      "zoomIn": "放大查看",
-      "zoomOut": "退出放大",
-      "viewImage": "查看第{index}张图片",
+      "keyboardNavigation": "使用键盘方向键浏览图片",
+      "navigationAccessibility": "当前显示第 {current} 张，共 {total} 张图片",
+      "zoomIn": "放大图片",
+      "zoomOut": "缩小图片",
+      "imageCounter": "{current}/{total}",
+      "viewImage": "查看第 {index} 张图片",
       "previousImage": "上一张图片",
-      "nextImage": "下一张图片",
-      "imageCounter": "{current} / {total}"
+      "nextImage": "下一张图片"
     },
     "detail": {
       "loadingFailed": "加载商品失败",

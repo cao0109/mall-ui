@@ -1,7 +1,29 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { Product } from '@/components/product/product-card';
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+  profitMargin: number;
+  minOrder: number;
+  shippingTime: string;
+  supplier: {
+    name: string;
+    logo: string;
+    rating: number;
+  };
+  suggestedPrice: number;
+  shopUrl: string;
+  origin: string;
+  variant?: {
+    id: string;
+    title: string;
+    sku: string;
+  };
+}
 
 interface SelectionState {
   products: Product[];

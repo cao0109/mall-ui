@@ -154,7 +154,10 @@ export function ProductGallery({ images, title, initialIndex = 0 }: ProductGalle
       {/* 使用带有键盘监听的按钮包装内容 */}
       <div className="outline-none" ref={galleryRef}>
         <button className="sr-only" onKeyDown={handleKeyDown} aria-label={t('keyboardNavigation')}>
-          {t('navigationAccessibility')}
+          {t('navigationAccessibility', {
+            current: selectedIndex + 1,
+            total: validImages.length,
+          })}
         </button>
         {/* 主图展示区域 */}
         <div

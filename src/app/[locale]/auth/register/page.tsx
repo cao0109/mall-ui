@@ -117,7 +117,7 @@ export default function RegisterPage() {
     const url = new URL(window.location.href);
     url.searchParams.set('role', role);
     window.history.replaceState({}, '', url.toString());
-  }, [form.watch('role')]);
+  }, [form]);
 
   // 倒计时逻辑
   useEffect(() => {

@@ -1,4 +1,7 @@
-import { PricedProduct as MedusaPricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import {
+  PricedProduct as MedusaPricedProduct,
+  PricedVariant as MedusaPricedVariant,
+} from '@medusajs/medusa/dist/types/pricing';
 
 export interface ProductReview {
   id: string;
@@ -13,6 +16,9 @@ export interface ProductReview {
   created_at: string;
 }
 
+export type PricedVariant = MedusaPricedVariant;
+
 export interface PricedProduct extends MedusaPricedProduct {
+  details?: string;
   reviews?: ProductReview[];
 }

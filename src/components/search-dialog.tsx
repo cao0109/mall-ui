@@ -113,7 +113,6 @@ export function SearchDialog() {
                 }}
                 placeholder={t('search.searchPlaceholder')}
                 className="w-full rounded-lg border border-input bg-background/50 py-2 pl-10 pr-4 text-sm ring-offset-background backdrop-blur-sm transition-all duration-200 placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                autoFocus
                 aria-label={t('search.searchInput')}
               />
               <Search
