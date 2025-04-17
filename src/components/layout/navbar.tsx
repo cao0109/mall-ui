@@ -173,7 +173,7 @@ export function Navbar() {
                             className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                             role="listitem"
                           >
-                            {category.image && (
+                            {category.image ? (
                               <div className="relative h-16 w-16 overflow-hidden rounded-lg">
                                 <Image
                                   src={category.image}
@@ -181,6 +181,12 @@ export function Navbar() {
                                   fill
                                   className="object-cover transition-transform group-hover:scale-105"
                                 />
+                              </div>
+                            ) : (
+                              <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-gray-100">
+                                <div className="flex h-full w-full items-center justify-center text-gray-400">
+                                  <Package className="h-8 w-8" />
+                                </div>
                               </div>
                             )}
                             <span className="text-center">{category.name}</span>

@@ -21,7 +21,7 @@ export default function Categories() {
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
         {categories.map(category => (
-          <Link key={category.id} href={`/categories/${category.id}`} className="group">
+          <Link key={category.id} href={`/products?category_id=${category.id}`} className="group">
             <Card className="overflow-hidden">
               <div className="relative h-32 sm:h-40">
                 <Image
