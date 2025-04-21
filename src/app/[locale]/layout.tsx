@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
@@ -14,6 +15,7 @@ import { SkipToContent } from '@/components/skip-to-content';
 import { Toaster } from '@/components/ui/toaster';
 import { routing } from '@/i18n/routing';
 import { MedusaWrapper } from '@/lib/medusa-provider';
+
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -78,6 +80,7 @@ export default async function LocaleLayout({
                     <Navbar />
                     <main id="main-content" className="flex-1 p-4 sm:p-6" tabIndex={-1}>
                       {children}
+                      <Analytics />
                     </main>
                     <Footer />
                   </div>
