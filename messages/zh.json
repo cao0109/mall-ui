@@ -38,6 +38,89 @@
     "loginFailed": "登录失败",
     "logoutSuccess": "已退出登录",
     "logoutDescription": "您已成功退出登录",
+    "forgotPassword": {
+      "title": "忘记密码",
+      "subtitle": "重置您的账户密码",
+      "formTitle": "找回密码",
+      "formDescription": "请输入您的邮箱地址，我们将向您发送重置密码的验证码",
+      "form": {
+        "email": "邮箱地址",
+        "emailPlaceholder": "请输入您的邮箱地址",
+        "emailDescription": "我们将向此邮箱发送重置密码的验证码",
+        "submit": "发送验证码",
+        "sending": "发送中...",
+        "backToLogin": "返回登录"
+      },
+      "validation": {
+        "email": "请输入有效的邮箱地址"
+      },
+      "success": {
+        "title": "验证码已发送",
+        "description": "请查看您的邮箱，我们已发送重置密码的验证码"
+      },
+      "error": {
+        "title": "发送失败",
+        "description": "无法发送验证码，请稍后重试"
+      },
+      "rememberPassword": "已经记起密码?",
+      "loginNow": "立即登录"
+    },
+    "resetPassword": {
+      "title": "重置密码",
+      "subtitle": "设置新的密码",
+      "formTitle": "设置新密码",
+      "formDescription": "请输入您收到的验证码和新密码",
+      "form": {
+        "email": "邮箱地址",
+        "emailPlaceholder": "请输入您的邮箱地址",
+        "code": "验证码",
+        "codePlaceholder": "请输入您收到的验证码",
+        "codeDescription": "请输入我们发送到您邮箱的6位验证码",
+        "password": "新密码",
+        "passwordPlaceholder": "请设置您的新密码",
+        "passwordDescription": "密码必须至少包含8个字符，并包含字母、数字和特殊字符",
+        "confirmPassword": "确认密码",
+        "confirmPasswordPlaceholder": "请再次输入新密码",
+        "submit": "重置密码",
+        "processing": "处理中...",
+        "backToLogin": "返回登录"
+      },
+      "validation": {
+        "email": "请输入有效的邮箱地址",
+        "code": "请输入验证码",
+        "password": "密码至少需要8个字符",
+        "passwordStrength": "密码强度不足，请包含大小写字母、数字和特殊字符",
+        "confirmPassword": "请确认您的密码",
+        "passwordMismatch": "两次输入的密码不一致"
+      },
+      "success": {
+        "title": "密码已重置",
+        "description": "您的密码已成功重置，现在可以使用新密码登录"
+      },
+      "error": {
+        "title": "重置失败",
+        "description": "无法重置密码，请稍后重试",
+        "invalidCode": "验证码无效或已过期"
+      },
+      "noCode": "没有收到验证码?",
+      "requestAgain": "重新获取"
+    },
+    "passwordStrength": {
+      "veryWeak": "非常弱",
+      "weak": "弱",
+      "fair": "一般",
+      "medium": "中等",
+      "strong": "强",
+      "veryStrong": "非常强",
+      "strength": "强度",
+      "validPassword": "密码有效",
+      "minLength": "至少8个字符",
+      "hasLetter": "包含字母",
+      "hasNumber": "包含数字",
+      "hasSpecial": "包含特殊字符(@$!%*?&#)",
+      "excellentLength": "(优秀! {length}个字符)",
+      "excellentCase": "(优秀! 大小写字母都有)"
+    },
     "register": {
       "title": {
         "vendor": "成为供应商",
@@ -184,22 +267,6 @@
           "feature2": "一键生成独立站",
           "feature3": "专业的培训指导"
         }
-      },
-      "passwordStrength": {
-        "strength": "密码强度",
-        "veryWeak": "非常弱",
-        "weak": "弱",
-        "fair": "一般",
-        "medium": "中等",
-        "strong": "强",
-        "veryStrong": "非常强",
-        "validPassword": "有效密码",
-        "minLength": "至少8个字符",
-        "excellentLength": "优秀长度({length}个字符)",
-        "hasLetter": "包含字母",
-        "excellentCase": "优秀的大小写组合",
-        "hasNumber": "包含数字",
-        "hasSpecial": "包含特殊字符(@$!%*?&#)"
       }
     },
     "login": {

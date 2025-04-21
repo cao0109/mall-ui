@@ -13,6 +13,12 @@ interface LoginParams {
   password: string;
 }
 
+interface ResetPasswordParams {
+  email: string;
+  code: string;
+  password: string;
+}
+
 interface ApiResponse<T> {
   user: T;
   token: string;
@@ -88,6 +94,27 @@ export class ApiService {
       body: JSON.stringify({ email }),
     });
   }
+
+  static async forgotPassword(email: string): Promise<void> {
+    return this.request<void>('/auth/password/reset', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+  }
+
+  static async resetPassword(params: ResetPasswordParams): Promise<ApiResponse<UserData>> {
+    return this.request<ApiResponse<UserData>>('/auth/password/reset/confirm', {
+      method: 'POST',
+      body: JSON.stringify(params),
+    });
+  }
+
+  static async validateResetCode(email: string, code: string): Promise<boolean> {
+    return this.request<boolean>('/auth/password/reset/validate', {
+      method: 'POST',
+      body: JSON.stringify({ email, code }),
+    });
+  }
 }
 
-export type { ApiResponse, LoginParams, RegisterParams, UserData };
+export type { ApiResponse, LoginParams, RegisterParams, ResetPasswordParams, UserData };

@@ -34,10 +34,10 @@
     "popularCategories": "Popular Categories"
   },
   "auth": {
-    "loginSuccess": "Login successful",
-    "loginFailed": "Login failed",
-    "logoutSuccess": "Logged out",
-    "logoutDescription": "You have successfully logged out",
+    "loginSuccess": "Login Successful",
+    "loginFailed": "Login Failed",
+    "logoutSuccess": "Logged Out",
+    "logoutDescription": "You have been successfully logged out",
     "register": {
       "title": {
         "vendor": "Join as a Vendor",
@@ -250,6 +250,89 @@
           }
         }
       }
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Reset your account password",
+      "formTitle": "Password Recovery",
+      "formDescription": "Please enter your email address and we'll send you a verification code to reset your password",
+      "form": {
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email address",
+        "emailDescription": "We will send a verification code to this email",
+        "submit": "Send Code",
+        "sending": "Sending...",
+        "backToLogin": "Back to Login"
+      },
+      "validation": {
+        "email": "Please enter a valid email address"
+      },
+      "success": {
+        "title": "Code Sent",
+        "description": "Please check your email for the password reset code"
+      },
+      "error": {
+        "title": "Failed to Send",
+        "description": "Unable to send verification code, please try again later"
+      },
+      "rememberPassword": "Remembered your password?",
+      "loginNow": "Login now"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Set a new password",
+      "formTitle": "Set New Password",
+      "formDescription": "Please enter the verification code you received and your new password",
+      "form": {
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email address",
+        "code": "Verification Code",
+        "codePlaceholder": "Enter the verification code",
+        "codeDescription": "Enter the 6-digit code we sent to your email",
+        "password": "New Password",
+        "passwordPlaceholder": "Set your new password",
+        "passwordDescription": "Password must be at least 8 characters and include letters, numbers, and special characters",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm your new password",
+        "submit": "Reset Password",
+        "processing": "Processing...",
+        "backToLogin": "Back to Login"
+      },
+      "validation": {
+        "email": "Please enter a valid email address",
+        "code": "Please enter the verification code",
+        "password": "Password must be at least 8 characters",
+        "passwordStrength": "Password not strong enough, include uppercase, lowercase, numbers and special characters",
+        "confirmPassword": "Please confirm your password",
+        "passwordMismatch": "Passwords do not match"
+      },
+      "success": {
+        "title": "Password Reset",
+        "description": "Your password has been successfully reset, you can now login with your new password"
+      },
+      "error": {
+        "title": "Reset Failed",
+        "description": "Unable to reset password, please try again later",
+        "invalidCode": "Invalid or expired verification code"
+      },
+      "noCode": "Didn't receive a code?",
+      "requestAgain": "Request again"
+    },
+    "passwordStrength": {
+      "veryWeak": "Very Weak",
+      "weak": "Weak",
+      "fair": "Fair",
+      "medium": "Medium",
+      "strong": "Strong",
+      "veryStrong": "Very Strong",
+      "strength": "Strength",
+      "validPassword": "Valid password",
+      "minLength": "At least 8 characters",
+      "hasLetter": "Contains letters",
+      "hasNumber": "Contains numbers",
+      "hasSpecial": "Contains special characters (@$!%*?&#)",
+      "excellentLength": "(Excellent! {length} characters)",
+      "excellentCase": "(Excellent! Both upper and lowercase)"
     }
   },
   "region": {
