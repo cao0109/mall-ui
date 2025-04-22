@@ -535,7 +535,8 @@
     "detail": {
       "loadingFailed": "加载商品失败",
       "productNotFound": "商品不存在"
-    }
+    },
+    "recommended": "推荐商品"
   },
   "search": {
     "searchContent": "搜索内容",

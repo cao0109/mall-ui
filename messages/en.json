@@ -544,7 +544,8 @@
     "detail": {
       "loadingFailed": "Failed to load product",
       "productNotFound": "Product not found"
-    }
+    },
+    "recommended": "Recommended Products"
   },
   "search": {
     "searchContent": "Search content",

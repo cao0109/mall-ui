@@ -11,6 +11,7 @@ import { ProductBreadcrumb } from './product-breadcrumb';
 import { ProductGallery } from './product-gallery';
 import { ProductInfo } from './product-info';
 import { ProductTabs } from './product-tabs';
+import { RecommendedProducts } from './recommended-products';
 
 export function ProductDetail() {
   const params = useParams();
@@ -54,8 +55,21 @@ export function ProductDetail() {
           </div>
         </div>
 
-        {/* 底部标签页区域 */}
-        <ProductTabs product={pricedProduct} />
+        {/* 底部推荐商品和标签页区域 */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-4 lg:gap-8">
+          {/* 左侧推荐商品列表 */}
+          <div className="md:col-span-1">
+            <RecommendedProducts
+              collection_id={product.collection_id}
+              categories={product.categories?.map(cat => cat.id) || []}
+            />
+          </div>
+
+          {/* 右侧产品标签页 */}
+          <div className="md:col-span-3">
+            <ProductTabs product={pricedProduct} />
+          </div>
+        </div>
       </div>
     </div>
   );
