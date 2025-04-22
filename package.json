@@ -44,6 +44,7 @@
     "cookies-next": "^5.1.0",
     "embla-carousel-react": "^8.5.2",
     "framer-motion": "^12.6.2",
+    "html-react-parser": "^5.2.3",
     "lucide-react": "^0.484.0",
     "medusa-react": "^9.0.18",
     "next": "15.2.4",

@@ -7,6 +7,8 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PricedProduct } from '@/types/product';
 
+import HtmlRichText from '../html-rich-text';
+
 import { ProductReviews } from './product-reviews';
 
 interface ProductTabsProps {
@@ -105,7 +107,7 @@ export function ProductTabs({ product }: ProductTabsProps) {
       <TabsContent value="description" className="mt-3 sm:mt-4">
         <Card className="p-4 sm:p-6">
           <div className="prose dark:prose-invert max-w-none text-sm sm:text-base">
-            <p dangerouslySetInnerHTML={{ __html: product?.details || '' }} />
+            <HtmlRichText content={product.details || ''} />
           </div>
         </Card>
       </TabsContent>
