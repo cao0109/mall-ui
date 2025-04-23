@@ -1,11 +1,9 @@
 'use client';
 
-import { ProductCategory } from '@medusajs/medusa';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   Book,
   ChevronRight,
-  Flame,
   Home,
   Info,
   LogIn,
@@ -19,8 +17,6 @@ import {
   ShoppingCart,
   Star,
   Store,
-  Tag,
-  Timer,
   User,
   UserPlus,
   Users,
@@ -56,6 +52,8 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth';
 
+import { ProductMenuContent } from '../product/product-menu-content';
+
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: (i: number) => ({
@@ -75,7 +73,7 @@ export function Navbar() {
   const { toast } = useToast();
   const t = useTranslations();
   const { product_categories } = useProductCategories({
-    limit: 4,
+    limit: 8,
     parent_category_id: 'null',
   });
 
@@ -161,86 +159,7 @@ export function Navbar() {
                 {t('common.productLibrary')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <nav className="grid gap-3 p-4 md:w-[400px] lg:w-[500px]" aria-label="产品分类">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <h2 className="mb-2 text-sm font-medium leading-none">热门分类</h2>
-                      <div className="grid grid-cols-2 gap-2" role="list">
-                        {product_categories?.slice(0, 4).map((category: ProductCategory) => (
-                          <Link
-                            key={category.id}
-                            href={`/products?category_id=${category.id}`}
-                            className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                            role="listitem"
-                          >
-                            {category.image ? (
-                              <div className="relative h-16 w-16 overflow-hidden rounded-lg">
-                                <Image
-                                  src={category.image}
-                                  alt={category.name}
-                                  fill
-                                  className="object-cover transition-transform group-hover:scale-105"
-                                />
-                              </div>
-                            ) : (
-                              <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-gray-100">
-                                <div className="flex h-full w-full items-center justify-center text-gray-400">
-                                  <Package className="h-8 w-8" />
-                                </div>
-                              </div>
-                            )}
-                            <span className="text-center">{category.name}</span>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="space-y-1">
-                      <h2 className="mb-2 text-sm font-medium leading-none">特色商品</h2>
-                      <div className="grid grid-cols-2 gap-2" role="list">
-                        <Link
-                          href="/products/featured/new"
-                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                          role="listitem"
-                        >
-                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
-                            <Package className="h-8 w-8 text-primary" />
-                          </div>
-                          <span className="text-center">新品上市</span>
-                        </Link>
-                        <Link
-                          href="/products/featured/hot"
-                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                          role="listitem"
-                        >
-                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
-                            <Flame className="h-8 w-8 text-primary" />
-                          </div>
-                          <span className="text-center">热销商品</span>
-                        </Link>
-                        <Link
-                          href="/products/featured/sale"
-                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                          role="listitem"
-                        >
-                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
-                            <Tag className="h-8 w-8 text-primary" />
-                          </div>
-                          <span className="text-center">特惠活动</span>
-                        </Link>
-                        <Link
-                          href="/products/featured/limited"
-                          className="group flex flex-col items-center gap-2 rounded-lg p-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                          role="listitem"
-                        >
-                          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10">
-                            <Timer className="h-8 w-8 text-primary" />
-                          </div>
-                          <span className="text-center">限量商品</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </nav>
+                <ProductMenuContent product_categories={product_categories} />
               </NavigationMenuContent>
             </NavigationMenuItem>
 
