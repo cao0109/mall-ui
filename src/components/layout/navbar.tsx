@@ -75,6 +75,7 @@ export function Navbar() {
   const { product_categories } = useProductCategories({
     limit: 8,
     parent_category_id: 'null',
+    expand: 'products',
   });
 
   const handleLogout = () => {

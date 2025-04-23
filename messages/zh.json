@@ -32,7 +32,10 @@
       "limited": "限量商品"
     },
     "popularCategories": "热门分类",
-    "viewAll": "查看全部"
+    "viewAll": "查看全部",
+    "inquiryWelcome": "欢迎询价",
+    "suggestedPrice": "建议售价",
+    "loginToSeePrice": "登录查看价格"
   },
   "auth": {
     "loginSuccess": "登录成功",

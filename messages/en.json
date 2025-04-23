@@ -31,7 +31,10 @@
       "sale": "Special Offers",
       "limited": "Limited Edition"
     },
-    "popularCategories": "Popular Categories"
+    "popularCategories": "Popular Categories",
+    "inquiryWelcome": "Welcome to Inquire",
+    "suggestedPrice": "Suggested Price",
+    "loginToSeePrice": "Login to See Price"
   },
   "auth": {
     "loginSuccess": "Login Successful",

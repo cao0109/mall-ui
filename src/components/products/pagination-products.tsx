@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { ProductCard } from '@/components/products/product-card';
 import { ProductSkeleton } from '@/components/products/product-skeleton';
 import { cn } from '@/lib/utils';
+import { useRegionStore } from '@/store/region';
 
 interface MedusaProductsProps {
   searchQuery: string;
@@ -34,12 +35,16 @@ export function PaginationProducts({
   itemsPerPage,
   onProductsCount,
 }: MedusaProductsProps) {
+  // 使用 zustand store 获取当前区域
+  const { regionId } = useRegionStore();
+
   // API调用
   const { products, isLoading, error } = useProducts({
     limit: 100,
     expand: 'categories,variants,variants.prices,collection',
     category_id: selectedCategory !== 'all' ? [selectedCategory] : undefined,
     q: searchQuery || undefined,
+    region_id: regionId || undefined,
   });
 
   // 过滤产品
@@ -126,6 +131,9 @@ export function PaginationProducts({
       profitMargin = Number(product.metadata.profit_margin);
     }
 
+    // 从变体中获取所有价格
+    const prices = product.variants?.[0]?.prices || [];
+
     return {
       id: product.id || 'unknown-id',
       name: product.title || 'Unnamed Product',
@@ -143,6 +151,7 @@ export function PaginationProducts({
         rating: 4.5,
       },
       categoryId: product.categories?.[0]?.id,
+      prices: prices,
     };
   });
 

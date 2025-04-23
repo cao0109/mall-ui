@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Check, Globe } from 'lucide-react';
 import { useCart, useRegions } from 'medusa-react';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
+import { useRegionStore } from '@/store/region';
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
@@ -31,10 +33,24 @@ export const RegionSwitcher = () => {
   const { cart, updateCart } = useCart();
   const t = useTranslations();
 
-  const handleRegionChange = async (regionId: string) => {
+  // 使用 zustand store
+  const { regionId, setRegionId } = useRegionStore();
+
+  // 从 cart 同步状态
+  useEffect(() => {
+    if (cart?.region_id && cart.region_id !== regionId) {
+      setRegionId(cart.region_id);
+    }
+  }, [cart?.region_id, regionId, setRegionId]);
+
+  const handleRegionChange = async (newRegionId: string) => {
+    // 更新 zustand store
+    setRegionId(newRegionId);
+
+    // 更新购物车
     if (cart?.id) {
       await updateCart.mutateAsync({
-        region_id: regionId,
+        region_id: newRegionId,
       });
     }
   };
@@ -63,7 +79,9 @@ export const RegionSwitcher = () => {
     );
   }
 
-  const currentRegion = regions?.find(region => region.id === cart?.region_id);
+  // 优先使用 store 中的 regionId，其次是 cart 中的 region_id
+  const currentRegionId = regionId || cart?.region_id;
+  const currentRegion = regions?.find(region => region.id === currentRegionId);
 
   return (
     <DropdownMenu>

@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
+import { PriceDisplay } from './price-display';
 import { SyncProductData, SyncProductSheet } from './sync-product-sheet';
 
 interface ProductCardProps {
@@ -28,6 +29,10 @@ interface ProductCardProps {
       rating: number;
     };
     categoryId?: string;
+    prices?: Array<{
+      amount: number;
+      currency_code: string;
+    }>;
   };
   viewMode: 'grid' | 'list';
 }
@@ -75,23 +80,32 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
   const supplierRating = Number(product.supplier?.rating) || 4.5;
   const minOrder = Number(product.minOrder) || 1;
   const shippingTime = String(product.shippingTime || '3-5天');
-  const price = product.price || 0;
   const description = String(product.description || '');
   const collectionTitle = product.supplier?.name || '默认供应商';
   const productTitle = String(product.name || '');
+
+  // 如果没有 prices 数组，从传统价格创建一个默认价格对象
+  const prices = product.prices || [
+    {
+      amount: Math.round(product.price * 100),
+      currency_code: 'CNY',
+    },
+  ];
 
   return (
     <>
       <Card
         className={cn(
           'group overflow-hidden transition-colors duration-300 hover:border-primary/50',
-          viewMode === 'list' && 'flex flex-col sm:flex-row'
+          viewMode === 'list' && 'flex flex-col sm:flex-row',
+          'min-h-[400px]', // 确保卡片有最小高度
+          'flex flex-col' // 使用flex布局，确保内容填满卡片
         )}
       >
         <div
           className={cn(
             'relative',
-            viewMode === 'grid' && 'aspect-square',
+            viewMode === 'grid' && 'aspect-square', // 确保图片保持正方形比例
             viewMode === 'list' && 'aspect-video w-full sm:aspect-auto sm:w-48'
           )}
         >
@@ -118,7 +132,7 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
             </Link>
           </div>
         </div>
-        <div className="flex-1 space-y-3 p-4">
+        <div className="flex flex-1 flex-col space-y-3 p-4">
           <div className="flex items-center gap-2">
             <div className="h-5 w-5 overflow-hidden rounded-full bg-muted">
               <Image
@@ -143,12 +157,7 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
             <p className="line-clamp-2 text-sm text-muted-foreground">{description}</p>
           )}
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <div className="text-lg font-bold text-primary">¥{price / 100}</div>
-              <div className="text-xs text-muted-foreground">
-                建议售价 ¥{((price * 1.3) / 100).toFixed(2)}
-              </div>
-            </div>
+            <PriceDisplay prices={prices} showSuggestedPrice profitMargin={profitMargin} />
             <Button
               size="sm"
               variant="outline"
