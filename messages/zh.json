@@ -479,6 +479,22 @@
           "suggestedPrice": "99.99"
         }
       }
+    },
+    "partnerBrands": {
+      "title": "合作品牌",
+      "description": "我们与全球领先品牌合作，为您提供高品质、多样化的产品选择",
+      "premium": "高端品牌",
+      "premiumDesc": "全球知名的顶级品牌合作伙伴",
+      "featured": "精选品牌",
+      "featuredDesc": "特别推荐的优质合作伙伴",
+      "trusted": "信任品牌",
+      "trustedDesc": "长期合作的可靠品牌",
+      "premiumLabel": "高端",
+      "featuredLabel": "精选",
+      "joinTitle": "成为我们的合作伙伴",
+      "joinDescription": "加入HiDoo全球合作伙伴网络，拓展您的业务并接触更多客户。我们提供全方位的支持，帮助您在全球市场取得成功。",
+      "becomePartner": "成为合作伙伴",
+      "learnMore": "了解更多"
     }
   },
   "product": {

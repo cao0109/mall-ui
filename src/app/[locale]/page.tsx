@@ -9,6 +9,7 @@ import DataOverview from '@/components/home/data-overview';
 import FAQ from '@/components/home/faq';
 import FlashSale from '@/components/home/flash-sale';
 import MustHaveSection from '@/components/home/must-have';
+import PartnerBrands from '@/components/home/partner-brands';
 import Products from '@/components/home/products';
 import Testimonials from '@/components/home/testimonials';
 import Trending from '@/components/home/trending';
@@ -32,6 +33,27 @@ export default function Home() {
         subtitle={t('home.welcome.subtitle')}
         description={t('home.welcome.description')}
       />
+
+      {/* 商品分类 */}
+      <Categories />
+
+      {/* 跨境爆款 */}
+      <Trending />
+
+      {/* 商品展示 */}
+      <Products />
+
+      {/* 限时特惠 */}
+      <FlashSale />
+
+      {/* 新店必备 */}
+      <MustHaveSection />
+
+      {/* 用户评价 */}
+      <Testimonials />
+
+      {/* 合作品牌 */}
+      <PartnerBrands />
 
       {/* 数据概览 */}
       <DataOverview
@@ -78,24 +100,6 @@ export default function Home() {
           },
         ]}
       />
-
-      {/* 商品分类 */}
-      <Categories />
-
-      {/* 跨境爆款 */}
-      <Trending />
-
-      {/* 商品展示 */}
-      <Products />
-
-      {/* 限时特惠 */}
-      <FlashSale />
-
-      {/* 新店必备 */}
-      <MustHaveSection />
-
-      {/* 用户评价 */}
-      <Testimonials />
 
       {/* 常见问题 */}
       <FAQ />
