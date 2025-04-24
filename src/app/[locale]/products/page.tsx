@@ -159,9 +159,9 @@ export default function ProductsPage() {
   const itemsPerPage = typeof window !== 'undefined' && window.innerWidth < 768 ? 6 : 12;
 
   // 过滤供应商
-  const filteredSuppliers = suppliers.filter(supplier =>
-    supplier.name.toLowerCase().includes(supplierSearchQuery.toLowerCase())
-  );
+  // const filteredSuppliers = suppliers.filter(supplier =>
+  //   supplier.name.toLowerCase().includes(supplierSearchQuery.toLowerCase())
+  // );
 
   // 处理分类选择
   const handleCategorySelect = useCallback((categoryId: string) => {
@@ -192,7 +192,7 @@ export default function ProductsPage() {
       />
 
       {/* 供应商筛选 */}
-      <div className="space-y-4">
+      {/*<div className="space-y-4">
         <div className="flex items-center justify-between border-b pb-2">
           <h3 className="text-sm font-semibold">供应商</h3>
           <div className="flex items-center gap-2">
@@ -284,7 +284,7 @@ export default function ProductsPage() {
             )}
           </div>
         </div>
-      </div>
+      </div>*/}
 
       {/* 价格范围 */}
       <div className="space-y-4">
@@ -323,7 +323,7 @@ export default function ProductsPage() {
       </div>
 
       {/* 利润率范围 */}
-      <div className="space-y-4">
+      {/*<div className="space-y-4">
         <div className="flex items-center justify-between border-b pb-2">
           <h3 className="text-sm font-semibold">利润率范围</h3>
           <Button
@@ -356,7 +356,7 @@ export default function ProductsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div>*/}
 
       {/* 应用筛选按钮 - 仅在移动视图中显示 */}
       <div className="mt-6 md:hidden">
@@ -519,10 +519,6 @@ export default function ProductsPage() {
                     <ArrowDownNarrowWide className="mr-2 h-4 w-4" />
                     价格从高到低
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSortBy('profit-desc')}>
-                    <Star className="mr-2 h-4 w-4" />
-                    利润率从高到低
-                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               <div className="flex items-center gap-1 rounded-lg border p-1">
@@ -546,7 +542,7 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          {/* 商品列表 - 使用Medusa商品数据 */}
+          {/* 商品列表 */}
           <div className="transition-all duration-300 ease-in-out">
             <PaginationProducts
               searchQuery={searchQuery}
@@ -616,14 +612,14 @@ export default function ProductsPage() {
           )}
 
           {/* 底部推荐供应商 - 使用组件 */}
-          <div className="mt-8">
+          {/*<div className="mt-8">
             <RecommendedSuppliers suppliers={suppliers} />
-          </div>
+          </div>*/}
 
           {/* 帮助和资源 - 使用组件 */}
-          <div className="mt-6">
+          {/*<div className="mt-6">
             <HelpResources resources={helpResources} />
-          </div>
+          </div>*/}
         </div>
       </div>
     </div>

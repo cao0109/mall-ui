@@ -165,7 +165,7 @@ export function Navbar() {
             </NavigationMenuItem>
 
             {/* 供应商 */}
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <Link
                 href="/suppliers"
                 className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
@@ -173,10 +173,10 @@ export function Navbar() {
                 <Store className="mr-1 h-4 w-4" />
                 {t('common.suppliers')}
               </Link>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
 
             {/* 博客 */}
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <Link
                 href="/blog"
                 className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
@@ -184,7 +184,7 @@ export function Navbar() {
                 <Book className="mr-1 h-4 w-4" />
                 {t('blog.title')}
               </Link>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
 
             {/* 关于 */}
             <NavigationMenuItem>
@@ -556,13 +556,13 @@ export function Navbar() {
                 <Package className="h-4 w-4" />
                 {t('common.productLibrary')}
               </Link>
-              <Link
+              {/* <Link
                 href="/suppliers"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 <Store className="h-4 w-4" />
                 {t('common.suppliers')}
-              </Link>
+              </Link> */}
               <Link
                 href="/my-stores"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
@@ -577,13 +577,13 @@ export function Navbar() {
                 <Star className="h-4 w-4" />
                 {t('common.selectedProducts')}
               </Link>
-              <Link
+              {/* <Link
                 href="/blog"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 <Book className="h-4 w-4" />
                 {t('blog.title')}
-              </Link>
+              </Link> */}
               <Link
                 href="/about"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"

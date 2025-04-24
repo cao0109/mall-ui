@@ -1,4 +1,6 @@
-import { useRouter } from 'next/navigation';
+'use client';
+
+import Link from 'next/link';
 
 import { useAuthStore } from '@/store/auth';
 
@@ -12,7 +14,6 @@ interface WelcomeSectionProps {
 
 export default function WelcomeSection({ title, subtitle, description }: WelcomeSectionProps) {
   const { isAuthenticated } = useAuthStore();
-  const router = useRouter();
 
   return (
     <section className="py-8 md:py-12">
@@ -22,12 +23,14 @@ export default function WelcomeSection({ title, subtitle, description }: Welcome
         <p className="mx-auto max-w-2xl text-muted-foreground">{description}</p>
         {!isAuthenticated && (
           <div className="mt-6 flex justify-center gap-4">
-            <Button size="lg" onClick={() => router.push('/auth/register')}>
-              开店赚钱
-            </Button>
-            <Button size="lg" variant="outline" onClick={() => router.push('/auth/login')}>
-              商家登录
-            </Button>
+            <Link href="/auth/register" passHref>
+              <Button size="lg">开店赚钱</Button>
+            </Link>
+            <Link href="/auth/login" passHref>
+              <Button size="lg" variant="outline">
+                商家登录
+              </Button>
+            </Link>
           </div>
         )}
       </div>

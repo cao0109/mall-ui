@@ -1,16 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  ArrowRight,
-  Check,
-  Download,
-  ExternalLink,
-  FileText,
-  ShoppingCart,
-  Upload,
-  X,
-} from 'lucide-react';
+import { ArrowRight, Check, Download, ExternalLink, ShoppingCart, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -37,7 +28,11 @@ export default function SelectedProductsPage() {
   );
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="container mx-auto space-y-6 px-4 py-6 md:px-6"
+    >
       {/* 页面标题 */}
       <div className="flex items-center justify-between">
         <div>
@@ -46,16 +41,8 @@ export default function SelectedProductsPage() {
         </div>
         <div className="flex gap-4">
           <Button variant="outline">
-            <Upload className="mr-2 h-4 w-4" />
-            导入选品
-          </Button>
-          <Button variant="outline">
             <Download className="mr-2 h-4 w-4" />
             导出列表
-          </Button>
-          <Button>
-            <FileText className="mr-2 h-4 w-4" />
-            生成报告
           </Button>
         </div>
       </div>

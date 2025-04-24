@@ -1,5 +1,3 @@
-'use client';
-
 import { useTranslations } from 'next-intl';
 
 import Advantages from '@/components/home/advantages';
@@ -11,7 +9,7 @@ import FlashSale from '@/components/home/flash-sale';
 import MustHaveSection from '@/components/home/must-have';
 import PartnerBrands from '@/components/home/partner-brands';
 import Products from '@/components/home/products';
-import Testimonials from '@/components/home/testimonials';
+// import Testimonials from '@/components/home/testimonials';
 import Trending from '@/components/home/trending';
 import WelcomeSection from '@/components/home/welcome';
 
@@ -50,7 +48,7 @@ export default function Home() {
       <MustHaveSection />
 
       {/* 用户评价 */}
-      <Testimonials />
+      {/*<Testimonials />*/}
 
       {/* 合作品牌 */}
       <PartnerBrands />

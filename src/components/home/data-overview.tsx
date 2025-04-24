@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { Package, ShoppingCart, Store, Users } from 'lucide-react';
 

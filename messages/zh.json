@@ -389,42 +389,9 @@
       }
     },
     "categories": {
-      "title": "商品分类",
-      "viewAll": "查看全部",
-      "items": {
-        "electronics": {
-          "name": "电子产品",
-          "subcategories": {
-            "mobile": "手机数码",
-            "computer": "电脑配件",
-            "smart": "智能设备"
-          }
-        },
-        "home": {
-          "name": "家居用品",
-          "subcategories": {
-            "furniture": "家具装饰",
-            "kitchen": "厨房用品",
-            "daily": "生活日用"
-          }
-        },
-        "clothing": {
-          "name": "服装鞋帽",
-          "subcategories": {
-            "men": "男装",
-            "women": "女装",
-            "kids": "童装"
-          }
-        },
-        "beauty": {
-          "name": "美妆护肤",
-          "subcategories": {
-            "skincare": "护肤品",
-            "makeup": "彩妆",
-            "perfume": "香水"
-          }
-        }
-      }
+      "title": "热门分类",
+      "description": "精选优质商品分类",
+      "productCount": "个商品"
     },
     "products": {
       "hot": {

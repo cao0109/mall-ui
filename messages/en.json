@@ -397,42 +397,9 @@
       }
     },
     "categories": {
-      "title": "Product Categories",
-      "viewAll": "View All",
-      "items": {
-        "electronics": {
-          "name": "Electronics",
-          "subcategories": {
-            "mobile": "Mobile & Digital",
-            "computer": "Computer Accessories",
-            "smart": "Smart Devices"
-          }
-        },
-        "home": {
-          "name": "Home Goods",
-          "subcategories": {
-            "furniture": "Furniture & Decor",
-            "kitchen": "Kitchen Supplies",
-            "daily": "Daily Essentials"
-          }
-        },
-        "clothing": {
-          "name": "Clothing & Footwear",
-          "subcategories": {
-            "men": "Men's Clothing",
-            "women": "Women's Clothing",
-            "kids": "Kids' Clothing"
-          }
-        },
-        "beauty": {
-          "name": "Beauty & Skincare",
-          "subcategories": {
-            "skincare": "Skincare Products",
-            "makeup": "Makeup",
-            "perfume": "Perfume"
-          }
-        }
-      }
+      "title": "Popular Categories",
+      "description": "Curated quality product categories",
+      "productCount": "products"
     },
     "products": {
       "hot": {

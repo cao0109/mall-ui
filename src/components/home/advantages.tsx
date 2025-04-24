@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { BadgeCheck, Clock, PiggyBank, ShieldCheck } from 'lucide-react';
 

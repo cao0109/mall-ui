@@ -97,15 +97,13 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
       <Card
         className={cn(
           'group overflow-hidden transition-colors duration-300 hover:border-primary/50',
-          viewMode === 'list' && 'flex flex-col sm:flex-row',
-          'min-h-[400px]', // 确保卡片有最小高度
-          'flex flex-col' // 使用flex布局，确保内容填满卡片
+          viewMode === 'list' && 'flex flex-col sm:flex-row'
         )}
       >
         <div
           className={cn(
             'relative',
-            viewMode === 'grid' && 'aspect-square', // 确保图片保持正方形比例
+            viewMode === 'grid' && 'aspect-square',
             viewMode === 'list' && 'aspect-video w-full sm:aspect-auto sm:w-48'
           )}
         >
@@ -132,7 +130,7 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
             </Link>
           </div>
         </div>
-        <div className="flex flex-1 flex-col space-y-3 p-4">
+        <div className="flex-1 space-y-3 p-4">
           <div className="flex items-center gap-2">
             <div className="h-5 w-5 overflow-hidden rounded-full bg-muted">
               <Image
@@ -156,14 +154,13 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
           {viewMode === 'list' && (
             <p className="line-clamp-2 text-sm text-muted-foreground">{description}</p>
           )}
-          <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-row items-center justify-between gap-2">
             <PriceDisplay prices={prices} showSuggestedPrice profitMargin={profitMargin} />
             <Button
               size="sm"
               variant="outline"
               onClick={() => setShowSyncModal(true)}
               disabled={isSyncing}
-              className="min-w-[90px]"
             >
               {isSyncing ? '同步中...' : '同步商品'}
             </Button>
