@@ -1,6 +1,7 @@
 'use client';
 
 import { ProductCategory } from '@medusajs/medusa';
+import { useTranslate } from '@tolgee/react';
 import { motion } from 'framer-motion';
 import {
   BadgePercent,
@@ -47,6 +48,7 @@ const itemVariants = {
 
 export function ProductMenuContent({ product_categories }: ProductMenuContentProps) {
   const t = useTranslations();
+  const { t: tTolgee } = useTranslate();
 
   // 将产品分类分组
   const categoryGroups = product_categories
@@ -107,7 +109,9 @@ export function ProductMenuContent({ product_categories }: ProductMenuContentPro
                     )}
                   </div>
                   <div className="flex flex-col">
-                    <span className="line-clamp-1 text-sm font-medium">{category.name}</span>
+                    <span className="line-clamp-1 text-sm font-medium">
+                      {tTolgee(`${category.id}.name`, category.name)}
+                    </span>
                     <span className="text-xs text-muted-foreground">
                       {t('products.itemCount', { count: category.products?.length || 0 })}
                     </span>

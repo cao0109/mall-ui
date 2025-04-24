@@ -24,7 +24,6 @@ import {
 } from 'lucide-react';
 import { useProductCategories } from 'medusa-react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { LanguageSwitcher } from '@/components/language-switcher';
@@ -52,6 +51,7 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth';
 
+import { useTranslations } from 'next-intl';
 import { ProductMenuContent } from '../product/product-menu-content';
 
 const itemVariants = {
@@ -72,6 +72,8 @@ export function Navbar() {
   const router = useRouter();
   const { toast } = useToast();
   const t = useTranslations();
+  // const { t } = useTranslate();
+
   const { product_categories } = useProductCategories({
     limit: 8,
     parent_category_id: 'null',

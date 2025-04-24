@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslate } from '@tolgee/react';
 import { ArrowRight } from 'lucide-react';
 import { useProductCategories } from 'medusa-react';
 import Image from 'next/image';
@@ -12,6 +13,8 @@ import { Card, CardContent } from '../ui/card';
 
 export default function Categories() {
   const t = useTranslations();
+  const { t: tTolgee } = useTranslate();
+
   const { product_categories, isLoading } = useProductCategories({
     limit: 4,
     parent_category_id: 'null',
@@ -69,7 +72,9 @@ export default function Categories() {
                 />
               </div>
               <CardContent className="p-3 sm:p-4">
-                <h3 className="text-sm font-semibold sm:text-base">{category.name}</h3>
+                <h3 className="text-sm font-semibold sm:text-base">
+                  {tTolgee(`${category.id}.name`)}
+                </h3>
                 <p className="text-xs text-muted-foreground sm:text-sm">
                   {category.products?.length || 0} {t('home.categories.productCount')}
                 </p>

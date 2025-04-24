@@ -2,10 +2,12 @@ import { Analytics } from '@vercel/analytics/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { ThemeProvider } from 'next-themes';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
 // import { CookieBanner } from '@/components/cookie/cookie-banner';
+import { ThemeProvider } from 'next-themes';
+import React from 'react';
+
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
 import { AccessibilityProvider } from '@/components/providers/accessibility-provider';
@@ -14,6 +16,9 @@ import { LoadingProvider } from '@/components/providers/loading-provider';
 import { SkipToContent } from '@/components/skip-to-content';
 import { Toaster } from '@/components/ui/toaster';
 import { routing } from '@/i18n/routing';
+import { TolgeeNextProvider } from '@/i18n/tolgee/client';
+import { getTolgee } from '@/i18n/tolgee/server';
+import { ALL_LANGUAGES } from '@/i18n/tolgee/shared';
 import { MedusaWrapper } from '@/lib/medusa-provider';
 
 import './globals.css';
@@ -54,9 +59,12 @@ export default async function LocaleLayout({
 }) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
+  if (!hasLocale(routing.locales, locale) || !ALL_LANGUAGES.includes(locale)) {
     notFound();
   }
+
+  const tolgee = await getTolgee();
+  const records = await tolgee.loadRequired();
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -75,18 +83,20 @@ export default async function LocaleLayout({
             <LiveRegionProvider>
               <MedusaWrapper>
                 <NextIntlClientProvider>
-                  <SkipToContent />
-                  <div className="flex min-h-screen flex-col">
-                    <Navbar />
-                    <main id="main-content" className="flex-1 p-4 sm:p-6" tabIndex={-1}>
-                      {children}
-                      <Analytics />
-                    </main>
-                    <Footer />
-                  </div>
-                  <LoadingProvider />
-                  <Toaster />
-                  {/*<CookieBanner />*/}
+                  <TolgeeNextProvider language={locale} staticData={records}>
+                    <SkipToContent />
+                    <div className="flex min-h-screen flex-col">
+                      <Navbar />
+                      <main id="main-content" className="flex-1 p-4 sm:p-6" tabIndex={-1}>
+                        {children}
+                        <Analytics />
+                      </main>
+                      <Footer />
+                    </div>
+                    <LoadingProvider />
+                    <Toaster />
+                    {/*<CookieBanner />*/}
+                  </TolgeeNextProvider>
                 </NextIntlClientProvider>
               </MedusaWrapper>
             </LiveRegionProvider>

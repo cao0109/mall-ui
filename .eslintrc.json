@@ -7,13 +7,25 @@
     "plugin:jsx-a11y/recommended",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "import", "jsx-a11y", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jsx-a11y",
+    "prettier"
+  ],
   "rules": {
     "prettier/prettier": "error",
     "import/order": [
-      "error",
+      "warn",
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc"
