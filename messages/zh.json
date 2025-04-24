@@ -465,6 +465,14 @@
       "joinDescription": "加入HiDoo全球合作伙伴网络，拓展您的业务并接触更多客户。我们提供全方位的支持，帮助您在全球市场取得成功。",
       "becomePartner": "成为合作伙伴",
       "learnMore": "了解更多"
+    },
+    "flashSale": {
+      "title": "限时特惠",
+      "subtitle": "每日精选，限时抢购",
+      "endingSoon": "即将结束",
+      "sold": "已售 {count} 件",
+      "remaining": "仅剩 {count} 件",
+      "shipping": "包邮"
     }
   },
   "product": {
@@ -731,6 +739,14 @@
       "clothing": "服装",
       "homeDecor": "家居装饰",
       "beauty": "美妆护肤"
+    }
+  },
+  "error": {
+    "productNotFound": {
+      "title": "找不到该商品",
+      "description": "抱歉，您要查找的商品不存在或已下架",
+      "browseProducts": "浏览其他商品",
+      "tryAgain": "重试"
     }
   }
 }

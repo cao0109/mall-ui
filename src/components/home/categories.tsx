@@ -2,48 +2,46 @@
 
 import { useTranslate } from '@tolgee/react';
 import { ArrowRight } from 'lucide-react';
-import { useProductCategories } from 'medusa-react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 import { Link } from '@/i18n/navigation';
 
+import { ProductCategory } from '@medusajs/medusa/dist/models/product-category';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 
-export default function Categories() {
+interface Category {
+  categories: ProductCategory[];
+}
+
+export default function Categories({ categories }: Category) {
   const t = useTranslations();
   const { t: tTolgee } = useTranslate();
 
-  const { product_categories, isLoading } = useProductCategories({
-    limit: 4,
-    parent_category_id: 'null',
-    expand: 'products',
-  });
-
-  if (isLoading) {
-    return (
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="space-y-2">
-            <div className="h-6 w-32 animate-pulse rounded-md bg-muted"></div>
-            <div className="h-4 w-48 animate-pulse rounded-md bg-muted"></div>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <Card key={index} className="overflow-hidden">
-              <div className="h-32 animate-pulse bg-muted sm:h-40"></div>
-              <CardContent className="space-y-2 p-3 sm:p-4">
-                <div className="h-4 w-20 animate-pulse rounded bg-muted"></div>
-                <div className="h-3 w-16 animate-pulse rounded bg-muted"></div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="space-y-4">
+  //       <div className="flex items-center justify-between">
+  //         <div className="space-y-2">
+  //           <div className="h-6 w-32 animate-pulse rounded-md bg-muted"></div>
+  //           <div className="h-4 w-48 animate-pulse rounded-md bg-muted"></div>
+  //         </div>
+  //       </div>
+  //       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+  //         {Array.from({ length: 4 }).map((_, index) => (
+  //           <Card key={index} className="overflow-hidden">
+  //             <div className="h-32 animate-pulse bg-muted sm:h-40"></div>
+  //             <CardContent className="space-y-2 p-3 sm:p-4">
+  //               <div className="h-4 w-20 animate-pulse rounded bg-muted"></div>
+  //               <div className="h-3 w-16 animate-pulse rounded bg-muted"></div>
+  //             </CardContent>
+  //           </Card>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -59,7 +57,7 @@ export default function Categories() {
         </Link>
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-        {product_categories?.map(category => (
+        {categories?.map(category => (
           <Link key={category.id} href={`/products?category_id=${category.id}`} className="group">
             <Card className="overflow-hidden">
               <div className="relative h-32 sm:h-40">

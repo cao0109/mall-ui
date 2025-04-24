@@ -26,10 +26,7 @@
           "sibling",
           "index"
         ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc"
-        }
+        "newlines-between": "always"
       }
     ],
     "@typescript-eslint/no-unused-vars": [

@@ -107,7 +107,11 @@ export function ProductTabs({ product }: ProductTabsProps) {
       <TabsContent value="description" className="mt-3 sm:mt-4">
         <Card className="p-4 sm:p-6">
           <div className="prose dark:prose-invert max-w-none text-sm sm:text-base">
-            <HtmlRichText content={product.details || ''} />
+            {product.details ? (
+              <HtmlRichText content={product.details} />
+            ) : (
+              <p className="text-muted-foreground">暂无详情</p>
+            )}
           </div>
         </Card>
       </TabsContent>

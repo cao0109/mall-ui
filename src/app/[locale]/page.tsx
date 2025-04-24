@@ -1,21 +1,57 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 import Advantages from '@/components/home/advantages';
 import HomeBanner from '@/components/home/banner';
 import Categories from '@/components/home/categories';
 import DataOverview from '@/components/home/data-overview';
 import FAQ from '@/components/home/faq';
-import FlashSale from '@/components/home/flash-sale';
+// import FlashSale from '@/components/home/flash-sale';
 import MustHaveSection from '@/components/home/must-have';
 import PartnerBrands from '@/components/home/partner-brands';
 import Products from '@/components/home/products';
 // import Testimonials from '@/components/home/testimonials';
 import Trending from '@/components/home/trending';
 import WelcomeSection from '@/components/home/welcome';
+import { listProducts } from '@/lib/actions/product';
+import { listProductCategories } from '@/lib/actions/product-category';
 
-export default function Home() {
-  const t = useTranslations();
+// get hot products
+export async function getHotProducts() {
+  const products = await listProducts({
+    limit: 10,
+    offset: 100,
+  });
+  return products;
+}
 
+// get new products
+export async function getNewProducts() {
+  const products = await listProducts({
+    limit: 5,
+    offset: 5,
+  });
+  return products;
+}
+
+// get must have products
+export async function getMustHaveProducts() {
+  const products = await listProducts({
+    limit: 12,
+    offset: 30,
+  });
+  return products;
+}
+export default async function Home() {
+  const t = await getTranslations();
+  const categories = await listProductCategories({
+    limit: 4,
+    parent_category_id: 'null',
+    expand: 'products',
+  });
+
+  const hotProducts = await getHotProducts();
+  const newProducts = await getNewProducts();
+  const mustHaveProducts = await getMustHaveProducts();
   return (
     <div className="container mx-auto space-y-16 py-6">
       {/* 轮播图区域 */}
@@ -33,19 +69,19 @@ export default function Home() {
       />
 
       {/* 商品分类 */}
-      <Categories />
+      <Categories categories={categories} />
+
+      {/* 商品展示 */}
+      <Products hotProducts={hotProducts} newProducts={newProducts} />
 
       {/* 跨境爆款 */}
       <Trending />
 
-      {/* 商品展示 */}
-      <Products />
-
       {/* 限时特惠 */}
-      <FlashSale />
+      {/* <FlashSale /> */}
 
       {/* 新店必备 */}
-      <MustHaveSection />
+      <MustHaveSection products={mustHaveProducts} />
 
       {/* 用户评价 */}
       {/*<Testimonials />*/}

@@ -1,8 +1,8 @@
 import { Analytics } from '@vercel/analytics/next';
 import { Metadata, Viewport } from 'next';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
 // import { CookieBanner } from '@/components/cookie/cookie-banner';
 import { ThemeProvider } from 'next-themes';

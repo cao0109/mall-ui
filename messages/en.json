@@ -474,6 +474,14 @@
       "joinDescription": "Join HiDoo's global partner network to expand your business and reach more customers. We provide comprehensive support to help you succeed in the global market.",
       "becomePartner": "Become a Partner",
       "learnMore": "Learn More"
+    },
+    "flashSale": {
+      "title": "Flash Sale",
+      "subtitle": "Daily Picks, Limited Time",
+      "endingSoon": "Ending Soon",
+      "sold": "{count} Sold",
+      "remaining": "Only {count} Left",
+      "shipping": "Free Shipping"
     }
   },
   "product": {
@@ -747,6 +755,14 @@
       "clothing": "Clothing",
       "homeDecor": "Home Decor",
       "beauty": "Beauty & Skincare"
+    }
+  },
+  "error": {
+    "productNotFound": {
+      "title": "Product Not Found",
+      "description": "Sorry, the product you're looking for doesn't exist or has been removed",
+      "browseProducts": "Browse Products",
+      "tryAgain": "Try Again"
     }
   }
 }
