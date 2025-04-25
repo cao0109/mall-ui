@@ -5,7 +5,6 @@ import { ArrowRight, Check, Download, ExternalLink, ShoppingCart, X } from 'luci
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Product } from '@/components/product/product-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +17,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useSelectionStore } from '@/store/selection';
+import { Product } from '@/lib/data';
 
 export default function SelectedProductsPage() {
   const { products, removeProduct, clearProducts } = useSelectionStore();

@@ -16,31 +16,29 @@ import { listProducts } from '@/lib/actions/product';
 import { listProductCategories } from '@/lib/actions/product-category';
 
 // get hot products
-export async function getHotProducts() {
-  const products = await listProducts({
+async function getHotProducts() {
+  return await listProducts({
     limit: 10,
     offset: 100,
   });
-  return products;
 }
 
 // get new products
-export async function getNewProducts() {
-  const products = await listProducts({
+async function getNewProducts() {
+  return await listProducts({
     limit: 5,
     offset: 5,
   });
-  return products;
 }
 
 // get must have products
-export async function getMustHaveProducts() {
-  const products = await listProducts({
+async function getMustHaveProducts() {
+  return await listProducts({
     limit: 12,
     offset: 30,
   });
-  return products;
 }
+
 export default async function Home() {
   const t = await getTranslations();
   const categories = await listProductCategories({
